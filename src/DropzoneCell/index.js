@@ -2,16 +2,31 @@ import React from "react";
 import { findDOMNode } from "react-dom";
 import { DropTarget } from "react-dnd";
 
-import { DND_TYPE } from "../DraggableBoard";
+import { isEmptyCell } from "../Game";
+import { DND_TYPE } from "../DraggableRectangle";
 import { Cell } from "../base/Table";
 
+const canDropRectangle = ({ value }) => {
+  return isEmptyCell(value);
+};
+
 const cellTarget = {
-  canDrop: props => {
-    return true;
+  canDrop: (props, monitor) => {
+    const { value } = props;
+    // will be useful for future
+    // const { rows: rectangleRows } = monitor.getItem();
+    return canDropRectangle({ value });
   },
 
-  drop: props => {
-    console.log(props.size, props.x, props.y);
+  drop: (props, monitor) => {
+    const { rowIndex, columnIndex } = props;
+    const { rows } = monitor.getItem();
+    props.onDropCell({
+      rowIndex,
+      columnIndex,
+      rectangleHeight: rows.length,
+      rectangleWidth: rows[0].length
+    });
   }
 };
 
@@ -40,14 +55,12 @@ const renderOverlay = color => {
 
 const DropzoneCell = ({
   cellClassName,
-  columnIndex,
   connectDropTarget,
   isOver,
   canDrop
 }) => {
   return (
     <Cell
-      key={`board-cell-${columnIndex}`}
       className={cellClassName}
       style={{
         position: "relative"

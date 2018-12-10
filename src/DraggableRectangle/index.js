@@ -6,8 +6,8 @@ import { StyledBoard } from "./elements";
 
 export const DND_TYPE = "Board";
 
-const boardSource = {
-  beginDrag: ({ size }) => ({ size })
+const rectangleSource = {
+  beginDrag: ({ rows }) => ({ rows })
 };
 
 const collect = (connect, monitor) => ({
@@ -15,12 +15,14 @@ const collect = (connect, monitor) => ({
   isDragging: monitor.isDragging()
 });
 
-const DraggableBoard = ({ isDragging, connectDragSource, data }) => (
+const DraggableRectangle = ({ isDragging, connectDragSource, rows }) => (
   <StyledBoard
-    data={data}
+    rows={rows}
     isDragging={isDragging}
     ref={instance => connectDragSource(findDOMNode(instance))}
   />
 );
 
-export default DragSource(DND_TYPE, boardSource, collect)(DraggableBoard);
+export default DragSource(DND_TYPE, rectangleSource, collect)(
+  DraggableRectangle
+);

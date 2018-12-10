@@ -4,6 +4,7 @@ import Table, { Cell, Row } from "./Table";
 
 class Board extends Component {
   renderRow = ({
+    rows,
     row,
     rowIndex,
     rowRenderer,
@@ -13,7 +14,8 @@ class Board extends Component {
   }) => {
     return rowRenderer ? (
       rowRenderer({
-        row,
+        rows,
+        value: row,
         rowIndex,
         rowClassName,
         cellRenderer,
@@ -23,6 +25,7 @@ class Board extends Component {
       <Row key={`board-row-${rowIndex}`} className={rowClassName}>
         {row.map((cell, columnIndex) =>
           this.renderCell({
+            rows,
             row,
             rowIndex,
             columnIndex,
@@ -36,6 +39,7 @@ class Board extends Component {
   };
 
   renderCell = ({
+    rows,
     row,
     rowIndex,
     columnIndex,
@@ -45,10 +49,11 @@ class Board extends Component {
   }) => {
     return cellRenderer ? (
       cellRenderer({
+        rows,
         row,
         rowIndex,
         columnIndex,
-        cell,
+        value: cell,
         cellClassName
       })
     ) : (
@@ -58,23 +63,23 @@ class Board extends Component {
 
   render() {
     const {
-      data,
+      rows,
       rowClassName,
       cellClassName,
       rowRenderer,
       cellRenderer,
       ...rest
     } = this.props;
-    if (!Array.isArray(data)) {
-      debugger;
+    if (!Array.isArray(rows)) {
       throw new Error(
-        "'data' is a required argument in format [[ 0, 1 ], [0, 'any']]"
+        "'rows' is a required argument in format [[ 0, 1 ], [0, 'any']]"
       );
     }
     return (
       <Table {...rest}>
-        {data.map((row, rowIndex) =>
+        {rows.map((row, rowIndex) =>
           this.renderRow({
+            rows,
             row,
             rowIndex,
             rowRenderer,

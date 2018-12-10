@@ -6,7 +6,7 @@ import { ThemeProvider } from "styled-components";
 import Board from "../base/Board";
 import Button from "../base/Button";
 import { Container, Item } from "../base/Grid";
-import DraggableBoard from "../DraggableBoard";
+import DraggableRectangle from "../DraggableRectangle";
 import DropzoneCell from "../DropzoneCell";
 import Footer from "../Footer";
 import Header from "../Header";
@@ -27,8 +27,19 @@ export default class UI extends Component {
     this.props.moves.switchDices();
   };
 
-  handleDropSquare = (rowIndex, columnIndex, squareSize) => {
-    this.props.moves.dropSquare(rowIndex, columnIndex, squareSize);
+  handleDropSquare = ({
+    rowIndex,
+    columnIndex,
+    rectangleHeight,
+    rectangleWidth
+  }) => {
+    debugger
+    this.props.moves.dropSquare(
+      rowIndex,
+      columnIndex,
+      rectangleHeight,
+      rectangleWidth
+    );
   };
 
   render() {
@@ -51,16 +62,24 @@ export default class UI extends Component {
               {gameover &&
                 (gameover.winner ? `Winner: ${gameover.winner}` : "Draw!")}
               <Button onClick={this.handleRotateRectangle}>Rotate</Button>
-              <DraggableBoard
-                data={Array(dices[0]).fill(Array(dices[1]).fill())}
+              <DraggableRectangle
+                rows={Array(dices[0]).fill(Array(dices[1]).fill())}
               />
 
               <Board
-                data={board}
-                cellRenderer={({ rowIndex, columnIndex, cellClassName }) => (
+                rows={board}
+                cellRenderer={({
+                  value,
+                  rowIndex,
+                  columnIndex,
+                  cellClassName
+                }) => (
                   <DropzoneCell
+                    rowIndex={rowIndex}
                     columnIndex={columnIndex}
+                    value={value}
                     cellClassName={cellClassName}
+                    onDropCell={this.handleDropSquare}
                   />
                 )}
               />
