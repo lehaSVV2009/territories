@@ -2,9 +2,18 @@ import React from "react";
 import { findDOMNode } from "react-dom";
 import { DropTarget } from "react-dnd";
 
-import { isEmptyCell } from "../Game";
+import {
+  isEmptyCell,
+  isCapturedByPlayerOneCell,
+  isCapturedByPlayerTwoCell
+} from "../gameUtils";
 import { DND_TYPE } from "../DraggableRectangle";
-import { Cell } from "../base/Table";
+import {
+  CapturedCell,
+  TYPE_EMPTY,
+  TYPE_PLAYER_1,
+  TYPE_PLAYER_2
+} from "./elements";
 
 const canDropRectangle = ({ value }) => {
   return isEmptyCell(value);
@@ -54,23 +63,28 @@ const renderOverlay = color => {
 };
 
 const DropzoneCell = ({
+  value,
   cellClassName,
   connectDropTarget,
   isOver,
   canDrop
 }) => {
   return (
-    <Cell
+    <CapturedCell
+      type={
+        isCapturedByPlayerOneCell(value)
+          ? TYPE_PLAYER_1
+          : isCapturedByPlayerTwoCell(value)
+          ? TYPE_PLAYER_2
+          : TYPE_EMPTY
+      }
       className={cellClassName}
-      style={{
-        position: "relative"
-      }}
       ref={instance => connectDropTarget(findDOMNode(instance))}
     >
       {isOver && !canDrop && renderOverlay("red")}
       {!isOver && canDrop && renderOverlay("yellow")}
       {isOver && canDrop && renderOverlay("green")}
-    </Cell>
+    </CapturedCell>
   );
 };
 

@@ -10,11 +10,14 @@ import DraggableRectangle from "../DraggableRectangle";
 import DropzoneCell from "../DropzoneCell";
 import Footer from "../Footer";
 import Header from "../Header";
+import Player from "../base/Player";
 
 const theme = {
   colors: {
     gray: "#DDDDDD",
-    green: "#00FF00"
+    green: "#00FF00",
+    player1: "#375E97",
+    player2: "#FB6542"
   }
 };
 
@@ -33,13 +36,14 @@ export default class UI extends Component {
     rectangleHeight,
     rectangleWidth
   }) => {
-    debugger
     this.props.moves.dropSquare(
       rowIndex,
       columnIndex,
       rectangleHeight,
       rectangleWidth
     );
+    this.props.moves.clearDices();
+    this.props.events.endTurn();
   };
 
   render() {
@@ -53,15 +57,28 @@ export default class UI extends Component {
         <ThemeProvider theme={theme}>
           <Container fullPage column>
             <Item>
+              {/* TODO add some nice title */}
               <Header />
             </Item>
             <Item flex="auto">
-              <div>Player: {currentPlayer}</div>
-              <Button onClick={this.handleRollDices}>Roll Dices</Button>
-              <div>Dices: {dices}</div>
+              {/* TODO make gameover fullscreen window */}
               {gameover &&
                 (gameover.winner ? `Winner: ${gameover.winner}` : "Draw!")}
-              <Button onClick={this.handleRotateRectangle}>Rotate</Button>
+
+              {/* TODO Add current player right side within highlighted from all players */}
+              <Player player={currentPlayer} />
+
+              {/* TODO Big button with icon in the middle of the screen */}
+              <Button onClick={this.handleRollDices}>Roll Dices</Button>
+
+              {/* TODO Add nice dices animation */}
+              {dices && dices[0] !== 0 && (
+                <div>
+                  Dices: {dices}
+                  <Button onClick={this.handleRotateRectangle}>Rotate</Button>
+                </div>
+              )}
+              {/* TODO Think of how not to move game board down after rotating and dice rolling */}
               <DraggableRectangle
                 rows={Array(dices[0]).fill(Array(dices[1]).fill())}
               />
@@ -85,6 +102,7 @@ export default class UI extends Component {
               />
             </Item>
             <Item>
+              {/* TODO add some links */}
               <Footer />
             </Item>
           </Container>
