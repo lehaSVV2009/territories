@@ -489,7 +489,7 @@ class DiceObject {
   }
 }
 
-class DiceD4 extends DiceObject {
+export class DiceD4 extends DiceObject {
   constructor(options) {
     super(options);
 
@@ -541,7 +541,7 @@ class DiceD4 extends DiceObject {
   }
 }
 
-class DiceD6 extends DiceObject {
+export class DiceD6 extends DiceObject {
   constructor(options) {
     super(options);
 
@@ -600,7 +600,7 @@ class DiceD6 extends DiceObject {
   }
 }
 
-class DiceD8 extends DiceObject {
+export class DiceD8 extends DiceObject {
   constructor(options) {
     super(options);
 
@@ -659,7 +659,7 @@ class DiceD8 extends DiceObject {
   }
 }
 
-class DiceD10 extends DiceObject {
+export class DiceD10 extends DiceObject {
   constructor(options) {
     super(options);
 
@@ -730,7 +730,7 @@ class DiceD10 extends DiceObject {
   }
 }
 
-class DiceD12 extends DiceObject {
+export class DiceD12 extends DiceObject {
   constructor(options) {
     super(options);
 
@@ -810,7 +810,7 @@ class DiceD12 extends DiceObject {
   }
 }
 
-class DiceD20 extends DiceObject {
+export class DiceD20 extends DiceObject {
   constructor(options) {
     super(options);
 
@@ -891,26 +891,4 @@ class DiceD20 extends DiceObject {
 
 //---------------------------------------------//
 
-const DiceManager = new DiceManagerClass();
-
-if (typeof module !== "undefined" && typeof module.exports !== "undefined") {
-  module.exports = {
-    DiceManager: DiceManager,
-    DiceD4: DiceD4,
-    DiceD6: DiceD6,
-    DiceD8: DiceD8,
-    DiceD10: DiceD10,
-    DiceD12: DiceD12,
-    DiceD20: DiceD20
-  };
-} else {
-  window.Dice = {
-    DiceManager: DiceManager,
-    DiceD4: DiceD4,
-    DiceD6: DiceD6,
-    DiceD8: DiceD8,
-    DiceD10: DiceD10,
-    DiceD12: DiceD12,
-    DiceD20: DiceD20
-  };
-}
+export const DiceManager = new DiceManagerClass();
