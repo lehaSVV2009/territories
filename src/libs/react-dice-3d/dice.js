@@ -128,7 +128,7 @@ class DiceObject {
       specular: 0x172022,
       color: 0xf0f0f0,
       shininess: 40,
-      shading: THREE.FlatShading
+      flatShading: THREE.FlatShading
     };
     this.labelColor = options.fontColor;
     this.diceColor = options.backColor;
@@ -456,10 +456,7 @@ class DiceObject {
   create() {
     if (!DiceManager.world)
       throw new Error("You must call DiceManager.setWorld(world) first.");
-    this.object = new THREE.Mesh(
-      this.getGeometry(),
-      new THREE.MultiMaterial(this.getMaterials())
-    );
+    this.object = new THREE.Mesh(this.getGeometry(), this.getMaterials());
 
     this.object.reveiceShadow = true;
     this.object.castShadow = true;

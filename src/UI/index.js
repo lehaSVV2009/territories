@@ -6,7 +6,7 @@ import { ThemeProvider } from "styled-components";
 import Board from "../base/Board";
 import Button from "../base/Button";
 import { Container, Item } from "../base/Grid";
-import Dice from "../base/Dice";
+import DicePopup from "../DicePopup";
 import DraggableRectangle from "../DraggableRectangle";
 import DropzoneCell from "../DropzoneCell";
 import Footer from "../Footer";
@@ -71,8 +71,8 @@ export default class UI extends Component {
 
               {/* TODO Big button with icon in the middle of the screen */}
               <Button onClick={this.handleRollDices}>Roll Dices</Button>
+              <DicePopup dices={dices} />
 
-              <Dice />
               {/* TODO Add nice dices animation */}
               {dices && dices[0] !== 0 && (
                 <div>
@@ -80,6 +80,7 @@ export default class UI extends Component {
                   <Button onClick={this.handleRotateRectangle}>Rotate</Button>
                 </div>
               )}
+
               {/* TODO Think of how not to move game board down after rotating and dice rolling */}
               <DraggableRectangle
                 rows={Array(dices[0]).fill(Array(dices[1]).fill())}
