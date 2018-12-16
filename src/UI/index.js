@@ -6,6 +6,7 @@ import { ThemeProvider } from "styled-components";
 import Board from "../base/Board";
 import Button from "../base/Button";
 import { Container, Item } from "../base/Grid";
+import Dice from "../base/Dice";
 import DraggableRectangle from "../DraggableRectangle";
 import DropzoneCell from "../DropzoneCell";
 import Footer from "../Footer";
@@ -71,6 +72,7 @@ export default class UI extends Component {
               {/* TODO Big button with icon in the middle of the screen */}
               <Button onClick={this.handleRollDices}>Roll Dices</Button>
 
+              <Dice />
               {/* TODO Add nice dices animation */}
               {dices && dices[0] !== 0 && (
                 <div>
