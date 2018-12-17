@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import Board from "../base/Board";
+import Board from "../libs/territories-ui/Board";
 
 export const StyledBoard = styled(Board)`
   ${props =>

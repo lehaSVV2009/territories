@@ -3,15 +3,15 @@ import { DragDropContextProvider } from "react-dnd";
 import HTML5Backend from "react-dnd-html5-backend";
 import { ThemeProvider } from "styled-components";
 
-import Board from "../base/Board";
-import Button from "../base/Button";
-import { Container, Item } from "../base/Grid";
-import DicePopup from "../DicePopup";
+import Board from "../libs/territories-ui/Board";
+import Button from "../libs/territories-ui/Button";
+import { Container, Item } from "../libs/territories-ui/Grid";
+import DiceRoller from "../DiceRoller";
 import DraggableRectangle from "../DraggableRectangle";
 import DropzoneCell from "../DropzoneCell";
 import Footer from "../Footer";
 import Header from "../Header";
-import Player from "../base/Player";
+import Player from "../Player";
 
 const theme = {
   colors: {
@@ -23,8 +23,8 @@ const theme = {
 };
 
 export default class UI extends Component {
-  handleRollDices = () => {
-    this.props.moves.rollDices();
+  handleRollDices = dices => {
+    this.props.moves.changeDices(dices);
   };
 
   handleRotateRectangle = () => {
@@ -69,9 +69,7 @@ export default class UI extends Component {
               {/* TODO Add current player right side within highlighted from all players */}
               <Player player={currentPlayer} />
 
-              {/* TODO Big button with icon in the middle of the screen */}
-              <Button onClick={this.handleRollDices}>Roll Dices</Button>
-              <DicePopup dices={dices} />
+              <DiceRoller onRoll={this.handleRollDices} />
 
               {/* TODO Add nice dices animation */}
               {dices && dices[0] !== 0 && (

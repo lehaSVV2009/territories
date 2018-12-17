@@ -8,15 +8,23 @@ import * as THREE from "three";
 import * as CANNON from "cannon";
 import OrbitControls from "orbit-controls-es6";
 
-import { DiceManager, DiceD6 } from "./dice";
+import {
+  DiceManager,
+  DiceD4,
+  DiceD6,
+  DiceD8,
+  DiceD10,
+  DiceD12,
+  DiceD20
+} from "./dice";
 
 const DICE_SIZE = 4;
 
 class Dice extends Component {
   componentDidMount() {
-    if (!Array.isArray(this.props.dices)) {
+    if (!Array.isArray(this.props.options)) {
       throw new Error(
-        "Required argument 'dices' is missing. It has to be an array of dice configs like [{ color: 'white' }, { color: 'red', size: 10 }]"
+        "Required argument 'options' is missing. It has to be an array of dice configs like [{ color: 'white' }, { color: 'red', size: 10 }]"
       );
     }
 
@@ -85,8 +93,10 @@ class Dice extends Component {
 
     // Dice
     this.dices = this.generateDices();
+    this.dices.forEach(die => this.scene.add(die.getObject()));
 
     this.throwDices();
+    this.start();
   }
 
   componentWillUnmount() {
@@ -94,19 +104,10 @@ class Dice extends Component {
     this.mount.removeChild(this.renderer.domElement);
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.value !== prevProps.value) {
-      this.dices.forEach(die => this.scene.remove(die.getObject()));
-      this.dices = this.generateDices();
-      this.throwDices();
-    }
-  }
-
   generateDices = () => {
-    return this.props.dices.map(diceOptions => {
+    return this.props.options.map(diceOptions => {
       // TODO add different types
       const die = new DiceD6({ size: DICE_SIZE, ...diceOptions });
-      this.scene.add(die.getObject());
       return die;
     });
   };
@@ -114,13 +115,11 @@ class Dice extends Component {
   throwDices = () => {
     const { value } = this.props;
 
-    if (
-      !Array.isArray(value) ||
-      !value.every(number => number > 0 && number < 7)
-    ) {
+    if (!Array.isArray(value)) {
       return;
     }
 
+    // TODO simplify code
     const diceValues = [];
     for (var i = 0; i < this.dices.length; i++) {
       let yRand = Math.random() * 20;
@@ -147,7 +146,6 @@ class Dice extends Component {
     }
 
     DiceManager.prepareValues(diceValues);
-    this.start();
   };
 
   start = () => {
@@ -182,7 +180,7 @@ class Dice extends Component {
     return (
       <div
         style={{
-          width: this.props.width || "400px",
+          width: this.props.width,
           height: this.props.height || "300px",
           ...this.props.style
         }}

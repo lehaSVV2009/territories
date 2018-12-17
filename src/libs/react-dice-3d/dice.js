@@ -105,7 +105,7 @@ class DiceManagerClass {
   }
 }
 
-class DiceObject {
+export class DiceObject {
   /**
    * @constructor
    * @param {object} options

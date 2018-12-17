@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Cell } from "../base/Table";
+import { Cell } from "../libs/territories-ui/Table";
 
 export const TYPE_PLAYER_1 = "PLAYER_1";
 export const TYPE_PLAYER_2 = "PLAYER_2";

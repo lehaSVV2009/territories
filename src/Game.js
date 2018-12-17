@@ -18,8 +18,8 @@ const Territories = ({ dices, board }) =>
     }),
 
     moves: {
-      rollDices(G, ctx) {
-        return { ...G, dices: ctx.random.Die(6, 2) };
+      changeDices(G, ctx, dices) {
+        return { ...G, dices };
       },
 
       switchDices(G) {

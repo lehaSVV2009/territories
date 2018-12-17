@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { Container, Item } from "../base/Grid";
+import { Container, Item } from "../libs/territories-ui/Grid";
 import { isPlayer1 } from "../gameUtils";
 
 const PlayerIcon = styled.div`
@@ -13,6 +13,7 @@ const PlayerIcon = styled.div`
       : props.theme.colors.player2};
 `;
 
+// TODO move as Avatar to territories-ui
 const Player = ({ player }) => (
   <Container>
     <Item>

@@ -14,9 +14,12 @@ export const isCapturedByPlayerTwoCell = type => {
   return type === CELL_TYPE.CAPTURED_BY_PLAYER_2;
 };
 
+export const PLAYER_1 = "0";
+export const PLAYER_2 = "1";
+
 export const isPlayer1 = player => {
-  return player === "0";
+  return player === PLAYER_1;
 };
 export const isPlayer2 = player => {
-  return player === "1";
+  return player === PLAYER_2;
 };
