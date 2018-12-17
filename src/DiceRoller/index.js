@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import random from "lodash.random";
 import Button from "../libs/territories-ui/Button";
 import Dialog from "../libs/territories-ui/Dialog";
-import Dice from "../libs/react-dice-3d";
+import Dices3d, { DICE_TYPES } from "../libs/react-dice-3d";
 
 const generateRandomDices = () => {
   return [random(1, 6), random(1, 6)];
@@ -33,10 +33,10 @@ class DiceRoller extends Component {
           {/* Dice component is mounted again when dialog is open 
           cause of required dice init logic in componentDidMount */}
           {open && (
-            <Dice
+            <Dices3d
               options={[
-                { backColor: "red", fontColor: "white" },
-                { backColor: "blue", fontColor: "white" }
+                { type: DICE_TYPES.D6, backColor: "red", fontColor: "white" },
+                { type: DICE_TYPES.D6, backColor: "blue", fontColor: "white" }
               ]}
               value={dices}
             />

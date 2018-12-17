@@ -15,10 +15,20 @@ import {
   DiceD8,
   DiceD10,
   DiceD12,
-  DiceD20
+  DiceD20,
+  DiceObject
 } from "./dice";
 
-const DICE_SIZE = 4;
+export const DICE_TYPES = {
+  D4: "D4",
+  D6: "D6",
+  D8: "D8",
+  D10: "D10",
+  D12: "D12",
+  D20: "D20"
+};
+
+const DEFAULT_DICE_SIZE = 4;
 
 class Dice extends Component {
   componentDidMount() {
@@ -106,14 +116,32 @@ class Dice extends Component {
 
   generateDices = () => {
     return this.props.options.map(diceOptions => {
-      // TODO add different types
-      const die = new DiceD6({ size: DICE_SIZE, ...diceOptions });
-      return die;
+      const { type, size } = diceOptions;
+      const diceSize = size || DEFAULT_DICE_SIZE;
+      if (type === DICE_TYPES.D4) {
+        return new DiceD4({ size: diceSize, ...diceOptions });
+      }
+      if (type === DICE_TYPES.D6) {
+        return new DiceD6({ size: diceSize, ...diceOptions });
+      }
+      if (type === DICE_TYPES.D8) {
+        return new DiceD8({ size: diceSize, ...diceOptions });
+      }
+      if (type === DICE_TYPES.D10) {
+        return new DiceD10({ size: diceSize, ...diceOptions });
+      }
+      if (type === DICE_TYPES.D12) {
+        return new DiceD12({ size: diceSize, ...diceOptions });
+      }
+      if (type === DICE_TYPES.D20) {
+        return new DiceD20({ size: diceSize, ...diceOptions });
+      }
+      return new DiceObject({ size: diceSize, ...diceOptions });
     });
   };
 
   throwDices = () => {
-    const { value } = this.props;
+    const { options, value } = this.props;
 
     if (!Array.isArray(value)) {
       return;
@@ -123,9 +151,10 @@ class Dice extends Component {
     const diceValues = [];
     for (var i = 0; i < this.dices.length; i++) {
       let yRand = Math.random() * 20;
-      this.dices[i].getObject().position.x = -15 - (i % 3) * DICE_SIZE;
-      this.dices[i].getObject().position.y = 2 + Math.floor(i / 3) * DICE_SIZE;
-      this.dices[i].getObject().position.z = -15 + (i % 3) * DICE_SIZE;
+      const diceSize = options[i].size || DEFAULT_DICE_SIZE;
+      this.dices[i].getObject().position.x = -15 - (i % 3) * diceSize;
+      this.dices[i].getObject().position.y = 2 + Math.floor(i / 3) * diceSize;
+      this.dices[i].getObject().position.z = -15 + (i % 3) * diceSize;
       this.dices[i].getObject().quaternion.x =
         ((Math.random() * 90 - 45) * Math.PI) / 180;
       this.dices[i].getObject().quaternion.z =
