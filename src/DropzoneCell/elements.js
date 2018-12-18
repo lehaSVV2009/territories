@@ -5,7 +5,7 @@ export const TYPE_PLAYER_1 = "PLAYER_1";
 export const TYPE_PLAYER_2 = "PLAYER_2";
 export const TYPE_EMPTY = "EMPTY";
 
-export const CapturedCell = styled(Cell)`
+export const OccupiedCell = styled(Cell)`
   position: relative;
   background-color: ${props =>
     props.type === TYPE_PLAYER_1

@@ -99,6 +99,8 @@ export default class UI extends Component {
                     columnIndex={columnIndex}
                     value={value}
                     cellClassName={cellClassName}
+                    rows={board}
+                    currentPlayer={currentPlayer}
                     onDropCell={this.handleDropSquare}
                   />
                 )}

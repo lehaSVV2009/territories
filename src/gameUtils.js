@@ -1,17 +1,17 @@
 export const CELL_TYPE = {
   EMPTY: "EMPTY",
-  CAPTURED_BY_PLAYER_1: "CAPTURED_BY_PLAYER_1",
-  CAPTURED_BY_PLAYER_2: "CAPTURED_BY_PLAYER_2"
+  OCCUPIED_BY_PLAYER_1: "OCCUPIED_BY_PLAYER_1",
+  OCCUPIED_BY_PLAYER_2: "OCCUPIED_BY_PLAYER_2"
 };
 
 export const isEmptyCell = type => {
   return type === CELL_TYPE.EMPTY;
 };
-export const isCapturedByPlayerOneCell = type => {
-  return type === CELL_TYPE.CAPTURED_BY_PLAYER_1;
+export const isOccupiedByPlayerOneCell = type => {
+  return type === CELL_TYPE.OCCUPIED_BY_PLAYER_1;
 };
-export const isCapturedByPlayerTwoCell = type => {
-  return type === CELL_TYPE.CAPTURED_BY_PLAYER_2;
+export const isOccupiedByPlayerTwoCell = type => {
+  return type === CELL_TYPE.OCCUPIED_BY_PLAYER_2;
 };
 
 export const PLAYER_1 = "0";
