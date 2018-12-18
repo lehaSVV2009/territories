@@ -1,19 +1,43 @@
 import { Game } from "boardgame.io/core";
-import { CELL_TYPE } from "./gameUtils";
+import { CELL_TYPE, PLAYER_1, PLAYER_2 } from "./gameUtils";
 
-const isVictory = board => {
-  return false;
+// TODO reimplement and optimize when game is implemented by rules
+// TODO probably store capturing counters in G state
+const selectVictoryContext = board => {
+  let empty = 0;
+  let capturedByPlayer1 = 0;
+  let capturedByPlayer2 = 0;
+  board.forEach(row =>
+    row.forEach(cell => {
+      if (cell === CELL_TYPE.EMPTY) {
+        empty++;
+      } else if (cell === CELL_TYPE.CAPTURED_BY_PLAYER_1) {
+        capturedByPlayer1++;
+      } else if (cell === CELL_TYPE.CAPTURED_BY_PLAYER_2) {
+        capturedByPlayer2++;
+      }
+    })
+  );
+  return {
+    empty,
+    capturedByPlayer1,
+    capturedByPlayer2
+  };
 };
 
-const isDraw = board => {
-  return false;
+const isVictory = ({ empty, capturedByPlayer1, capturedByPlayer2 }) => {
+  return empty === 0 && capturedByPlayer1 !== capturedByPlayer2;
+};
+
+const isDraw = ({ empty, capturedByPlayer1, capturedByPlayer2 }) => {
+  return empty === 0 && capturedByPlayer1 === capturedByPlayer2;
 };
 
 const Territories = ({ dices, board }) =>
   Game({
     setup: () => ({
-      // Board 2x2 in format [[0, 0], [0, 0]]
-      board: board || [...Array(10).fill([...Array(30).fill(CELL_TYPE.EMPTY)])],
+      // Board in format [["EMPTY", "EMPTY"], ["CAPTURED_BY_PLAYER_1", "CAPTURED_BY_PLAYER_2"]]
+      board: board || [...Array(2).fill([...Array(2).fill(CELL_TYPE.EMPTY)])],
       dices: dices || [0, 0]
     }),
 
@@ -45,7 +69,7 @@ const Territories = ({ dices, board }) =>
             rowStateIndex === rowIndex
               ? row.map((cell, columnStateIndex) =>
                   columnStateIndex === columnIndex
-                    ? currentPlayer === "0"
+                    ? currentPlayer === PLAYER_1
                       ? CELL_TYPE.CAPTURED_BY_PLAYER_1
                       : CELL_TYPE.CAPTURED_BY_PLAYER_2
                     : cell
@@ -58,10 +82,14 @@ const Territories = ({ dices, board }) =>
 
     flow: {
       endGameIf: (G, ctx) => {
-        if (isVictory(G.board)) {
-          return { winner: ctx.currentPlayer };
+        const victoryContext = selectVictoryContext(G.board);
+        if (isVictory(victoryContext)) {
+          const { capturedByPlayer1, capturedByPlayer2 } = victoryContext;
+          return {
+            winner: capturedByPlayer1 > capturedByPlayer2 ? PLAYER_1 : PLAYER_2
+          };
         }
-        if (isDraw(G.board)) {
+        if (isDraw(victoryContext)) {
           return { draw: true };
         }
       }

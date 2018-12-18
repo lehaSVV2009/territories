@@ -43,6 +43,10 @@ export default class UI extends Component {
       rectangleHeight,
       rectangleWidth
     );
+    this.handleEndTurn();
+  };
+
+  handleEndTurn = () => {
     this.props.moves.clearDices();
     this.props.events.endTurn();
   };
@@ -62,27 +66,25 @@ export default class UI extends Component {
               <Header />
             </Item>
             <Item flex="auto">
-              {/* TODO make gameover fullscreen window */}
+              {/* TODO make gameover fullscreen modal */}
               {gameover &&
                 (gameover.winner ? `Winner: ${gameover.winner}` : "Draw!")}
 
               {/* TODO Add current player right side within highlighted from all players */}
               <Player player={currentPlayer} />
 
-              <DiceRoller onRoll={this.handleRollDices} />
+              <Button onClick={this.handleEndTurn}>Skip Turn</Button>
 
-              {/* TODO Add nice dices animation */}
-              {dices && dices[0] !== 0 && (
-                <div>
-                  Dices: {dices}
-                  <Button onClick={this.handleRotateRectangle}>Rotate</Button>
-                </div>
-              )}
+              <DiceRoller onRoll={this.handleRollDices} />
 
               {/* TODO Think of how not to move game board down after rotating and dice rolling */}
               <DraggableRectangle
                 rows={Array(dices[0]).fill(Array(dices[1]).fill())}
               />
+
+              {dices && dices[0] !== 0 && (
+                <Button onClick={this.handleRotateRectangle}>Rotate</Button>
+              )}
 
               <Board
                 rows={board}
