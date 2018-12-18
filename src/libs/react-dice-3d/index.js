@@ -116,58 +116,45 @@ class Dices3d extends Component {
 
   generateDiceModels = dices => {
     return dices.map(dice => {
-      const { type, size, value } = dice;
+      const { type, size } = dice;
       const diceSize = size || DEFAULT_DICE_SIZE;
       if (type === DICE_TYPES.D4) {
-        return new DiceD4({ size: diceSize, value, ...dice });
+        return new DiceD4({ size: diceSize, ...dice });
       }
       if (type === DICE_TYPES.D6) {
-        return new DiceD6({ size: diceSize, value, ...dice });
+        return new DiceD6({ size: diceSize, ...dice });
       }
       if (type === DICE_TYPES.D8) {
-        return new DiceD8({ size: diceSize, value, ...dice });
+        return new DiceD8({ size: diceSize, ...dice });
       }
       if (type === DICE_TYPES.D10) {
-        return new DiceD10({ size: diceSize, value, ...dice });
+        return new DiceD10({ size: diceSize, ...dice });
       }
       if (type === DICE_TYPES.D12) {
-        return new DiceD12({ size: diceSize, value, ...dice });
+        return new DiceD12({ size: diceSize, ...dice });
       }
       if (type === DICE_TYPES.D20) {
-        return new DiceD20({ size: diceSize, value, ...dice });
+        return new DiceD20({ size: diceSize, ...dice });
       }
-      return new DiceObject({ size: diceSize, value, ...dice });
+      return new DiceObject({ size: diceSize, ...dice });
     });
   };
 
   prepareDicesValues = values => {
-    // TODO simplify code
-    const diceValues = [];
-    for (var i = 0; i < this.diceModels.length; i++) {
-      let yRand = Math.random() * 20;
-      const diceSize = this.diceModels[i].size;
-      this.diceModels[i].getObject().position.x = -15 - (i % 3) * diceSize;
-      this.diceModels[i].getObject().position.y =
-        2 + Math.floor(i / 3) * diceSize;
-      this.diceModels[i].getObject().position.z = -15 + (i % 3) * diceSize;
-      this.diceModels[i].getObject().quaternion.x =
-        ((Math.random() * 90 - 45) * Math.PI) / 180;
-      this.diceModels[i].getObject().quaternion.z =
-        ((Math.random() * 90 - 45) * Math.PI) / 180;
-      this.diceModels[i].updateBodyFromMesh();
-      let rand = Math.random() * 5;
-      this.diceModels[i]
-        .getObject()
-        .body.velocity.set(25 + rand, 40 + yRand, 15 + rand);
-      this.diceModels[i]
-        .getObject()
-        .body.angularVelocity.set(
-          20 * Math.random() - 10,
-          20 * Math.random() - 10,
-          20 * Math.random() - 10
-        );
-      diceValues.push({ dice: this.diceModels[i], value: values[i] });
-    }
+    const diceValues = this.diceModels.map((diceModel, index) => {
+      const { size } = diceModel;
+      const diceObject = diceModel.getObject();
+      diceObject.position.x = -15 - (index % 3) * size;
+      diceObject.position.y = 2 + Math.floor(index / 3) * size;
+      diceObject.position.z = -15 + (index % 3) * size;
+      diceObject.quaternion.x = ((Math.random() * 90 - 45) * Math.PI) / 180;
+      diceObject.quaternion.z = ((Math.random() * 90 - 45) * Math.PI) / 180;
+      diceModel.updateBodyFromMesh();
+      const yRand = Math.random() * 20;
+      const rand = Math.random() * 5;
+      diceObject.body.velocity.set(25 + rand, 40 + yRand, 15 + rand);
+      return { dice: diceModel, value: values[index] };
+    });
 
     DiceManager.prepareValues(diceValues);
   };
