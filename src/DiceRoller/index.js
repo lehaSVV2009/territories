@@ -34,11 +34,20 @@ class DiceRoller extends Component {
           cause of required dice init logic in componentDidMount */}
           {open && (
             <Dices3d
-              options={[
-                { type: DICE_TYPES.D6, backColor: "red", fontColor: "white" },
-                { type: DICE_TYPES.D6, backColor: "blue", fontColor: "white" }
+              dices={[
+                {
+                  type: DICE_TYPES.D6,
+                  backColor: "red",
+                  fontColor: "white",
+                  value: dices[0]
+                },
+                {
+                  type: DICE_TYPES.D6,
+                  backColor: "blue",
+                  fontColor: "white",
+                  value: dices[1]
+                }
               ]}
-              value={dices}
             />
           )}
         </Dialog>

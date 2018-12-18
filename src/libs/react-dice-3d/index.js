@@ -30,11 +30,11 @@ export const DICE_TYPES = {
 
 const DEFAULT_DICE_SIZE = 4;
 
-class Dice extends Component {
+class Dices3d extends Component {
   componentDidMount() {
-    if (!Array.isArray(this.props.options)) {
+    if (!Array.isArray(this.props.dices)) {
       throw new Error(
-        "Required argument 'options' is missing. It has to be an array of dice configs like [{ color: 'white' }, { color: 'red', size: 10 }]"
+        "Required argument 'dices' is missing. It has to be an array of dice configs like [{ type: 'D6', backColor: 'red', value: 4 }]"
       );
     }
 
@@ -102,10 +102,10 @@ class Dice extends Component {
     this.world.add(floorBody);
 
     // Dice
-    this.dices = this.generateDices();
-    this.dices.forEach(die => this.scene.add(die.getObject()));
+    this.diceModels = this.generateDiceModels(this.props.dices);
+    this.diceModels.forEach(dice => this.scene.add(dice.getObject()));
 
-    this.throwDices();
+    this.prepareDicesValues(this.props.dices.map(dice => dice.value));
     this.start();
   }
 
@@ -114,64 +114,59 @@ class Dice extends Component {
     this.mount.removeChild(this.renderer.domElement);
   }
 
-  generateDices = () => {
-    return this.props.options.map(diceOptions => {
-      const { type, size } = diceOptions;
+  generateDiceModels = dices => {
+    return dices.map(dice => {
+      const { type, size, value } = dice;
       const diceSize = size || DEFAULT_DICE_SIZE;
       if (type === DICE_TYPES.D4) {
-        return new DiceD4({ size: diceSize, ...diceOptions });
+        return new DiceD4({ size: diceSize, value, ...dice });
       }
       if (type === DICE_TYPES.D6) {
-        return new DiceD6({ size: diceSize, ...diceOptions });
+        return new DiceD6({ size: diceSize, value, ...dice });
       }
       if (type === DICE_TYPES.D8) {
-        return new DiceD8({ size: diceSize, ...diceOptions });
+        return new DiceD8({ size: diceSize, value, ...dice });
       }
       if (type === DICE_TYPES.D10) {
-        return new DiceD10({ size: diceSize, ...diceOptions });
+        return new DiceD10({ size: diceSize, value, ...dice });
       }
       if (type === DICE_TYPES.D12) {
-        return new DiceD12({ size: diceSize, ...diceOptions });
+        return new DiceD12({ size: diceSize, value, ...dice });
       }
       if (type === DICE_TYPES.D20) {
-        return new DiceD20({ size: diceSize, ...diceOptions });
+        return new DiceD20({ size: diceSize, value, ...dice });
       }
-      return new DiceObject({ size: diceSize, ...diceOptions });
+      return new DiceObject({ size: diceSize, value, ...dice });
     });
   };
 
-  throwDices = () => {
-    const { options, value } = this.props;
-
-    if (!Array.isArray(value)) {
-      return;
-    }
-
+  prepareDicesValues = values => {
     // TODO simplify code
     const diceValues = [];
-    for (var i = 0; i < this.dices.length; i++) {
+    for (var i = 0; i < this.diceModels.length; i++) {
       let yRand = Math.random() * 20;
-      const diceSize = options[i].size || DEFAULT_DICE_SIZE;
-      this.dices[i].getObject().position.x = -15 - (i % 3) * diceSize;
-      this.dices[i].getObject().position.y = 2 + Math.floor(i / 3) * diceSize;
-      this.dices[i].getObject().position.z = -15 + (i % 3) * diceSize;
-      this.dices[i].getObject().quaternion.x =
+      const diceSize = this.diceModels[i].size;
+      this.diceModels[i].getObject().position.x = -15 - (i % 3) * diceSize;
+      this.diceModels[i].getObject().position.y =
+        2 + Math.floor(i / 3) * diceSize;
+      this.diceModels[i].getObject().position.z = -15 + (i % 3) * diceSize;
+      this.diceModels[i].getObject().quaternion.x =
         ((Math.random() * 90 - 45) * Math.PI) / 180;
-      this.dices[i].getObject().quaternion.z =
+      this.diceModels[i].getObject().quaternion.z =
         ((Math.random() * 90 - 45) * Math.PI) / 180;
-      this.dices[i].updateBodyFromMesh();
+      this.diceModels[i].updateBodyFromMesh();
       let rand = Math.random() * 5;
-      this.dices[i]
+      this.diceModels[i]
         .getObject()
         .body.velocity.set(25 + rand, 40 + yRand, 15 + rand);
-      this.dices[i]
+      this.diceModels[i]
         .getObject()
         .body.angularVelocity.set(
           20 * Math.random() - 10,
           20 * Math.random() - 10,
           20 * Math.random() - 10
         );
-      diceValues.push({ dice: this.dices[i], value: value[i] });
+      diceValues.push({ dice: this.diceModels[i], value: values[i] });
     }
 
     DiceManager.prepareValues(diceValues);
@@ -196,9 +191,7 @@ class Dice extends Component {
 
   updatePhysics = () => {
     this.world.step(1.0 / 60.0);
-    for (var i in this.dices) {
-      this.dices[i].updateMeshFromBody();
-    }
+    this.diceModels.forEach(diceModel => diceModel.updateMeshFromBody());
   };
 
   renderScene = () => {
@@ -208,6 +201,7 @@ class Dice extends Component {
   render() {
     return (
       <div
+        className={this.props.className}
         style={{
           width: this.props.width,
           height: this.props.height || "300px",
@@ -221,4 +215,4 @@ class Dice extends Component {
   }
 }
 
-export default Dice;
+export default Dices3d;
