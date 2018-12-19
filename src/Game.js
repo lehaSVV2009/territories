@@ -42,26 +42,26 @@ const Territories = ({ dices, board }) =>
     }),
 
     moves: {
-      changeDices(G, ctx, dices) {
+      changeDices: (G, ctx, dices) => {
         return { ...G, dices };
       },
 
-      switchDices(G) {
+      switchDices: G => {
         return { ...G, dices: [G.dices[1], G.dices[0]] };
       },
 
-      clearDices(G) {
+      clearDices: G => {
         return { ...G, dices: [0, 0] };
       },
 
-      dropSquare(
+      dropRectangle: (
         G,
         ctx,
         rowIndex,
         columnIndex,
         rectangleHeight,
         rectangleWidth
-      ) {
+      ) => {
         const { currentPlayer } = ctx;
         return {
           ...G,

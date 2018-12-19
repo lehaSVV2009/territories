@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import Board from "../libs/territories-ui/Board";
 
-export const StyledBoard = styled(Board)`
+export const StyledRectangle = styled(Board)`
   ${props =>
     props.isDragging
       ? css`

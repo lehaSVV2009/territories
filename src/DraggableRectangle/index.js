@@ -2,9 +2,9 @@ import React from "react";
 import { findDOMNode } from "react-dom";
 import { DragSource } from "react-dnd";
 
-import { StyledBoard } from "./elements";
+import { StyledRectangle } from "./elements";
 
-export const DND_TYPE = "Board";
+export const DND_TYPE = "Rectangle";
 
 const rectangleSource = {
   beginDrag: ({ rows }) => ({ rows })
@@ -16,7 +16,7 @@ const collect = (connect, monitor) => ({
 });
 
 const DraggableRectangle = ({ isDragging, connectDragSource, rows }) => (
-  <StyledBoard
+  <StyledRectangle
     rows={rows}
     isDragging={isDragging}
     ref={instance => connectDragSource(findDOMNode(instance))}

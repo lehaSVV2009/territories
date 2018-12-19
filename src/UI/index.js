@@ -31,13 +31,13 @@ export default class UI extends Component {
     this.props.moves.switchDices();
   };
 
-  handleDropSquare = ({
+  handleDropRectangle = ({
     rowIndex,
     columnIndex,
     rectangleHeight,
     rectangleWidth
   }) => {
-    this.props.moves.dropSquare(
+    this.props.moves.dropRectangle(
       rowIndex,
       columnIndex,
       rectangleHeight,
@@ -78,13 +78,18 @@ export default class UI extends Component {
               <DiceRoller onRoll={this.handleRollDices} />
 
               {/* TODO Think of how not to move game board down after rotating and dice rolling */}
+              {dices && dices[0] !== 0 && (
+                <Container column>
+                  <Item>
+                    <Button onClick={this.handleRotateRectangle}>Rotate</Button>
+                  </Item>
+                  <Item>Drag rectangle and drop to the board</Item>
+                </Container>
+              )}
+
               <DraggableRectangle
                 rows={Array(dices[0]).fill(Array(dices[1]).fill())}
               />
-
-              {dices && dices[0] !== 0 && (
-                <Button onClick={this.handleRotateRectangle}>Rotate</Button>
-              )}
 
               <Board
                 rows={board}
@@ -101,7 +106,7 @@ export default class UI extends Component {
                     cellClassName={cellClassName}
                     rows={board}
                     currentPlayer={currentPlayer}
-                    onDropCell={this.handleDropSquare}
+                    onDropCell={this.handleDropRectangle}
                   />
                 )}
               />
