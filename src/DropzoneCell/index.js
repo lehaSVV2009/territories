@@ -99,6 +99,7 @@ const hasCapturedNeighbour = ({
 };
 
 const cellTarget = {
+  // TODO try to check if monitor takes more than half of cell pixels
   canDrop: (props, monitor) => {
     const { rowIndex, columnIndex, value, rows, currentPlayer } = props;
     // will be useful for future
@@ -126,12 +127,21 @@ const cellTarget = {
   }
 };
 
-const collect = (connect, monitor) => ({
-  connectDropTarget: connect.dropTarget(),
-  isOver: monitor.isOver(),
-  canDrop: monitor.canDrop()
-});
+const collect = (connect, monitor) => {
+  // console.log(monitor.getInitialClientOffset());
+  // console.log(monitor.getInitialSourceClientOffset());
+  // console.log(monitor.getClientOffset());
+  // console.log(monitor.getDifferenceFromInitialOffset());
+  // console.log(monitor.getSourceClientOffset());
+  return {
+    connectDropTarget: connect.dropTarget(),
+    // TODO try to find in API if draggable div is over and takes more than 50% of target, not just mouse
+    isOver: monitor.isOver(),
+    canDrop: monitor.canDrop()
+  };
+};
 
+// TODO move overlay div to elements.js
 const renderOverlay = color => {
   return (
     <div

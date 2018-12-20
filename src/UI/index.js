@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { DragDropContextProvider } from "react-dnd";
-import HTML5Backend from "react-dnd-html5-backend";
+import { DragDropContext } from "react-dnd";
+import MultiBackend from "react-dnd-multi-backend";
+import HTML5toTouch from "react-dnd-multi-backend/lib/HTML5toTouch";
 import { ThemeProvider } from "styled-components";
 
 import Board from "../libs/territories-ui/Board";
@@ -22,7 +23,7 @@ const theme = {
   }
 };
 
-export default class UI extends Component {
+class UI extends Component {
   handleRollDices = dices => {
     this.props.moves.changeDices(dices);
   };
@@ -58,66 +59,66 @@ export default class UI extends Component {
     } = this.props;
 
     return (
-      <DragDropContextProvider backend={HTML5Backend}>
-        <ThemeProvider theme={theme}>
-          <Container fullPage column>
-            <Item>
-              {/* TODO add some nice title */}
-              <Header />
-            </Item>
-            <Item flex="auto">
-              {/* TODO make gameover fullscreen modal */}
-              {gameover &&
-                (gameover.winner ? `Winner: ${gameover.winner}` : "Draw!")}
+      <ThemeProvider theme={theme}>
+        <Container fullPage column>
+          <Item>
+            {/* TODO add some nice title */}
+            <Header />
+          </Item>
+          <Item flex="auto">
+            {/* TODO make gameover fullscreen modal */}
+            {gameover &&
+              (gameover.winner ? `Winner: ${gameover.winner}` : "Draw!")}
 
-              {/* TODO Add current player right side within highlighted from all players */}
-              <Player player={currentPlayer} />
+            {/* TODO Add current player right side within highlighted from all players */}
+            <Player player={currentPlayer} />
 
-              <Button onClick={this.handleEndTurn}>Skip Turn</Button>
+            <Button onClick={this.handleEndTurn}>Skip Turn</Button>
 
-              <DiceRoller onRoll={this.handleRollDices} />
+            <DiceRoller onRoll={this.handleRollDices} />
 
-              {/* TODO Think of how not to move game board down after rotating and dice rolling */}
-              {dices && dices[0] !== 0 && (
-                <Container column>
-                  <Item>
-                    <Button onClick={this.handleRotateRectangle}>Rotate</Button>
-                  </Item>
-                  <Item>Drag rectangle and drop to the board</Item>
-                </Container>
+            {/* TODO Think of how not to move game board down after rotating and dice rolling */}
+            {dices && dices[0] !== 0 && (
+              <Container column>
+                <Item>Drag rectangle and drop to the board</Item>
+                <Item>
+                  <Button onClick={this.handleRotateRectangle}>Rotate</Button>
+                </Item>
+              </Container>
+            )}
+
+            <DraggableRectangle
+              rows={Array(dices[0]).fill(Array(dices[1]).fill())}
+            />
+
+            <Board
+              rows={board}
+              cellRenderer={({
+                value,
+                rowIndex,
+                columnIndex,
+                cellClassName
+              }) => (
+                <DropzoneCell
+                  rowIndex={rowIndex}
+                  columnIndex={columnIndex}
+                  value={value}
+                  cellClassName={cellClassName}
+                  rows={board}
+                  currentPlayer={currentPlayer}
+                  onDropCell={this.handleDropRectangle}
+                />
               )}
-
-              <DraggableRectangle
-                rows={Array(dices[0]).fill(Array(dices[1]).fill())}
-              />
-
-              <Board
-                rows={board}
-                cellRenderer={({
-                  value,
-                  rowIndex,
-                  columnIndex,
-                  cellClassName
-                }) => (
-                  <DropzoneCell
-                    rowIndex={rowIndex}
-                    columnIndex={columnIndex}
-                    value={value}
-                    cellClassName={cellClassName}
-                    rows={board}
-                    currentPlayer={currentPlayer}
-                    onDropCell={this.handleDropRectangle}
-                  />
-                )}
-              />
-            </Item>
-            <Item>
-              {/* TODO add some links */}
-              <Footer />
-            </Item>
-          </Container>
-        </ThemeProvider>
-      </DragDropContextProvider>
+            />
+          </Item>
+          <Item>
+            {/* TODO add some links */}
+            <Footer />
+          </Item>
+        </Container>
+      </ThemeProvider>
     );
   }
 }
+
+export default DragDropContext(MultiBackend(HTML5toTouch))(UI);
