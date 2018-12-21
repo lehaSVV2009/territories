@@ -6,6 +6,7 @@ import { ThemeProvider } from "styled-components";
 
 import Board from "../libs/territories-ui/Board";
 import Button from "../libs/territories-ui/Button";
+import Congratulations from "../Congratulations";
 import { Container, Item } from "../libs/territories-ui/Grid";
 import DiceRoller from "../DiceRoller";
 import DraggableRectangle from "../DraggableRectangle";
@@ -66,10 +67,6 @@ class UI extends Component {
             <Header />
           </Item>
           <Item flex="auto">
-            {/* TODO make gameover fullscreen modal */}
-            {gameover &&
-              (gameover.winner ? `Winner: ${gameover.winner}` : "Draw!")}
-
             {/* TODO Add current player right side within highlighted from all players */}
             <Player player={currentPlayer} />
 
@@ -110,6 +107,9 @@ class UI extends Component {
                 />
               )}
             />
+
+            {/* Win or Draw modal */}
+            <Congratulations gameover={gameover} />
           </Item>
           <Item>
             {/* TODO add some links */}

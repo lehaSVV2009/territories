@@ -37,7 +37,7 @@ const Territories = ({ dices, board }) =>
   Game({
     setup: () => ({
       // Board in format [["EMPTY", "EMPTY"], ["OCCUPIED_BY_PLAYER_1", "OCCUPIED_BY_PLAYER_2"]]
-      board: board || [...Array(20).fill([...Array(20).fill(CELL_TYPE.EMPTY)])],
+      board: board || [...Array(20).fill([...Array(10).fill(CELL_TYPE.EMPTY)])],
       dices: dices || [0, 0]
     }),
 
