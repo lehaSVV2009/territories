@@ -9,8 +9,11 @@ class Board extends Component {
     rowIndex,
     rowRenderer,
     rowClassName,
+    rowStyle,
     cellRenderer,
-    cellClassName
+    cellRadius,
+    cellClassName,
+    cellStyle
   }) => {
     return rowRenderer ? (
       rowRenderer({
@@ -18,11 +21,18 @@ class Board extends Component {
         value: row,
         rowIndex,
         rowClassName,
+        rowStyle,
         cellRenderer,
-        cellClassName
+        cellRadius,
+        cellClassName,
+        cellStyle
       })
     ) : (
-      <Row key={`board-row-${rowIndex}`} className={rowClassName}>
+      <Row
+        key={`board-row-${rowIndex}`}
+        className={rowClassName}
+        style={rowStyle}
+      >
         {row.map((cell, columnIndex) =>
           this.renderCell({
             rows,
@@ -31,7 +41,9 @@ class Board extends Component {
             columnIndex,
             cell,
             cellRenderer,
-            cellClassName
+            cellRadius,
+            cellClassName,
+            cellStyle
           })
         )}
       </Row>
@@ -45,7 +57,9 @@ class Board extends Component {
     columnIndex,
     cell,
     cellRenderer,
-    cellClassName
+    cellRadius,
+    cellClassName,
+    cellStyle
   }) => {
     return cellRenderer ? (
       cellRenderer({
@@ -54,10 +68,17 @@ class Board extends Component {
         rowIndex,
         columnIndex,
         value: cell,
-        cellClassName
+        cellRadius,
+        cellClassName,
+        cellStyle
       })
     ) : (
-      <Cell key={`board-cell-${columnIndex}`} className={cellClassName} />
+      <Cell
+        key={`board-cell-${columnIndex}`}
+        className={cellClassName}
+        style={cellStyle}
+        cellRadius={cellRadius}
+      />
     );
   };
 
@@ -65,7 +86,10 @@ class Board extends Component {
     const {
       rows,
       rowClassName,
+      rowStyle,
       cellClassName,
+      cellStyle,
+      cellRadius,
       rowRenderer,
       cellRenderer,
       ...rest
@@ -84,8 +108,11 @@ class Board extends Component {
             rowIndex,
             rowRenderer,
             rowClassName,
+            rowStyle,
             cellRenderer,
-            cellClassName
+            cellRadius,
+            cellClassName,
+            cellStyle
           })
         )}
       </Table>

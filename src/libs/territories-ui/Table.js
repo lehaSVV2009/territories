@@ -1,8 +1,11 @@
 import styled from "styled-components";
 
+const DEFAULT_BORDER = 1;
+const DEFAULT_CELL_RADIUS = 10;
+
 export default styled.div`
   display: table;
-  border: 1px solid ${props => props.theme.colors.gray};
+  border: ${DEFAULT_BORDER}px solid ${props => props.theme.colors.gray};
 `;
 
 export const Row = styled.div`
@@ -11,6 +14,9 @@ export const Row = styled.div`
 
 export const Cell = styled.div`
   display: table-cell;
-  padding: 10px;
-  border: 1px solid ${props => props.theme.colors.gray};
+  padding: ${props =>
+    props.cellRadius
+      ? props.cellRadius - DEFAULT_BORDER
+      : DEFAULT_CELL_RADIUS}px;
+  border: ${DEFAULT_BORDER}px solid ${props => props.theme.colors.gray};
 `;

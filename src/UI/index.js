@@ -24,6 +24,8 @@ const theme = {
   }
 };
 
+const CELL_RADIUS = 5;
+
 class UI extends Component {
   handleRollDices = dices => {
     this.props.moves.changeDices(dices);
@@ -70,6 +72,21 @@ class UI extends Component {
             {/* TODO Add current player right side within highlighted from all players */}
             <Player player={currentPlayer} />
 
+            <Board
+              rows={board}
+              cellRenderer={({ value, rowIndex, columnIndex }) => (
+                <DropzoneCell
+                  rowIndex={rowIndex}
+                  columnIndex={columnIndex}
+                  value={value}
+                  rows={board}
+                  cellRadius={CELL_RADIUS}
+                  currentPlayer={currentPlayer}
+                  onDropCell={this.handleDropRectangle}
+                />
+              )}
+            />
+
             <Button onClick={this.handleEndTurn}>Skip Turn</Button>
 
             <DiceRoller onRoll={this.handleRollDices} />
@@ -85,27 +102,8 @@ class UI extends Component {
             )}
 
             <DraggableRectangle
+              cellRadius={CELL_RADIUS}
               rows={Array(dices[0]).fill(Array(dices[1]).fill())}
-            />
-
-            <Board
-              rows={board}
-              cellRenderer={({
-                value,
-                rowIndex,
-                columnIndex,
-                cellClassName
-              }) => (
-                <DropzoneCell
-                  rowIndex={rowIndex}
-                  columnIndex={columnIndex}
-                  value={value}
-                  cellClassName={cellClassName}
-                  rows={board}
-                  currentPlayer={currentPlayer}
-                  onDropCell={this.handleDropRectangle}
-                />
-              )}
             />
 
             {/* Win or Draw modal */}

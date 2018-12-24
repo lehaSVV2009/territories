@@ -15,8 +15,14 @@ const collect = (connect, monitor) => ({
   isDragging: monitor.isDragging()
 });
 
-const DraggableRectangle = ({ isDragging, connectDragSource, rows }) => (
+const DraggableRectangle = ({
+  isDragging,
+  connectDragSource,
+  rows,
+  cellRadius
+}) => (
   <StyledRectangle
+    cellRadius={cellRadius}
     rows={rows}
     isDragging={isDragging}
     ref={instance => connectDragSource(findDOMNode(instance))}

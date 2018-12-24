@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { findDOMNode } from "react-dom";
 import { DropTarget } from "react-dnd";
 
@@ -10,6 +10,42 @@ import {
   TYPE_PLAYER_1,
   TYPE_PLAYER_2
 } from "./elements";
+
+const getRectangleSize = monitor => {
+  if (!monitor) {
+    return null;
+  }
+  const props = monitor.getItem();
+  if (!props) {
+    return null;
+  }
+  const { rows } = props;
+
+  return {
+    height: rows.length,
+    width: rows.length > 0 ? rows[0].length : 0
+  };
+};
+
+const getRectangleCoordinates = monitor => {
+  if (!monitor) {
+    return null;
+  }
+  const offset = monitor.getSourceClientOffset();
+  if (!offset) {
+    return null;
+  }
+  const dimensions = getRectangleSize(monitor);
+  if (!dimensions) {
+    return null;
+  }
+  return {
+    x: offset.x,
+    y: offset.y,
+    height: dimensions.height,
+    width: dimensions.width
+  };
+};
 
 const canDropRectangle = ({
   rowIndex,
@@ -103,26 +139,26 @@ const cellTarget = {
   canDrop: (props, monitor) => {
     const { rowIndex, columnIndex, value, rows, currentPlayer } = props;
     // will be useful for future
-    const { rows: rectangleRows } = monitor.getItem();
+    const { height, width } = getRectangleSize(monitor);
     return canDropRectangle({
       rowIndex,
       columnIndex,
       value,
       rows,
       currentPlayer,
-      rectangleHeight: rectangleRows.length,
-      rectangleWidth: rectangleRows[0].length
+      rectangleHeight: height,
+      rectangleWidth: width
     });
   },
 
   drop: (props, monitor) => {
     const { rowIndex, columnIndex } = props;
-    const { rows: rectangleRows } = monitor.getItem();
+    const { height, width } = getRectangleSize(monitor);
     props.onDropCell({
       rowIndex,
       columnIndex,
-      rectangleHeight: rectangleRows.length,
-      rectangleWidth: rectangleRows[0].length
+      rectangleHeight: height,
+      rectangleWidth: width
     });
   }
 };
@@ -133,8 +169,12 @@ const collect = (connect, monitor) => {
   // console.log(monitor.getClientOffset());
   // console.log(monitor.getDifferenceFromInitialOffset());
   // console.log(monitor.getSourceClientOffset());
+  const rectangleCoordinates = getRectangleCoordinates(monitor);
+  // console.log("Drag source top left coordinates", dragSourceTopLeftCoordinates);
+  //   const componentRect = findDOMNode(component).getBoundingClientRect();
   return {
     connectDropTarget: connect.dropTarget(),
+    rectangleCoordinates,
     // TODO try to find in API if draggable div is over and takes more than 50% of target, not just mouse
     isOver: monitor.isOver(),
     canDrop: monitor.canDrop()
@@ -159,30 +199,55 @@ const renderOverlay = color => {
   );
 };
 
-const DropzoneCell = ({
-  value,
-  cellClassName,
-  connectDropTarget,
-  isOver,
-  canDrop
-}) => {
-  return (
-    <OccupiedCell
-      type={
-        GameUtils.isOccupiedByPlayerOneCell(value)
-          ? TYPE_PLAYER_1
-          : GameUtils.isOccupiedByPlayerTwoCell(value)
-          ? TYPE_PLAYER_2
-          : TYPE_EMPTY
-      }
-      className={cellClassName}
-      ref={instance => connectDropTarget(findDOMNode(instance))}
-    >
-      {isOver && !canDrop && renderOverlay("red")}
-      {!isOver && canDrop && renderOverlay("yellow")}
-      {isOver && canDrop && renderOverlay("green")}
-    </OccupiedCell>
-  );
-};
+class DropzoneCell extends Component {
+  state = {
+    rect: null
+  };
+
+  componentDidMount() {
+    if (!this.instance) {
+      return;
+    }
+    const rect = this.instance.getBoundingClientRect();
+    this.setState({ rect });
+  }
+
+  render() {
+    const {
+      value,
+      cellRadius,
+      rectangleCoordinates,
+      connectDropTarget,
+      isOver,
+      canDrop
+    } = this.props;
+    const { rect } = this.state;
+    console.log("Cell coordinates");
+    console.log(rect);
+    console.log("Rectangle coordinates");
+    console.log(rectangleCoordinates);
+
+    return (
+      <OccupiedCell
+        type={
+          GameUtils.isOccupiedByPlayerOneCell(value)
+            ? TYPE_PLAYER_1
+            : GameUtils.isOccupiedByPlayerTwoCell(value)
+            ? TYPE_PLAYER_2
+            : TYPE_EMPTY
+        }
+        cellRadius={cellRadius}
+        ref={instance => {
+          this.instance = instance;
+          connectDropTarget(findDOMNode(instance));
+        }}
+      >
+        {isOver && !canDrop && renderOverlay("red")}
+        {!isOver && canDrop && renderOverlay("yellow")}
+        {isOver && canDrop && renderOverlay("green")}
+      </OccupiedCell>
+    );
+  }
+}
 
 export default DropTarget(DND_TYPE, cellTarget, collect)(DropzoneCell);

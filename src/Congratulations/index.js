@@ -1,9 +1,9 @@
-import React from "react";
+import React, { Component } from "react";
 import Dialog from "../libs/territories-ui/Dialog";
 import Button from "../libs/territories-ui/Button";
 import Player from "../Player";
 
-class Congratulations extends React.Component {
+class Congratulations extends Component {
   state = {
     open: false
   };
