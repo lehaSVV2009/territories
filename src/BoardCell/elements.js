@@ -14,3 +14,21 @@ export const OccupiedCell = styled(Cell)`
       ? props.theme.colors.player2
       : "inherit"};
 `;
+
+export const Overlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  opacity: 0.5;
+`;
+
+export const GreenOverlay = styled(Overlay)`
+  background-color: ${props => props.theme.colors.green};
+`;
+
+export const RedOverlay = styled(Overlay)`
+  background-color: ${props => props.theme.colors.red};
+`;

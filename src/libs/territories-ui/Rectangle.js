@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import Table, { Cell, Row } from "./Table";
 
-class Board extends Component {
+class Rectangle extends Component {
   renderRow = ({
     rows,
     row,
@@ -29,7 +29,7 @@ class Board extends Component {
       })
     ) : (
       <Row
-        key={`board-row-${rowIndex}`}
+        key={`rectangle-row-${rowIndex}`}
         className={rowClassName}
         style={rowStyle}
       >
@@ -74,7 +74,7 @@ class Board extends Component {
       })
     ) : (
       <Cell
-        key={`board-cell-${columnIndex}`}
+        key={`rectangle-cell-${columnIndex}`}
         className={cellClassName}
         style={cellStyle}
         cellRadius={cellRadius}
@@ -120,4 +120,4 @@ class Board extends Component {
   }
 }
 
-export default Board;
+export default Rectangle;

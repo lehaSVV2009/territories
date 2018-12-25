@@ -1,36 +1,36 @@
 import { Game } from "boardgame.io/core";
 import { CELL_TYPE, PLAYER_1, PLAYER_2 } from "./gameUtils";
 
-// TODO reimplement and optimize when game is implemented by rules
-// TODO probably store capturing counters in G state
-const selectVictoryContext = board => {
-  let empty = 0;
-  let occupiedByPlayer1 = 0;
-  let occupiedByPlayer2 = 0;
-  board.forEach(row =>
-    row.forEach(cell => {
-      if (cell === CELL_TYPE.EMPTY) {
-        empty++;
-      } else if (cell === CELL_TYPE.OCCUPIED_BY_PLAYER_1) {
-        occupiedByPlayer1++;
-      } else if (cell === CELL_TYPE.OCCUPIED_BY_PLAYER_2) {
-        occupiedByPlayer2++;
-      }
-    })
-  );
+const selectVictoryContext = ({ board, occupiedCounters }) => {
+  const allCellsCount = board.length * (board.length > 0 ? board[0].length : 0);
+  const occupiedByPlayer1 = occupiedCounters[PLAYER_1];
+  const occupiedByPlayer2 = occupiedCounters[PLAYER_2];
   return {
-    empty,
+    allCellsCount,
     occupiedByPlayer1,
     occupiedByPlayer2
   };
 };
 
-const isVictory = ({ empty, occupiedByPlayer1, occupiedByPlayer2 }) => {
-  return empty === 0 && occupiedByPlayer1 !== occupiedByPlayer2;
+// TODO think about nice algorithm, calculating locked borders
+const selectWinner = ({
+  allCellsCount,
+  occupiedByPlayer1,
+  occupiedByPlayer2
+}) => {
+  const halfCellsCount = allCellsCount / 2;
+  return occupiedByPlayer1 > halfCellsCount
+    ? PLAYER_1
+    : occupiedByPlayer2 > halfCellsCount
+    ? PLAYER_2
+    : null;
 };
 
-const isDraw = ({ empty, occupiedByPlayer1, occupiedByPlayer2 }) => {
-  return empty === 0 && occupiedByPlayer1 === occupiedByPlayer2;
+const isDraw = ({ allCellsCount, occupiedByPlayer1, occupiedByPlayer2 }) => {
+  return (
+    occupiedByPlayer1 + occupiedByPlayer2 === allCellsCount &&
+    occupiedByPlayer1 === occupiedByPlayer2
+  );
 };
 
 const Territories = ({ dices, board }) =>
@@ -38,7 +38,11 @@ const Territories = ({ dices, board }) =>
     setup: () => ({
       // Board in format [["EMPTY", "EMPTY"], ["OCCUPIED_BY_PLAYER_1", "OCCUPIED_BY_PLAYER_2"]]
       board: board || [...Array(20).fill([...Array(10).fill(CELL_TYPE.EMPTY)])],
-      dices: dices || [0, 0]
+      dices: dices || [0, 0],
+      occupiedCounters: {
+        [PLAYER_1]: 0,
+        [PLAYER_2]: 0
+      }
     }),
 
     moves: {
@@ -66,28 +70,34 @@ const Territories = ({ dices, board }) =>
         return {
           ...G,
           board: G.board.map((row, rowStateIndex) =>
-            rowStateIndex === rowIndex
+            rowStateIndex >= rowIndex &&
+            rowStateIndex < rowIndex + rectangleHeight
               ? row.map((cell, columnStateIndex) =>
-                  columnStateIndex === columnIndex
+                  columnStateIndex >= columnIndex &&
+                  columnStateIndex < columnIndex + rectangleWidth
                     ? currentPlayer === PLAYER_1
                       ? CELL_TYPE.OCCUPIED_BY_PLAYER_1
                       : CELL_TYPE.OCCUPIED_BY_PLAYER_2
                     : cell
                 )
               : row
-          )
+          ),
+          occupiedCounters: {
+            ...G.occupiedCounters,
+            [currentPlayer]:
+              G.occupiedCounters[currentPlayer] +
+              rectangleHeight * rectangleWidth
+          }
         };
       }
     },
 
     flow: {
-      endGameIf: (G, ctx) => {
-        const victoryContext = selectVictoryContext(G.board);
-        if (isVictory(victoryContext)) {
-          const { occupiedByPlayer1, occupiedByPlayer2 } = victoryContext;
-          return {
-            winner: occupiedByPlayer1 > occupiedByPlayer2 ? PLAYER_1 : PLAYER_2
-          };
+      endGameIf: G => {
+        const victoryContext = selectVictoryContext(G);
+        const winner = selectWinner(victoryContext);
+        if (winner) {
+          return { winner };
         }
         if (isDraw(victoryContext)) {
           return { draw: true };
