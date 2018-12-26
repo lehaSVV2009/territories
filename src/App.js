@@ -7,7 +7,8 @@ import Game from "./Game";
 const Territories = Client({
   game: Game({}),
   board: UI,
-  ai: AI
+  ai: AI,
+  debug: false
 });
 
 export default Territories;

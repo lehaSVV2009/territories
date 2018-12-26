@@ -23,6 +23,7 @@ const theme = {
 
 const CELL_RADIUS = 10;
 
+// TODO Add internationalization
 class UI extends Component {
   handleRollDices = dices => {
     this.props.moves.changeDices(dices);
@@ -60,41 +61,60 @@ class UI extends Component {
 
     return (
       <ThemeProvider theme={theme}>
-        <Container fullPage column>
+        <Container column>
           <Item>
             {/* TODO add some nice title */}
             <Header />
           </Item>
-          <Item flex="auto">
-            {/* TODO Add current player right side within highlighted from all players */}
-            <Player player={currentPlayer} />
+          <Item centered>
+            <Container>
+              <Item>
+                <Player player={currentPlayer} />
+              </Item>
+              <Item centered>
+                <div
+                  style={{
+                    textAlign: "center"
+                  }}
+                >
+                  {/* TODO add fixed-size paper with roll button or rectangle + rotate */}
+                  <div
+                    style={{
+                      minHeight: CELL_RADIUS * 20,
+                      minWidth: CELL_RADIUS * 20
+                    }}
+                  >
+                    <DiceRoller onRoll={this.handleRollDices} />
 
-            <Button onClick={this.handleEndTurn}>Skip Turn</Button>
+                    {/* TODO Think of how not to move game board down after rotating and dice rolling */}
+                    {dices && dices[0] !== 0 && (
+                      <Container column>
+                        <Item>
+                          <Button onClick={this.handleRotateRectangle}>
+                            Rotate
+                          </Button>
+                        </Item>
+                        <Item centered>
+                          <Rectangle
+                            rows={Array(dices[0]).fill(Array(dices[1]).fill())}
+                            cellRadius={CELL_RADIUS}
+                          />
+                        </Item>
+                        <Item>Mouse over board</Item>
+                      </Container>
+                    )}
+                  </div>
+                  {/* TODO replace style with className */}
+                  <Button onClick={this.handleEndTurn}>Skip Turn</Button>
+                </div>
+              </Item>
 
-            <DiceRoller onRoll={this.handleRollDices} />
-
-            {/* TODO Think of how not to move game board down after rotating and dice rolling */}
-            {dices && dices[0] !== 0 && (
-              <Container column>
-                <Item>
-                  <Container>
-                    <Item>
-                      <Rectangle
-                        rows={Array(dices[0]).fill(Array(dices[1]).fill())}
-                        cellRadius={CELL_RADIUS}
-                      />
-                    </Item>
-                    <Item>
-                      <Button onClick={this.handleRotateRectangle}>
-                        Rotate
-                      </Button>
-                    </Item>
-                  </Container>
-                </Item>
-                <Item>Mouse over board</Item>
-              </Container>
-            )}
-
+              <Item>
+                <Player player={currentPlayer} />
+              </Item>
+            </Container>
+          </Item>
+          <Item centered>
             <Board
               rows={board}
               rectangleHeight={dices[0]}
@@ -102,14 +122,14 @@ class UI extends Component {
               currentPlayer={currentPlayer}
               onDropRectangle={this.handleDropRectangle}
             />
-
-            {/* Win or Draw modal */}
-            <Congratulations gameover={gameover} />
           </Item>
           <Item>
             {/* TODO add some links */}
             <Footer />
           </Item>
+
+          {/* Win or Draw modal */}
+          <Congratulations gameover={gameover} />
         </Container>
       </ThemeProvider>
     );
