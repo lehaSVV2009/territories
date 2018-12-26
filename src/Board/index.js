@@ -108,9 +108,12 @@ const hasOccupiedNeighbour = ({
 
   // Check if any cell exists on the LEFT of rectangle
   // and occupied by current player
-  if (columnIndex - 1 >= columnFirstIndex) {
+  const leftNeighbourColumnIndex = columnIndex - 1;
+  if (leftNeighbourColumnIndex >= columnFirstIndex) {
     for (let index = 0; index < rectangleHeight; ++index) {
-      if (isOccupiedFunction(rows[rowIndex + index][columnIndex - 1])) {
+      if (
+        isOccupiedFunction(rows[rowIndex + index][leftNeighbourColumnIndex])
+      ) {
         return true;
       }
     }
@@ -118,12 +121,11 @@ const hasOccupiedNeighbour = ({
 
   // Check if any cell exists on the RIGHT of rectangle
   // and is occupied by current player
-  if (columnIndex + rectangleWidth + 1 <= columnLastIndex) {
+  const rightNeighbourColumnIndex = columnIndex + rectangleWidth + 1;
+  if (rightNeighbourColumnIndex <= columnLastIndex) {
     for (let index = 0; index < rectangleHeight; ++index) {
       if (
-        isOccupiedFunction(
-          rows[rowIndex + index][columnIndex + rectangleWidth + 1]
-        )
+        isOccupiedFunction(rows[rowIndex + index][rightNeighbourColumnIndex])
       ) {
         return true;
       }
@@ -132,22 +134,22 @@ const hasOccupiedNeighbour = ({
 
   // Check if any cell exists on the TOP of rectangle
   // and is occupied by current player
-  if (rowIndex - 1 >= rowFirstIndex) {
+  const topNeighbourRowIndex = rowIndex - 1;
+  if (topNeighbourRowIndex >= rowFirstIndex) {
     for (let index = 0; index < rectangleWidth; ++index) {
-      if (isOccupiedFunction(rows[rowIndex - 1][columnIndex + index])) {
+      if (isOccupiedFunction(rows[topNeighbourRowIndex][columnIndex + index])) {
         return true;
       }
     }
   }
 
-  // Check if any cell exists on the TOP of rectangle
+  // Check if any cell exists on the BOTTOM of rectangle
   // and is occupied by current player
-  if (rowIndex + rectangleHeight + 1 <= rowLastIndex) {
+  const bottomNeighbourRowIndex = rowIndex + rectangleHeight + 1;
+  if (bottomNeighbourRowIndex <= rowLastIndex) {
     for (let index = 0; index < rectangleWidth; ++index) {
       if (
-        isOccupiedFunction(
-          rows[rowIndex + rectangleHeight + 1][columnIndex + index]
-        )
+        isOccupiedFunction(rows[bottomNeighbourRowIndex][columnIndex + index])
       ) {
         return true;
       }
