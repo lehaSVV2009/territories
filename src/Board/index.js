@@ -121,7 +121,7 @@ const hasOccupiedNeighbour = ({
 
   // Check if any cell exists on the RIGHT of rectangle
   // and is occupied by current player
-  const rightNeighbourColumnIndex = columnIndex + rectangleWidth + 1;
+  const rightNeighbourColumnIndex = columnIndex + rectangleWidth;
   if (rightNeighbourColumnIndex <= columnLastIndex) {
     for (let index = 0; index < rectangleHeight; ++index) {
       if (
@@ -145,7 +145,7 @@ const hasOccupiedNeighbour = ({
 
   // Check if any cell exists on the BOTTOM of rectangle
   // and is occupied by current player
-  const bottomNeighbourRowIndex = rowIndex + rectangleHeight + 1;
+  const bottomNeighbourRowIndex = rowIndex + rectangleHeight;
   if (bottomNeighbourRowIndex <= rowLastIndex) {
     for (let index = 0; index < rectangleWidth; ++index) {
       if (
