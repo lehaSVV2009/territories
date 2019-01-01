@@ -24,15 +24,16 @@ class DiceRoller extends Component {
   };
 
   render() {
+    const { buttonProps } = this.props;
     const { open, dices } = this.state;
 
     return (
       <Fragment>
         <Button
           size="large"
-          color="secondary"
-          variant="outlined"
+          variant="contained"
           onClick={this.handleRollDices}
+          {...buttonProps}
         >
           Roll Dices
         </Button>

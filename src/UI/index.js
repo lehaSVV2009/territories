@@ -33,7 +33,8 @@ const muiTheme = createMuiTheme({
       contrastText: theme.colors.white
     },
     secondary: {
-      main: theme.colors.player2
+      main: theme.colors.player2,
+      contrastText: theme.colors.white
     }
   }
 });
@@ -139,7 +140,14 @@ class UI extends Component {
                             alignItems="center"
                             style={{ height: "200px" }}
                           >
-                            <DiceRoller onRoll={this.handleRollDices} />
+                            <DiceRoller
+                              buttonProps={{
+                                color: GameUtils.isPlayer1(currentPlayer)
+                                  ? "primary"
+                                  : "secondary"
+                              }}
+                              onRoll={this.handleRollDices}
+                            />
                           </Container>
                         )}
                       </Paper>
