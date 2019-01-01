@@ -15,6 +15,11 @@ export const Container = styled.div`
       ? "space-around"
       : "none"};
   flex-direction: ${props => (props.column ? "column" : "row")};
+  ${props =>
+    props.alignItems &&
+    css`
+      align-items: ${props.alignItems};
+    `};
 `;
 
 export const Item = styled.div`

@@ -1,8 +1,7 @@
 import { Game } from "boardgame.io/core";
 import { CELL_TYPE, PLAYER_1, PLAYER_2 } from "./gameUtils";
 
-const selectVictoryContext = ({ board, occupiedCounters }) => {
-  const allCellsCount = board.length * (board.length > 0 ? board[0].length : 0);
+const selectVictoryContext = ({ allCellsCount, occupiedCounters }) => {
   const occupiedByPlayer1 = occupiedCounters[PLAYER_1];
   const occupiedByPlayer2 = occupiedCounters[PLAYER_2];
   return {
@@ -33,17 +32,29 @@ const isDraw = ({ allCellsCount, occupiedByPlayer1, occupiedByPlayer2 }) => {
   );
 };
 
+const calculateCellsCount = ({ board }) => {
+  return board.length * (board.length > 0 ? board[0].length : 0);
+};
+
+const DEFAULT_BOARD = [...Array(15).fill([...Array(40).fill(CELL_TYPE.EMPTY)])];
+const DEFAULT_DICES = [0, 0];
+
 const Territories = ({ dices, board }) =>
   Game({
-    setup: () => ({
-      // Board in format [["EMPTY", "EMPTY"], ["OCCUPIED_BY_PLAYER_1", "OCCUPIED_BY_PLAYER_2"]]
-      board: board || [...Array(20).fill([...Array(10).fill(CELL_TYPE.EMPTY)])],
-      dices: dices || [0, 0],
-      occupiedCounters: {
-        [PLAYER_1]: 0,
-        [PLAYER_2]: 0
-      }
-    }),
+    setup: () => {
+      const boardOrDefault = board || DEFAULT_BOARD;
+
+      return {
+        // Board in format [["EMPTY", "EMPTY"], ["OCCUPIED_BY_PLAYER_1", "OCCUPIED_BY_PLAYER_2"]]
+        board: boardOrDefault,
+        dices: dices || DEFAULT_DICES,
+        occupiedCounters: {
+          [PLAYER_1]: 0,
+          [PLAYER_2]: 0
+        },
+        allCellsCount: calculateCellsCount({ board: boardOrDefault })
+      };
+    },
 
     moves: {
       changeDices: (G, ctx, dices) => {

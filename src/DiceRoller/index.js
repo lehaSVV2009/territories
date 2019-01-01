@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import random from "lodash.random";
 import Button from "../libs/territories-ui/Button";
 import Dialog from "../libs/territories-ui/Dialog";
@@ -27,8 +27,15 @@ class DiceRoller extends Component {
     const { open, dices } = this.state;
 
     return (
-      <div>
-        <Button onClick={this.handleRollDices}>Roll Dices</Button>
+      <Fragment>
+        <Button
+          size="large"
+          color="secondary"
+          variant="outlined"
+          onClick={this.handleRollDices}
+        >
+          Roll Dices
+        </Button>
         <Dialog open={open}>
           {/* Dice component is mounted again when dialog is open 
           cause of required dice init logic in componentDidMount */}
@@ -51,7 +58,7 @@ class DiceRoller extends Component {
             />
           )}
         </Dialog>
-      </div>
+      </Fragment>
     );
   }
 }

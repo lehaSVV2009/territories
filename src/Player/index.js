@@ -1,26 +1,32 @@
 import React from "react";
-import styled from "styled-components";
 
-import { Container, Item } from "../libs/territories-ui/Grid";
-import { isPlayer1 } from "../gameUtils";
+import CardHeader from "../libs/territories-ui/CardHeader";
+import IconButton from "../libs/territories-ui/IconButton";
+import Timer from "../libs/territories-icons/Timer";
+import { CenteredCardContent, DetachedCard, StyledAvatar } from "./elements";
 
-const PlayerIcon = styled.div`
-  border: 1px solid ${props => props.theme.colors.gray};
-  padding: 8px;
-  background-color: ${props =>
-    isPlayer1(props.player)
-      ? props.theme.colors.player1
-      : props.theme.colors.player2};
-`;
-
-// TODO move as Avatar to territories-ui
-const Player = ({ player }) => (
-  <Container>
-    <Item>
-      <PlayerIcon player={player} />
-    </Item>
-    <Item>Player: {player}</Item>
-  </Container>
+const Player = ({
+  isCurrent,
+  player,
+  allCellsCount,
+  playerCellsCount,
+  onSkipTurn
+}) => (
+  <DetachedCard>
+    <CardHeader
+      avatar={<StyledAvatar player={player}>{player}</StyledAvatar>}
+      title={`Player ${player}`}
+      subheader={`${playerCellsCount} from ${allCellsCount} occupied`}
+    />
+    {isCurrent && (
+      <CenteredCardContent>
+        {/* TODO add tooltips */}
+        <IconButton onClick={onSkipTurn}>
+          <Timer />
+        </IconButton>
+      </CenteredCardContent>
+    )}
+  </DetachedCard>
 );
 
 export default Player;
