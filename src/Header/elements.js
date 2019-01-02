@@ -18,7 +18,7 @@ export const WhiteSelect = styled(Select)`
 
 export const DetachedButton = styled(Button)`
   && {
-    margin-left: 4px;
-    margin-right: 4px;
+    margin-left: 8px;
+    margin-right: 8px;
   }
-`
+`;

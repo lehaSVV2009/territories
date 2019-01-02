@@ -25,7 +25,7 @@ export const Container = styled.div`
 export const Item = styled.div`
   flex: ${props => props.flex || "none"};
   ${props =>
-    props.centered &&
+    props.center &&
     css`
       margin: 0 auto;
     `};
