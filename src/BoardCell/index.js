@@ -4,6 +4,7 @@ import * as GameUtils from "../gameUtils";
 import {
   OccupiedCell,
   GreenOverlay,
+  YellowOverlay,
   RedOverlay,
   TYPE_EMPTY,
   TYPE_PLAYER_1,
@@ -51,7 +52,8 @@ class BoardCell extends Component {
       selectedRowIndex,
       selectedColumnIndex,
       rectangleWidth,
-      rectangleHeight
+      rectangleHeight,
+      potentiallyOccupiedCells
     } = this.props;
 
     const isCellInRectangle = inRectangle({
@@ -62,6 +64,20 @@ class BoardCell extends Component {
       rectangleWidth,
       rectangleHeight
     });
+
+    let isPotentiallyOccupied = false;
+    if (!isCellInRectangle) {
+      isPotentiallyOccupied = potentiallyOccupiedCells.some(cell =>
+        inRectangle({
+          rowIndex,
+          columnIndex,
+          selectedRowIndex: cell.rowIndex,
+          selectedColumnIndex: cell.columnIndex,
+          rectangleWidth,
+          rectangleHeight
+        })
+      );
+    }
 
     return (
       <OccupiedCell
@@ -78,6 +94,9 @@ class BoardCell extends Component {
         onClick={this.handleCellClick}
       >
         {isCellInRectangle && (canDrop ? <GreenOverlay /> : <RedOverlay />)}
+        {GameUtils.isEmptyCell(value) && isPotentiallyOccupied && (
+          <YellowOverlay />
+        )}
       </OccupiedCell>
     );
   }

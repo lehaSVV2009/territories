@@ -32,3 +32,7 @@ export const GreenOverlay = styled(Overlay)`
 export const RedOverlay = styled(Overlay)`
   background-color: ${props => props.theme.colors.red};
 `;
+
+export const YellowOverlay = styled(Overlay)`
+  background-color: ${props => props.theme.colors.yellow};
+`;

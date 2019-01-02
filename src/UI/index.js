@@ -13,6 +13,7 @@ import { DetachedItem } from "./elements";
 const theme = {
   colors: {
     white: "#FFFFFF",
+    yellow: "#FFFF00",
     gray: "#DDDDDD",
     green: "#00FF00",
     red: "#FF0000",

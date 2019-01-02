@@ -163,8 +163,38 @@ class Board extends Component {
   state = {
     selectedRowIndex: -1,
     selectedColumnIndex: -1,
-    canDrop: false
+    canDrop: false,
+    potentiallyOccupiedCells: []
   };
+
+  componentDidUpdate(prevProps) {
+    const { currentPlayer, rectangleHeight, rectangleWidth, rows } = this.props;
+    if (
+      prevProps.rectangleHeight !== rectangleHeight ||
+      prevProps.rectangleWidth !== rectangleWidth ||
+      prevProps.currentPlayer !== currentPlayer
+    ) {
+      const potentiallyOccupiedCells = [];
+      rows.forEach((row, rowIndex) => {
+        row.forEach((column, columnIndex) => {
+          if (
+            canDropRectangle({
+              rowIndex,
+              columnIndex,
+              value: rows[rowIndex][columnIndex],
+              rows,
+              rectangleHeight,
+              rectangleWidth,
+              currentPlayer
+            })
+          ) {
+            potentiallyOccupiedCells.push({ rowIndex, columnIndex });
+          }
+        });
+      });
+      this.setState({ potentiallyOccupiedCells });
+    }
+  }
 
   handleCellMouseEnter = ({ rowIndex, columnIndex }) => {
     const { rows, rectangleHeight, rectangleWidth, currentPlayer } = this.props;
@@ -200,11 +230,18 @@ class Board extends Component {
         rectangleWidth
       });
     }
+
+    this.handleBoardMouseLeave();
   };
 
   render() {
     const { rows, cellRadius, rectangleWidth, rectangleHeight } = this.props;
-    const { selectedRowIndex, selectedColumnIndex, canDrop } = this.state;
+    const {
+      selectedRowIndex,
+      selectedColumnIndex,
+      canDrop,
+      potentiallyOccupiedCells
+    } = this.state;
     return (
       <Rectangle
         rows={rows}
@@ -220,6 +257,7 @@ class Board extends Component {
             rectangleHeight={rectangleHeight}
             rectangleWidth={rectangleWidth}
             cellRadius={cellRadius}
+            potentiallyOccupiedCells={potentiallyOccupiedCells}
             onMouseEnter={this.handleCellMouseEnter}
             onClick={this.handleDropRectangle}
           />
