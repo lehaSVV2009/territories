@@ -14,6 +14,7 @@ import Paper from "../libs/territories-ui/Paper";
 import Player from "../Player";
 import Rectangle from "../libs/territories-ui/Rectangle";
 import RotateIcon from "../libs/territories-icons/Rotate";
+import Tooltip from "../libs/territories-ui/Tooltip";
 
 const theme = {
   colors: {
@@ -41,6 +42,7 @@ const muiTheme = createMuiTheme({
 
 const CELL_RADIUS = 10;
 
+// TODO simplify UI to have only grid stuff and handlers
 // TODO Add internationalization
 class UI extends Component {
   handleRollDices = dices => {
@@ -117,12 +119,14 @@ class UI extends Component {
                             style={{ height: "200px" }}
                           >
                             <Item>
-                              <IconButton
-                                size="small"
-                                onClick={this.handleRotateRectangle}
-                              >
-                                <RotateIcon />
-                              </IconButton>
+                              <Tooltip title="Rotate rectangle">
+                                <IconButton
+                                  size="small"
+                                  onClick={this.handleRotateRectangle}
+                                >
+                                  <RotateIcon />
+                                </IconButton>
+                              </Tooltip>
                             </Item>
                             <Item centered>
                               <Rectangle

@@ -2,7 +2,8 @@ import React from "react";
 
 import CardHeader from "../libs/territories-ui/CardHeader";
 import IconButton from "../libs/territories-ui/IconButton";
-import Timer from "../libs/territories-icons/Timer";
+import TimerIcon from "../libs/territories-icons/Timer";
+import Tooltip from "../libs/territories-ui/Tooltip";
 import { CenteredCardContent, DetachedCard, StyledAvatar } from "./elements";
 
 const Player = ({
@@ -16,14 +17,19 @@ const Player = ({
     <CardHeader
       avatar={<StyledAvatar player={player}>{player}</StyledAvatar>}
       title={`Player ${player}`}
-      subheader={`${playerCellsCount} from ${allCellsCount} occupied`}
+      subheader={
+        Number.isInteger(playerCellsCount) &&
+        Number.isInteger(allCellsCount) &&
+        `${playerCellsCount} from ${allCellsCount} occupied`
+      }
     />
     {isCurrent && (
       <CenteredCardContent>
-        {/* TODO add tooltips */}
-        <IconButton onClick={onSkipTurn}>
-          <Timer />
-        </IconButton>
+        <Tooltip title="Skip turn">
+          <IconButton onClick={onSkipTurn}>
+            <TimerIcon />
+          </IconButton>
+        </Tooltip>
       </CenteredCardContent>
     )}
   </DetachedCard>

@@ -37,7 +37,7 @@ class DiceRoller extends Component {
         >
           Roll Dices
         </Button>
-        <Dialog open={open}>
+        <Dialog open={open} fullWidth>
           {/* Dice component is mounted again when dialog is open 
           cause of required dice init logic in componentDidMount */}
           {open && (
