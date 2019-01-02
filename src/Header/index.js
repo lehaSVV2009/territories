@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import AppBar from "../libs/territories-ui/AppBar";
+import GithubIcon from "../libs/territories-icons/Github";
+import IconButton from "../libs/territories-ui/IconButton";
 import MenuItem from "../libs/territories-ui/MenuItem";
 import Toolbar from "../libs/territories-ui/Toolbar";
+import Tooltip from "../libs/territories-ui/Tooltip";
 import { DetachedButton, Logo, WhiteSelect } from "./elements";
 
 export default class Header extends Component {
@@ -31,7 +34,7 @@ export default class Header extends Component {
     const { lang } = this.state;
 
     return (
-      <AppBar position="fixed">
+      <AppBar color="secondary" position="fixed">
         <Toolbar>
           <Logo onClick={this.handleLogoClick}>Territories</Logo>
           <WhiteSelect value={lang} onChange={this.handleLanguageChange}>
@@ -42,9 +45,11 @@ export default class Header extends Component {
           <DetachedButton color="inherit" onClick={this.handleRulesClick}>
             Rules
           </DetachedButton>
-          <DetachedButton color="inherit" onClick={this.handleGithubClick}>
-            Github
-          </DetachedButton>
+          <Tooltip title="Github">
+            <IconButton onClick={this.handleGithubClick}>
+              <GithubIcon />
+            </IconButton>
+          </Tooltip>
         </Toolbar>
       </AppBar>
     );
