@@ -13,7 +13,7 @@ export default class Header extends Component {
   };
 
   handleLogoClick = () => {
-    window.open("/", "_self");
+    window.open(`${process.env.PUBLIC_URL}/`, "_self");
   };
 
   handleGithubClick = () => {

@@ -34,7 +34,7 @@ class Congratulations extends Component {
   };
 
   handleNewGame = () => {
-    window.open("/", "_self");
+    window.open(`${process.env.PUBLIC_URL}/`, "_self");
   };
 
   render() {
