@@ -36,6 +36,12 @@ class BoardCell extends Component {
     onMouseEnter({ rowIndex, columnIndex });
   };
 
+  handleCellMouseLeave = () => {
+    const { onMouseLeave } = this.props;
+
+    onMouseLeave();
+  };
+
   handleCellClick = () => {
     const { rowIndex, columnIndex, onClick } = this.props;
 
@@ -91,6 +97,7 @@ class BoardCell extends Component {
             : TYPE_EMPTY
         }
         onMouseEnter={this.handleCellMouseEnter}
+        onMouseLeave={this.handleCellMouseLeave}
         onClick={this.handleCellClick}
       >
         {isCellInRectangle && (canDrop ? <GreenOverlay /> : <RedOverlay />)}
