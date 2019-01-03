@@ -214,7 +214,7 @@ class Board extends Component {
     });
   };
 
-  handleCellMouseLeave = () => {
+  handleBoardMouseLeave = () => {
     this.setState({ selectedRowIndex: -1, selectedColumnIndex: -1 });
   };
 
@@ -231,7 +231,7 @@ class Board extends Component {
       });
     }
 
-    this.handleCellMouseLeave();
+    this.handleBoardMouseLeave();
   };
 
   render() {
@@ -259,10 +259,10 @@ class Board extends Component {
             cellRadius={cellRadius}
             potentiallyOccupiedCells={potentiallyOccupiedCells}
             onMouseEnter={this.handleCellMouseEnter}
-            onMouseLeave={this.handleCellMouseLeave}
             onClick={this.handleDropRectangle}
           />
         )}
+        onMouseLeave={this.handleBoardMouseLeave}
       />
     );
   }
