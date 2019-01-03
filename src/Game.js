@@ -1,5 +1,12 @@
 import { Game } from "boardgame.io/core";
-import { CELL_TYPE, PLAYER_1, PLAYER_2 } from "./gameUtils";
+import {
+  CELL_TYPE,
+  PLAYER_1,
+  PLAYER_2,
+  isEmptyCell,
+  isOccupiedByPlayerOneCell
+} from "./gameUtils";
+import findClosedLoops from "./libs/find-closed-loops";
 
 const selectVictoryContext = ({ allCellsCount, occupiedCounters }) => {
   const occupiedByPlayer1 = occupiedCounters[PLAYER_1];
@@ -11,7 +18,6 @@ const selectVictoryContext = ({ allCellsCount, occupiedCounters }) => {
   };
 };
 
-// TODO think about nice algorithm, calculating locked borders
 const selectWinner = ({
   allCellsCount,
   occupiedByPlayer1,
@@ -78,26 +84,89 @@ const Territories = ({ dices, board }) =>
         rectangleWidth
       ) => {
         const { currentPlayer } = ctx;
+
+        const newBoard = G.board.map((row, rowStateIndex) =>
+          rowStateIndex >= rowIndex &&
+          rowStateIndex < rowIndex + rectangleHeight
+            ? row.map((cell, columnStateIndex) =>
+                columnStateIndex >= columnIndex &&
+                columnStateIndex < columnIndex + rectangleWidth
+                  ? currentPlayer === PLAYER_1
+                    ? CELL_TYPE.OCCUPIED_BY_PLAYER_1
+                    : CELL_TYPE.OCCUPIED_BY_PLAYER_2
+                  : cell
+              )
+            : row
+        );
+        const newOccupiedCounters = {
+          ...G.occupiedCounters,
+          [currentPlayer]:
+            G.occupiedCounters[currentPlayer] + rectangleHeight * rectangleWidth
+        };
+
+        // Calculate areas that are allowed for one player only
+        let autoOccupiedByPlayer1 = [];
+        let autoOccupiedByPlayer2 = [];
+
+        // Do not try to find locked borders if only one player occupied cells (start of the game)
+        if (
+          newOccupiedCounters[PLAYER_1] !== 0 &&
+          newOccupiedCounters[PLAYER_2] !== 0
+        ) {
+          const closedLoops = findClosedLoops({
+            matrix: newBoard,
+            loopHabitantsFilter: ({ value }) => isEmptyCell(value)
+          });
+          closedLoops.forEach(closedLoop => {
+            // Skip loops that have both players as neighbours
+            if (closedLoop.neigboursValues.length !== 1) {
+              return;
+            }
+            if (isOccupiedByPlayerOneCell(closedLoop.neigboursValues[0])) {
+              autoOccupiedByPlayer1 = autoOccupiedByPlayer1.concat(
+                closedLoop.cells
+              );
+            } else {
+              autoOccupiedByPlayer2 = autoOccupiedByPlayer2.concat(
+                closedLoop.cells
+              );
+            }
+          });
+        }
+
         return {
           ...G,
-          board: G.board.map((row, rowStateIndex) =>
-            rowStateIndex >= rowIndex &&
-            rowStateIndex < rowIndex + rectangleHeight
-              ? row.map((cell, columnStateIndex) =>
-                  columnStateIndex >= columnIndex &&
-                  columnStateIndex < columnIndex + rectangleWidth
-                    ? currentPlayer === PLAYER_1
-                      ? CELL_TYPE.OCCUPIED_BY_PLAYER_1
-                      : CELL_TYPE.OCCUPIED_BY_PLAYER_2
-                    : cell
+          board: newBoard.map((row, rowIndex) =>
+            row.map((cell, columnIndex) => {
+              if (!isEmptyCell(cell)) {
+                return cell;
+              }
+              if (
+                autoOccupiedByPlayer1.some(
+                  autoOccupiedCell =>
+                    rowIndex === autoOccupiedCell.rowIndex &&
+                    columnIndex === autoOccupiedCell.columnIndex
                 )
-              : row
+              ) {
+                return CELL_TYPE.OCCUPIED_BY_PLAYER_1;
+              }
+              if (
+                autoOccupiedByPlayer2.some(
+                  autoOccupiedCell =>
+                    rowIndex === autoOccupiedCell.rowIndex &&
+                    columnIndex === autoOccupiedCell.columnIndex
+                )
+              ) {
+                return CELL_TYPE.OCCUPIED_BY_PLAYER_2;
+              }
+              return CELL_TYPE.EMPTY;
+            })
           ),
           occupiedCounters: {
-            ...G.occupiedCounters,
-            [currentPlayer]:
-              G.occupiedCounters[currentPlayer] +
-              rectangleHeight * rectangleWidth
+            [PLAYER_1]:
+              newOccupiedCounters[PLAYER_1] + autoOccupiedByPlayer1.length,
+            [PLAYER_2]:
+              newOccupiedCounters[PLAYER_2] + autoOccupiedByPlayer2.length
           }
         };
       }
