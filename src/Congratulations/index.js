@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import intl from "react-intl-universal";
+
 import Button from "../libs/territories-ui/Button";
 import Dialog from "../libs/territories-ui/Dialog";
 import DialogActions from "../libs/territories-ui/DialogActions";
@@ -43,12 +45,19 @@ class Congratulations extends Component {
     return (
       <Dialog open={open} fullWidth onClose={this.handleClose}>
         {gameover && (
-          <DialogTitle>{gameover.winner ? "Winner" : "Draw"}</DialogTitle>
+          <DialogTitle>
+            {gameover.winner
+              ? intl.get("congratulations.winner")
+              : intl.get("congratulations.draw")}
+          </DialogTitle>
         )}
         {gameover && (
           <DialogContent>
             {gameover.winner && <Player player={gameover.winner} />}
-            <CenteredImage src={congratulationsImage} alt="Congratulations" />
+            <CenteredImage
+              src={congratulationsImage}
+              alt={intl.get("congratulations.image")}
+            />
           </DialogContent>
         )}
         <DialogActions>
@@ -57,10 +66,10 @@ class Congratulations extends Component {
             color="primary"
             onClick={this.handleNewGame}
           >
-            New Game
+            {intl.get("congratulations.new_game")}
           </Button>
           <Button variant="contained" onClick={this.handleClose}>
-            Cancel
+            {intl.get("congratulations.cancel")}
           </Button>
         </DialogActions>
       </Dialog>

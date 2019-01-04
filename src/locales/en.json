@@ -1,0 +1,13 @@
+{
+  "app_bar.rules": "Rules",
+  "app_bar.title": "Territories",
+  "congratulations.draw": "Draw",
+  "congratulations.image": "Congratulations",
+  "congratulations.winner": "Winner",
+  "congratulations.new_game": "New Game",
+  "congratulations.cancel": "Cancel",
+  "player_controls.roll_dices": "Roll Dices",
+  "player_controls.player": "Player",
+  "player_controls.skip_turn": "Skip Turn",
+  "player_controls.player_stats": "{playerCellsCount} from {allCellsCount} occupied"
+}

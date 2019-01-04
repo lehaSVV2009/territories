@@ -13,6 +13,7 @@
     "react": "^16.6.1",
     "react-board": "^1.1.0",
     "react-dom": "^16.6.1",
+    "react-intl-universal": "^1.15.5",
     "react-scripts": "2.1.1",
     "styled-components": "^4.1.1",
     "three": "^0.99.0"

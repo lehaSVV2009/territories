@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from "react";
+import intl from "react-intl-universal";
 import random from "lodash.random";
+
 import Button from "../libs/territories-ui/Button";
 import Dialog from "../libs/territories-ui/Dialog";
 import Dices3d, { DICE_TYPES } from "../libs/react-dice-3d";
@@ -35,7 +37,7 @@ class DiceRoller extends Component {
           onClick={this.handleRollDices}
           {...buttonProps}
         >
-          Roll Dices
+          {intl.get("player_controls.roll_dices")}
         </Button>
         <Dialog open={open} fullWidth>
           {/* Dice component is mounted again when dialog is open 

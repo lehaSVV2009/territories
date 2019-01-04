@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import intl from "react-intl-universal";
+
 import AppBar from "../libs/territories-ui/AppBar";
 import GithubIcon from "../libs/territories-icons/Github";
 import IconButton from "../libs/territories-ui/IconButton";
@@ -8,10 +10,6 @@ import Tooltip from "../libs/territories-ui/Tooltip";
 import { DetachedButton, Logo, WhiteSelect } from "./elements";
 
 export default class Header extends Component {
-  state = {
-    lang: "en"
-  };
-
   handleLogoClick = () => {
     window.open(`${process.env.PUBLIC_URL}/`, "_self");
   };
@@ -27,23 +25,30 @@ export default class Header extends Component {
   };
 
   handleLanguageChange = ({ target: { value } }) => {
-    this.setState({ lang: value });
+    window.open(`${process.env.PUBLIC_URL}?lang=${value}`, "_self");
   };
 
   render() {
-    const { lang } = this.state;
+    const { currentLocale, locales } = intl.getInitOptions();
 
     return (
       <AppBar color="secondary" position="fixed">
         <Toolbar>
-          <Logo onClick={this.handleLogoClick}>Territories</Logo>
-          <WhiteSelect value={lang} onChange={this.handleLanguageChange}>
-            <MenuItem value="en">en</MenuItem>
-            {/* TODO implement i18n with russian */}
-            {/* <MenuItem value="ru">ru</MenuItem> */}
+          <Logo onClick={this.handleLogoClick}>
+            {intl.get("app_bar.title")}
+          </Logo>
+          <WhiteSelect
+            value={currentLocale}
+            onChange={this.handleLanguageChange}
+          >
+            {Object.keys(locales).map(lang => (
+              <MenuItem key={lang} value={lang}>
+                {lang}
+              </MenuItem>
+            ))}
           </WhiteSelect>
           <DetachedButton color="inherit" onClick={this.handleRulesClick}>
-            Rules
+            {intl.get("app_bar.rules")}
           </DetachedButton>
           <Tooltip title="Github">
             <IconButton onClick={this.handleGithubClick}>

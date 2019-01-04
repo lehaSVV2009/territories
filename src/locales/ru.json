@@ -1,0 +1,13 @@
+{
+  "app_bar.rules": "Правила",
+  "app_bar.title": "Территории",
+  "congratulations.draw": "Ничья",
+  "congratulations.image": "Поздравления",
+  "congratulations.winner": "Победитель",
+  "congratulations.new_game": "Новая Игра",
+  "congratulations.cancel": "Отмена",
+  "player_controls.roll_dices": "Бросьте кубики",
+  "player_controls.player": "Игрок",
+  "player_controls.skip_turn": "Пропустить ход",
+  "player_controls.player_stats": "{playerCellsCount} из {allCellsCount} занято"
+}
