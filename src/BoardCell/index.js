@@ -91,7 +91,10 @@ class BoardCell extends Component {
             : TYPE_EMPTY
         }
         onMouseEnter={this.handleCellMouseEnter}
+        onTouchStart={this.handleCellMouseEnter}
+        onTouchMove={this.handleCellMouseEnter}
         onClick={this.handleCellClick}
+        onTouchCancel={this.handleCellClick}
       >
         {isCellInRectangle && (canDrop ? <GreenOverlay /> : <RedOverlay />)}
         {GameUtils.isEmptyCell(value) && isPotentiallyOccupied && (
