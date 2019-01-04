@@ -106,6 +106,7 @@ class UI extends Component {
                 </DetachedItem>
                 <Item center>
                   <Board
+                    disabled={!dices || dices[0] === 0}
                     cellRadius={CELL_RADIUS}
                     rows={board}
                     rectangleHeight={dices[0]}

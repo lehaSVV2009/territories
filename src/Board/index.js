@@ -219,10 +219,11 @@ class Board extends Component {
   };
 
   handleDropRectangle = ({ rowIndex, columnIndex }) => {
+    const { disabled } = this.props;
     const { canDrop } = this.state;
     const { onDropRectangle, rectangleHeight, rectangleWidth } = this.props;
 
-    if (canDrop) {
+    if (!disabled && canDrop) {
       onDropRectangle({
         rowIndex,
         columnIndex,

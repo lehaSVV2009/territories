@@ -81,7 +81,6 @@ class BoardCell extends Component {
 
     return (
       <OccupiedCell
-        disabled={false} // add disable logic when not a turn or rectangle doesn't fit
         cellRadius={cellRadius}
         type={
           GameUtils.isOccupiedByPlayerOneCell(value)
