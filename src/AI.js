@@ -1,15 +1,11 @@
 import { AI } from "boardgame.io/ai";
 
-const TicTacToeAI = AI({
+const TerritoriesAI = AI({
   enumerate: (G, ctx) => {
-    let moves = [];
-    for (let i = 0; i < 9; i++) {
-      if (G.cells[i] === null) {
-        moves.push({ move: "clickCell", args: [i] });
-      }
-    }
-    return moves;
+    const actions = [];
+    actions.push({ move: "changeDices", args: [[1, 4]] });
+    return actions;
   }
 });
 
-export default TicTacToeAI;
+export default TerritoriesAI;

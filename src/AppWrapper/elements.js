@@ -22,3 +22,8 @@ export const DetachedButton = styled(Button)`
     margin-right: 8px;
   }
 `;
+
+export const FixedAppBarMargin = styled.div`
+  /* Top margin from fixed app bar */
+  margin-top: 80px;
+`;

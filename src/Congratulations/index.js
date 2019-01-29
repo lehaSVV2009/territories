@@ -35,7 +35,7 @@ class Congratulations extends Component {
     this.setState({ open: false });
   };
 
-  handleNewGame = () => {
+  handleGoHome = () => {
     window.open(`${process.env.PUBLIC_URL}/`, "_self");
   };
 
@@ -64,9 +64,9 @@ class Congratulations extends Component {
           <Button
             variant="contained"
             color="primary"
-            onClick={this.handleNewGame}
+            onClick={this.handleGoHome}
           >
-            {intl.get("congratulations.new_game")}
+            {intl.get("congratulations.home")}
           </Button>
           <Button variant="contained" onClick={this.handleClose}>
             {intl.get("congratulations.cancel")}

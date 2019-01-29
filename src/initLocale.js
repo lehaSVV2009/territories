@@ -9,7 +9,7 @@ const locales = {
 
 export default () => {
   let currentLocale = intl.determineLocale({
-    urlLocaleKey: "lang"
+    cookieLocaleKey: "lang"
   });
   if (!SUPPORTED_LOCALES[currentLocale]) {
     currentLocale = "en";
