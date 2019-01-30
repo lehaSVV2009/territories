@@ -57,7 +57,7 @@ class App extends React.Component {
               <LinearProgress color="secondary" />
             ) : (
               <AppWraper>
-                <Router>
+                <Router basename={process.env.REACT_APP_BASE_NAME}>
                   <Switch>
                     <Route exact path="/" component={HomePage} />
                     <Route path="/ai" component={AIPage} />
