@@ -1,12 +1,12 @@
 {
-  "name": "territories",
+  "name": "territories-frontend",
   "version": "0.1.0",
   "private": true,
   "homepage": "/territories-frontend",
   "dependencies": {
     "@material-ui/core": "^3.8.1",
     "@material-ui/icons": "^3.0.1",
-    "boardgame.io": "^0.26.3",
+    "boardgame.io": "^0.31.1",
     "cannon": "^0.6.2",
     "js-cookie": "^2.2.0",
     "lodash.random": "^3.2.0",

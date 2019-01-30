@@ -1643,12 +1643,13 @@ bn.js@^4.0.0, bn.js@^4.1.0, bn.js@^4.1.1, bn.js@^4.4.0:
   version "4.11.8"
   resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-4.11.8.tgz#2cde09eb5ee341f484746bb0309b3253b1b1442f"
 
-boardgame.io@^0.26.3:
-  version "0.26.3"
-  resolved "https://registry.yarnpkg.com/boardgame.io/-/boardgame.io-0.26.3.tgz#2ef058aea3878f7b87cf33dd9fdcc6d0211bc96e"
+boardgame.io@^0.31.1:
+  version "0.31.1"
+  resolved "https://registry.yarnpkg.com/boardgame.io/-/boardgame.io-0.31.1.tgz#cc2c44a33eefe67f09fdaf80cd9f6d8a760ea458"
   dependencies:
     "@koa/cors" "^2.2.1"
     flatted "^0.2.3"
+    immer "^1.8.0"
     koa "^2.5.2"
     koa-body "^2.5.0"
     koa-router "^7.2.1"
@@ -1656,6 +1657,7 @@ boardgame.io@^0.26.3:
     lru-cache "^4.1.1"
     mousetrap "^1.6.1"
     prop-types "^15.5.10"
+    react-cookies "^0.1.0"
     react-dragtastic "^2.4.3"
     redux "^4.0.0"
     socket.io "^2.1.1"
@@ -4356,6 +4358,10 @@ ignore@^4.0.6:
 immer@1.7.2:
   version "1.7.2"
   resolved "https://registry.yarnpkg.com/immer/-/immer-1.7.2.tgz#a51e9723c50b27e132f6566facbec1c85fc69547"
+
+immer@^1.8.0:
+  version "1.12.1"
+  resolved "https://registry.yarnpkg.com/immer/-/immer-1.12.1.tgz#40c6e5b292c00560836c2993bda3a24379d466f5"
 
 import-cwd@^2.0.0:
   version "2.1.0"
@@ -7434,6 +7440,13 @@ react-board@^1.1.0:
   dependencies:
     prop-types "^15.6.0"
     react "^16.1.0"
+
+react-cookies@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/react-cookies/-/react-cookies-0.1.0.tgz#6bb883f2d1a397f138a4110300b46fe25df8f1a9"
+  dependencies:
+    cookie "^0.3.1"
+    object-assign "^4.1.1"
 
 react-dev-utils@^6.1.1:
   version "6.1.1"

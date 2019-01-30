@@ -1,3 +1,4 @@
+// TODO import from territories-core
 export const CELL_TYPE = {
   EMPTY: "EMPTY",
   OCCUPIED_BY_PLAYER_1: "OCCUPIED_BY_PLAYER_1",
