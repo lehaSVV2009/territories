@@ -1,3 +1,10 @@
 # territories
 
-Simple [territories](https://lehasvv2009.github.io/territories/) game
+Simple board game [Territories](https://lehasvv2009.github.io/territories-frontend/) game
+
+## Run
+
+```
+yarn
+yarn start
+```

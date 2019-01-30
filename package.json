@@ -2,7 +2,7 @@
   "name": "territories",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/territories",
+  "homepage": "/territories-frontend",
   "dependencies": {
     "@material-ui/core": "^3.8.1",
     "@material-ui/icons": "^3.0.1",
