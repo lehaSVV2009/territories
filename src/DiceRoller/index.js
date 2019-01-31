@@ -6,6 +6,7 @@ import Button from "../libs/territories-ui/Button";
 import Dialog from "../libs/territories-ui/Dialog";
 import Dices3d, { DICE_TYPES } from "../libs/react-dice-3d";
 
+// TODO move randomness to Game.random
 const generateRandomDices = () => {
   return [random(1, 6), random(1, 6)];
 };

@@ -57,6 +57,8 @@ class App extends React.Component {
               <LinearProgress color="secondary" />
             ) : (
               <AppWraper>
+                {/* TODO add router to routes.js file */}
+                {/* TODO add react-loadable */}
                 <Router basename={process.env.REACT_APP_BASE_NAME}>
                   <Switch>
                     <Route exact path="/" component={HomePage} />

@@ -15,7 +15,7 @@ import LobbyLoginForm from "./login-form";
 import LobbyRoomInstance from "./room-instance";
 import LobbyCreateRoomForm from "./create-room-form";
 
-export const PHASES = {
+const PHASES = {
   ENTER: "enter",
   PLAY: "play",
   LIST: "list"
