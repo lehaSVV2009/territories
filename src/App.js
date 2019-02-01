@@ -1,17 +1,12 @@
 import React, { Fragment } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { MuiThemeProvider } from "@material-ui/core";
 import { ThemeProvider } from "styled-components";
 
-import AIPage from "./AIPage";
 import AppWraper from "./AppWrapper";
 import initLocale from "./initLocale";
-import HomePage from "./HomePage";
 import LinearProgress from "./libs/territories-ui/LinearProgress";
-import NotFoundPage from "./NotFoundPage";
-import OnlineLobbyPage from "./OnlineLobbyPage";
-import TwoPlayersPage from "./TwoPlayersPage";
+import Routes from "./Routes";
 
 // TODO replace styled-components theme with mui theme
 const theme = {
@@ -57,18 +52,8 @@ class App extends React.Component {
               <LinearProgress color="secondary" />
             ) : (
               <AppWraper>
-                {/* TODO add router to routes.js file */}
-                {/* TODO add react-loadable */}
-                <Router basename={process.env.REACT_APP_BASE_NAME}>
-                  <Switch>
-                    <Route exact path="/" component={HomePage} />
-                    <Route path="/ai" component={AIPage} />
-                    <Route path="/two-players" component={TwoPlayersPage} />
-                    <Route path="/online" component={OnlineLobbyPage} />
-                    <Route path="*" component={NotFoundPage} />
-                  </Switch>
-                </Router>
-              </AppWraper>
+                <Routes />
+               </AppWraper>
             )}
           </Fragment>
         </ThemeProvider>
