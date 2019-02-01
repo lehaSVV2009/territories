@@ -1,7 +1,29 @@
 import React, { Component } from "react";
+import intl from "react-intl-universal";
+import Button from "../libs/territories-ui/Button";
+import { Container, Item } from "../libs/territories-ui/Grid";
+import TextField from "../libs/territories-ui/TextField";
+
 import OnlineRoom from "../OnlineRoom";
 
 const selectGameName = props => props.gameComponents[0].game.name;
+const selectAllPlayersNames = props => {
+  const playersNames = [];
+
+  if (!Array.isArray(props.gameInstances)) {
+    return playersNames;
+  }
+
+  props.gameInstances.forEach(gameInstance => {
+    gameInstance.players.forEach(player => {
+      if (player.name) {
+        playersNames.push(player.name);
+      }
+    });
+  });
+
+  return playersNames;
+};
 
 class OnlineLobby extends Component {
   constructor(props) {
@@ -72,15 +94,43 @@ class OnlineLobby extends Component {
     }
 
     if (phase === "enter") {
+      const isNameInvalid =
+        !changingPlayerName || changingPlayerName.includes(" ");
+      const isNameAlreadyTaken = selectAllPlayersNames(this.props).includes(
+        changingPlayerName
+      );
+
       return (
-        <div>
-          Enter your name:
-          <input
-            value={changingPlayerName}
-            onChange={this.handlePlayerNameChange}
-          />
-          <button onClick={this.handleEnterClick}>Login</button>
-        </div>
+        <Container column alignItems="center">
+          <Item>
+            <TextField
+              label={intl.get("online.enter_name")}
+              error={isNameInvalid || isNameAlreadyTaken}
+              helperText={
+                isNameInvalid
+                  ? intl.get("online.name_invalid")
+                  : isNameAlreadyTaken
+                  ? intl.get("online.name_taken")
+                  : ""
+              }
+              margin="normal"
+              value={changingPlayerName}
+              variant="outlined"
+              onChange={this.handlePlayerNameChange}
+            />
+          </Item>
+          <Item>
+            <Button
+              disabled={isNameInvalid || isNameAlreadyTaken}
+              color="primary"
+              size="large"
+              variant="extendedFab"
+              onClick={this.handleEnterClick}
+            >
+              {intl.get("online.login")}
+            </Button>
+          </Item>
+        </Container>
       );
     }
 
