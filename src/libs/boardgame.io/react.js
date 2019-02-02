@@ -193,6 +193,7 @@ class Lobby extends React.Component {
     const app = this.props.clientFactory({
       game: gameCode.game,
       board: gameCode.board,
+      loading: gameCode.loading || undefined,
       debug: this.props.debug,
       multiplayer
     });

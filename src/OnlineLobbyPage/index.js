@@ -16,7 +16,9 @@ const OnlineLobbyPage = () => (
   <LobbyLogic
     gameServer={process.env.REACT_APP_API_URL}
     lobbyServer={process.env.REACT_APP_API_URL}
-    gameComponents={[{ game, board: UI }]}
+    gameComponents={[
+      { game, board: UI, loading: () => <div>Connecting...</div> }
+    ]}
     renderer={({
       errorMsg,
       gameComponents,
