@@ -10,6 +10,7 @@
   "home.online": "Online",
   "home.two_players": "Two players",
   "online.enter_name": "Enter unique name",
+  "online.exit": "Exit",
   "online.hello": "Hello, {name}!",
   "online.login": "Login",
   "online.logout": "Logout",

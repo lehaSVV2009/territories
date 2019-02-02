@@ -4,10 +4,8 @@ import intl from "react-intl-universal";
 import Card from "../libs/territories-ui/Card";
 import CardContent from "../libs/territories-ui/CardContent";
 import CardHeader from "../libs/territories-ui/CardHeader";
-import { Container, Item } from "../libs/territories-ui/Grid";
 import IconAdd from "../libs/territories-icons/Add";
 import IconButton from "../libs/territories-ui/IconButton";
-import IconLogout from "../libs/territories-icons/Logout";
 import OnlineRoom from "../OnlineRoom";
 import Tooltip from "../libs/territories-ui/Tooltip";
 import { Layout } from "./elements";
@@ -33,27 +31,11 @@ class OnlineRooms extends Component {
     this.props.onPlay(gameId, numPlayers);
   };
 
-  handleLogoutClick = () => {
-    this.props.onLogout();
-  };
-
   render() {
     const { gameComponents, gameInstances, playerName } = this.props;
 
     return (
       <Layout>
-        <Container alignItems="center" spaceBetween>
-          <Item>
-            <h2>{intl.get("online.hello", { name: playerName })}</h2>
-          </Item>
-          <Item>
-            <Tooltip title={intl.get("online.logout")}>
-              <IconButton onClick={this.handleLogoutClick}>
-                <IconLogout />
-              </IconButton>
-            </Tooltip>
-          </Item>
-        </Container>
         <Card>
           <CardHeader
             title={intl.get("online.rooms_title")}
