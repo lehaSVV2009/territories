@@ -1,11 +1,11 @@
 import React from "react";
+import intl from "react-intl-universal";
 // TODO import from territories-core
 import Game from "../Game";
 import LobbyLogic from "../libs/boardgame.io/react";
 import OnlineLobby from "../OnlineLobby";
 
 import UI from "../UI";
-// import StyledLobby from "./StyledLobby";
 
 const game = Game({});
 game.name = "territories";
@@ -17,7 +17,11 @@ const OnlineLobbyPage = () => (
     gameServer={process.env.REACT_APP_API_URL}
     lobbyServer={process.env.REACT_APP_API_URL}
     gameComponents={[
-      { game, board: UI, loading: () => <div>Connecting...</div> }
+      {
+        game,
+        board: UI,
+        loading: () => <div>{intl.get("online.connecting")}</div>
+      }
     ]}
     renderer={({
       errorMsg,

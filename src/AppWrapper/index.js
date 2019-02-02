@@ -8,6 +8,7 @@ import IconButton from "../libs/territories-ui/IconButton";
 import MenuItem from "../libs/territories-ui/MenuItem";
 import Toolbar from "../libs/territories-ui/Toolbar";
 import Tooltip from "../libs/territories-ui/Tooltip";
+import { SUPPORTED_LOCALES } from "../initLocale";
 import {
   DetachedButton,
   FixedAppBarMargin,
@@ -36,7 +37,7 @@ export default class AppWrapper extends Component {
   };
 
   render() {
-    const { currentLocale, locales } = intl.getInitOptions();
+    const { currentLocale } = intl.getInitOptions();
 
     return (
       <div>
@@ -49,7 +50,7 @@ export default class AppWrapper extends Component {
               value={currentLocale}
               onChange={this.handleLanguageChange}
             >
-              {Object.keys(locales).map(lang => (
+              {Object.keys(SUPPORTED_LOCALES).map(lang => (
                 <MenuItem key={lang} value={lang}>
                   {lang}
                 </MenuItem>

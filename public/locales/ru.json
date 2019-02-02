@@ -9,6 +9,7 @@
   "home.game_vs_ai": "Против ИИ",
   "home.online": "Онлайн",
   "home.two_players": "Два игрока",
+  "online.connecting": "Соединение...",
   "online.enter_name": "Введите уникальное имя",
   "online.exit": "Выход",
   "online.hello": "Привет, {name}!",

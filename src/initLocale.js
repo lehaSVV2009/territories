@@ -1,11 +1,7 @@
+import axios from "axios";
 import intl from "react-intl-universal";
 
-const SUPPORTED_LOCALES = { en: "en", ru: "ru" };
-
-const locales = {
-  en: require("./locales/en.json"),
-  ru: require("./locales/ru.json")
-};
+export const SUPPORTED_LOCALES = { en: "en", ru: "ru" };
 
 export default () => {
   let currentLocale = intl.determineLocale({
@@ -15,5 +11,14 @@ export default () => {
     currentLocale = "en";
   }
 
-  return intl.init({ currentLocale, locales });
+  return axios
+    .get(`${process.env.PUBLIC_URL}/locales/${currentLocale}.json`)
+    .then(res => {
+      return intl.init({
+        currentLocale,
+        locales: {
+          [currentLocale]: res.data
+        }
+      });
+    });
 };

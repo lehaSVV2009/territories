@@ -9,6 +9,7 @@
   "home.game_vs_ai": "Game vs AI",
   "home.online": "Online",
   "home.two_players": "Two players",
+  "online.connecting": "Connecting...",
   "online.enter_name": "Enter unique name",
   "online.exit": "Exit",
   "online.hello": "Hello, {name}!",
