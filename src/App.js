@@ -53,7 +53,7 @@ class App extends React.Component {
             ) : (
               <AppWraper>
                 <Routes />
-               </AppWraper>
+              </AppWraper>
             )}
           </Fragment>
         </ThemeProvider>

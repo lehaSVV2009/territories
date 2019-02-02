@@ -1,8 +1,10 @@
 import React, { Component } from "react";
+import axios from "axios";
 
 import Board from "../Board";
 import Congratulations from "../Congratulations";
 import { Container, Item } from "../libs/territories-ui/Grid";
+import LinearProgress from "../libs/territories-ui/LinearProgress";
 import PlayersControls from "../PlayersControls";
 import PlayersNamesContext from "../playersNamesContext";
 import { DetachedItem } from "./elements";
@@ -11,11 +13,42 @@ const CELL_RADIUS = 10;
 
 class UI extends Component {
   state = {
+    isLoadingNames: false,
     playersNames: {
       0: "Alice",
       1: "Bob"
     }
   };
+
+  componentDidMount() {
+    const { isMultiplayer, gameID } = this.props;
+    if (!isMultiplayer || !gameID) {
+      return;
+    }
+
+    // Load players names if it is a multiplayer
+    // Cause boardgame.io framework doesn't support name handling..
+    this.setState({ isLoadingNames: true });
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/games/territories`)
+      .then(response => {
+        const gameInstance =
+          response.data &&
+          response.data.gameInstances.find(
+            gameInstance => gameInstance.gameID === gameID
+          );
+        if (!gameInstance) {
+          return;
+        }
+        this.setState({
+          playersNames: gameInstance.players.reduce((object, player) => {
+            object[`${player.id}`] = player.name;
+            return object;
+          }, {})
+        });
+      })
+      .finally(() => this.setState({ isLoadingNames: false }));
+  }
 
   handleRollDices = dices => {
     this.props.moves.changeDices(dices);
@@ -50,7 +83,11 @@ class UI extends Component {
       G: { board, dices, allCellsCount, occupiedCounters },
       ctx: { currentPlayer, gameover }
     } = this.props;
-    const { playersNames } = this.state;
+    const { isLoadingNames, playersNames } = this.state;
+
+    if (isLoadingNames) {
+      return <LinearProgress color="primary" />;
+    }
 
     return (
       <PlayersNamesContext.Provider value={playersNames}>
