@@ -128,8 +128,8 @@ class UI extends Component {
               disabled={readOnly || !dices || dices[0] === 0}
               cellRadius={CELL_RADIUS}
               rows={board}
-              rectangleHeight={dices[0]}
-              rectangleWidth={dices[1]}
+              rectangleHeight={dices ? dices[0] : 0}
+              rectangleWidth={dices ? dices[1] : 0}
               currentPlayer={currentPlayer}
               onDropRectangle={this.handleDropRectangle}
             />
