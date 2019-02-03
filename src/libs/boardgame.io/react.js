@@ -250,7 +250,8 @@ class Lobby extends React.Component {
         handleJoinRoom: this._joinRoom,
         handleLeaveRoom: this._leaveRoom,
         handleExitRoom: this._exitRoom,
-        handleStartGame: this._startGame
+        handleStartGame: this._startGame,
+        handleRefreshRooms: this._updateConnection
       });
     }
 

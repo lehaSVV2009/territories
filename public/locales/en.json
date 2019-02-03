@@ -25,7 +25,7 @@
   "online.room_play": "Play",
   "online.room_spectate": "Spectate",
   "online.rooms_title": "All rooms",
-  "online.rooms_subtitle": "Maximum 5 rooms. Rooms are automatically deleted after leave. You can join only 1 room.",
+  "online.rooms_subtitle": "Maximum 5 rooms. Rooms are automatically deleted after leave. Rooms sync interval is 5 seconds. You can join only 1 room.",
   "player_controls.roll_dices": "Roll Dices",
   "player_controls.player": "Player",
   "player_controls.skip_turn": "Skip Turn",

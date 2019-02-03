@@ -26,6 +26,11 @@ const selectAllPlayersNames = props => {
 };
 
 class OnlineLobby extends Component {
+  componentDidMount() {
+    // Refresh all rooms every 5 seconds
+    setInterval(() => this.props.onRefreshRooms(), 5000);
+  }
+
   handleLoginClick = name => {
     this.props.onEnterLobby(name);
   };

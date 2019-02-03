@@ -31,6 +31,7 @@ const OnlineLobbyPage = () => (
       handleJoinRoom,
       handleLeaveRoom,
       handleExitRoom,
+      handleRefreshRooms,
       handleStartGame
     }) => (
       <OnlineLobby
@@ -46,6 +47,7 @@ const OnlineLobbyPage = () => (
         onJoinRoom={handleJoinRoom}
         onLeaveRoom={handleLeaveRoom}
         onExitRoom={handleExitRoom}
+        onRefreshRooms={handleRefreshRooms}
         onStartGame={handleStartGame}
       />
     )}
