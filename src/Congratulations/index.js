@@ -64,12 +64,9 @@ class Congratulations extends Component {
           <Button
             variant="contained"
             color="primary"
-            onClick={this.handleGoHome}
+            onClick={this.handleClose}
           >
-            {intl.get("congratulations.home")}
-          </Button>
-          <Button variant="contained" onClick={this.handleClose}>
-            {intl.get("congratulations.cancel")}
+            {intl.get("congratulations.ok")}
           </Button>
         </DialogActions>
       </Dialog>
