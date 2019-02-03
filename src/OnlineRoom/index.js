@@ -41,7 +41,7 @@ class StyledRoom extends Component {
   };
 
   render() {
-    const { name, playerName, players } = this.props;
+    const { name, playerName, players, alreadyJoined } = this.props;
     const playerSeat = findPlayerSeat(players, playerName);
     const freeSeat = findFreeSeat(players);
 
@@ -50,20 +50,21 @@ class StyledRoom extends Component {
         <AlignLeftItem flex={3}>
           <Chip label={name} />
         </AlignLeftItem>
-        <AlignRightItem flex={2}>{players[0].name || ""}</AlignRightItem>
+        {/* TODO try smth better than vs */}
+        <AlignRightItem flex={2}>{players[0].name || "..."}</AlignRightItem>
         <AlignCenterItem flex={2}>
           <IconButton disabled>
             <IconVersus />
           </IconButton>
         </AlignCenterItem>
-        <AlignLeftItem flex={2}>{players[1].name || ""}</AlignLeftItem>
+        <AlignLeftItem flex={2}>{players[1].name || "..."}</AlignLeftItem>
         <AlignRightItem flex={3}>
           {playerSeat && (
             <DetachedButton variant="outlined" onClick={this.handleLeaveClick}>
               {intl.get("online.room_leave")}
             </DetachedButton>
           )}
-          {freeSeat && !playerSeat && (
+          {freeSeat && !playerSeat && !alreadyJoined && (
             <DetachedButton variant="outlined" onClick={this.handleJoinClick}>
               {intl.get("online.room_join")}
             </DetachedButton>

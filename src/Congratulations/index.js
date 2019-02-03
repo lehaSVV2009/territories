@@ -10,6 +10,7 @@ import Player from "../Player";
 import congratulationsImage from "../images/congratulations.gif";
 import { CenteredImage } from "./elements";
 
+// TODO win is not shown for player 2
 class Congratulations extends Component {
   state = {
     open: false

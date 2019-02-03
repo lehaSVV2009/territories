@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import intl from "react-intl-universal";
 
 import Card from "../libs/territories-ui/Card";
@@ -6,6 +6,7 @@ import CardContent from "../libs/territories-ui/CardContent";
 import CardHeader from "../libs/territories-ui/CardHeader";
 import IconAdd from "../libs/territories-icons/Add";
 import IconButton from "../libs/territories-ui/IconButton";
+import IconRefresh from "../libs/territories-icons/Refresh";
 import OnlineRoom from "../OnlineRoom";
 import Tooltip from "../libs/territories-ui/Tooltip";
 import { Layout } from "./elements";
@@ -13,6 +14,10 @@ import { Layout } from "./elements";
 class OnlineRooms extends Component {
   handleCreateRoomClick = () => {
     this.props.onCreate();
+  };
+
+  handleRefreshRooms = () => {
+    this.props.onRefresh();
   };
 
   handleJoinRoomClick = (gameId, playerId) => {
@@ -32,7 +37,7 @@ class OnlineRooms extends Component {
   };
 
   render() {
-    const { gameComponents, gameInstances, playerName } = this.props;
+    const { gameInstances, playerName, alreadyJoined } = this.props;
 
     return (
       <Layout>
@@ -41,28 +46,33 @@ class OnlineRooms extends Component {
             title={intl.get("online.rooms_title")}
             subheader={intl.get("online.rooms_subtitle")}
             action={
-              gameComponents.length === 1 && (
+              <Fragment>
                 <Tooltip title={intl.get("online.new_room")}>
                   <IconButton
-                    disabled={gameInstances.length > 4}
                     color="primary"
-                    variant="extendedFab"
+                    disabled={gameInstances.length > 4}
                     onClick={this.handleCreateRoomClick}
                   >
                     <IconAdd />
                   </IconButton>
                 </Tooltip>
-              )
+                <Tooltip title={intl.get("online.refresh")}>
+                  <IconButton color="primary" onClick={this.handleRefreshRooms}>
+                    <IconRefresh />
+                  </IconButton>
+                </Tooltip>
+              </Fragment>
             }
           />
           <CardContent>
-            {gameInstances.map((gameInstance, index) => (
+            {gameInstances.map(gameInstance => (
               <OnlineRoom
                 key={`game-${gameInstance.gameID}`}
-                name={`territories-${index + 1}`}
+                name={`Territories ${gameInstance.gameID.substring(0, 3)}`}
                 roomId={gameInstance.gameID}
                 players={gameInstance.players}
                 playerName={playerName}
+                alreadyJoined={alreadyJoined}
                 onJoin={this.handleJoinRoomClick}
                 onLeave={this.handleLeaveRoomClick}
                 onPlay={this.handlePlayClick}

@@ -27,8 +27,8 @@ const selectAllPlayersNames = props => {
 
 class OnlineLobby extends Component {
   componentDidMount() {
-    // Refresh all rooms every 5 seconds
-    setInterval(() => this.props.onRefreshRooms(), 5000);
+    // Refresh all rooms every 15 seconds
+    setInterval(this.handleRefreshRoomsClick, 15000);
   }
 
   handleLoginClick = name => {
@@ -48,6 +48,10 @@ class OnlineLobby extends Component {
     this.props.onCreateRoom(selectGameName(this.props), 2);
   };
 
+  handleRefreshRoomsClick = () => {
+    this.props.onRefreshRooms();
+  };
+
   handleJoinRoomClick = (gameId, playerId) => {
     this.props.onJoinRoom(selectGameName(this.props), gameId, playerId);
   };
@@ -64,6 +68,7 @@ class OnlineLobby extends Component {
     });
   };
 
+  // TODO fix spectating...
   handleSpectateClick = (gameId, numPlayers) => {
     this.props.onStartGame(selectGameName(this.props), {
       gameID: gameId,
@@ -72,9 +77,7 @@ class OnlineLobby extends Component {
   };
 
   handleExitRoomClick = () => {
-    const { gameID } = this.props.runningGame;
     this.props.onExitRoom();
-    setTimeout(() => this.handleLeaveRoomClick(gameID), 100);
   };
 
   render() {
@@ -83,7 +86,6 @@ class OnlineLobby extends Component {
       phase,
       playerName,
       gameInstances,
-      gameComponents,
       runningGame
     } = this.props;
 
@@ -110,10 +112,13 @@ class OnlineLobby extends Component {
             onExit={this.handleLogoutClick}
           />
           <OnlineRooms
-            gameComponents={gameComponents}
             gameInstances={gameInstances}
             playerName={playerName}
+            alreadyJoined={selectAllPlayersNames(this.props).includes(
+              playerName
+            )}
             onCreate={this.handleCreateRoomClick}
+            onRefresh={this.handleRefreshRoomsClick}
             onJoin={this.handleJoinRoomClick}
             onLeave={this.handleLeaveRoomClick}
             onPlay={this.handlePlayClick}

@@ -3,7 +3,7 @@ import intl from "react-intl-universal";
 
 import Button from "../libs/territories-ui/Button";
 import { Container, Item } from "../libs/territories-ui/Grid";
-import TextField from "../libs/territories-ui/TextField";
+import { StyledTextField } from "./elements";
 
 class OnlineLogin extends Component {
   constructor(props) {
@@ -25,10 +25,10 @@ class OnlineLogin extends Component {
     if (!changingPlayerName) {
       return intl.get("online.name_not_empty");
     }
-    if (changingPlayerName.includes(" ")) {
+    if (!/^\w+$/.test(changingPlayerName)) {
       return intl.get("online.name_invalid_characters");
     }
-    if (changingPlayerName.length > 20) {
+    if (changingPlayerName.length > 15) {
       return intl.get("online.name_too_long");
     }
     if (playersNames.includes(changingPlayerName)) {
@@ -47,13 +47,16 @@ class OnlineLogin extends Component {
     return (
       <Container column alignItems="center">
         <Item>
-          <TextField
+          <StyledTextField
             label={intl.get("online.enter_name")}
             error={hasError}
             helperText={errorMessage}
             margin="normal"
             value={changingPlayerName}
             variant="outlined"
+            onKeyPress={({ key }) =>
+              !hasError && key === "Enter" && this.handleLogin()
+            }
             onChange={this.handlePlayerNameChange}
           />
         </Item>
