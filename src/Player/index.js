@@ -13,6 +13,7 @@ const Player = ({
   player,
   allCellsCount,
   playerCellsCount,
+  readOnly,
   onSkipTurn
 }) => (
   <PlayersNamesContext.Consumer>
@@ -39,7 +40,7 @@ const Player = ({
           {isCurrent && (
             <CenteredCardContent>
               <Tooltip title={intl.get("player_controls.skip_turn")}>
-                <IconButton onClick={onSkipTurn}>
+                <IconButton disabled={readOnly} onClick={onSkipTurn}>
                   <TimerIcon />
                 </IconButton>
               </Tooltip>

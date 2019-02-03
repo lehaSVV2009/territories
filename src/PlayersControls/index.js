@@ -19,6 +19,7 @@ const PlayersControls = ({
   rollingDices,
   allCellsCount,
   occupiedCounters,
+  readOnly,
   onStartRollDices,
   onFinishRollDices,
   onRotateRectangle,
@@ -31,6 +32,7 @@ const PlayersControls = ({
         isCurrent={GameUtils.isPlayer1(currentPlayer)}
         allCellsCount={allCellsCount}
         playerCellsCount={occupiedCounters[GameUtils.PLAYER_1]}
+        readOnly={readOnly}
         onSkipTurn={onSkipTurn}
       />
     </Item>
@@ -44,7 +46,11 @@ const PlayersControls = ({
             <FullHeightContainer column center alignItems="center">
               <Item>
                 <Tooltip title="Rotate rectangle">
-                  <IconButton size="small" onClick={onRotateRectangle}>
+                  <IconButton
+                    disabled={readOnly}
+                    size="small"
+                    onClick={onRotateRectangle}
+                  >
                     <RotateIcon />
                   </IconButton>
                 </Tooltip>
@@ -59,6 +65,7 @@ const PlayersControls = ({
           ) : (
             <FullHeightContainer column center alignItems="center">
               <Button
+                disabled={readOnly}
                 color={
                   GameUtils.isPlayer1(currentPlayer) ? "primary" : "secondary"
                 }
@@ -83,6 +90,7 @@ const PlayersControls = ({
         isCurrent={GameUtils.isPlayer2(currentPlayer)}
         allCellsCount={allCellsCount}
         playerCellsCount={occupiedCounters[GameUtils.PLAYER_2]}
+        readOnly={readOnly}
         onSkipTurn={onSkipTurn}
       />
     </Item>

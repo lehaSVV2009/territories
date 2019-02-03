@@ -197,7 +197,18 @@ class Board extends Component {
   }
 
   handleCellMouseEnter = ({ rowIndex, columnIndex }) => {
-    const { rows, rectangleHeight, rectangleWidth, currentPlayer } = this.props;
+    const {
+      rows,
+      rectangleHeight,
+      rectangleWidth,
+      currentPlayer,
+      disabled
+    } = this.props;
+
+    if (disabled) {
+      return;
+    }
+
     const canDrop = canDropRectangle({
       rowIndex,
       columnIndex,
