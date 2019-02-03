@@ -7,18 +7,13 @@ import OnlineLobby from "../OnlineLobby";
 
 import UI from "../UI";
 
-const game = Game({});
-game.name = "territories";
-
-game.minPlayers = game.maxPlayers = 2;
-
 const OnlineLobbyPage = () => (
   <LobbyLogic
     gameServer={process.env.REACT_APP_API_URL}
     lobbyServer={process.env.REACT_APP_API_URL}
     gameComponents={[
       {
-        game,
+        game: Game,
         board: UI,
         loading: () => <div>{intl.get("online.connecting")}</div>
       }

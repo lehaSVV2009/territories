@@ -43,11 +43,6 @@ class DiceManagerClass {
    *
    */
   prepareValues(diceValues) {
-    if (this.throwRunning)
-      throw new Error(
-        "Cannot start another throw. Please wait, till the current throw is finished."
-      );
-
     for (let i = 0; i < diceValues.length; i++) {
       if (
         diceValues[i].value < 1 ||
@@ -62,8 +57,6 @@ class DiceManagerClass {
         );
       }
     }
-
-    this.throwRunning = true;
 
     for (let i = 0; i < diceValues.length; i++) {
       diceValues[i].dice.simulationRunning = true;
@@ -94,8 +87,6 @@ class DiceManagerClass {
           diceValues[i].dice.setVectors(diceValues[i].vectors);
           diceValues[i].dice.simulationRunning = false;
         }
-
-        this.throwRunning = false;
       } else {
         DiceManager.world.step(DiceManager.world.dt);
       }

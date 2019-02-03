@@ -1,6 +1,9 @@
 import React from "react";
+import intl from "react-intl-universal";
+
+import Button from "../libs/territories-ui/Button";
 import { Container, Item } from "../libs/territories-ui/Grid";
-import DiceRoller from "../DiceRoller";
+import DicesWindow from "../DicesWindow";
 import * as GameUtils from "../gameUtils";
 import IconButton from "../libs/territories-ui/IconButton";
 import Player from "../Player";
@@ -13,9 +16,11 @@ const PlayersControls = ({
   cellRadius,
   currentPlayer,
   dices,
+  rollingDices,
   allCellsCount,
   occupiedCounters,
-  onRollDices,
+  onStartRollDices,
+  onFinishRollDices,
   onRotateRectangle,
   onSkipTurn
 }) => (
@@ -53,17 +58,23 @@ const PlayersControls = ({
             </FullHeightContainer>
           ) : (
             <FullHeightContainer column center alignItems="center">
-              <DiceRoller
-                buttonProps={{
-                  color: GameUtils.isPlayer1(currentPlayer)
-                    ? "primary"
-                    : "secondary"
-                }}
-                onRoll={onRollDices}
-              />
+              <Button
+                color={
+                  GameUtils.isPlayer1(currentPlayer) ? "primary" : "secondary"
+                }
+                size="large"
+                variant="contained"
+                onClick={onStartRollDices}
+              >
+                {intl.get("player_controls.roll_dices")}
+              </Button>
             </FullHeightContainer>
           )}
         </FixedSizePaper>
+        <DicesWindow
+          rollingDices={rollingDices}
+          onFinishRoll={onFinishRollDices}
+        />
       </div>
     </Item>
     <Item>

@@ -50,8 +50,21 @@ class UI extends Component {
       .finally(() => this.setState({ isLoadingNames: false }));
   }
 
-  handleRollDices = dices => {
-    this.props.moves.changeDices(dices);
+  handleStartRollDices = () => {
+    this.props.moves.startRollDices();
+  };
+
+  handleFinishRollDices = () => {
+    const {
+      isMultiplayer,
+      playerID,
+      ctx: { currentPlayer }
+    } = this.props;
+    // Skip roll finish for multiplayers
+    if (isMultiplayer && playerID !== currentPlayer) {
+      return;
+    }
+    this.props.moves.finishRollDices();
   };
 
   handleRotateRectangle = () => {
@@ -80,7 +93,7 @@ class UI extends Component {
 
   render() {
     const {
-      G: { board, dices, allCellsCount, occupiedCounters },
+      G: { board, dices, rollingDices, allCellsCount, occupiedCounters },
       ctx: { currentPlayer, gameover }
     } = this.props;
     const { isLoadingNames, playersNames } = this.state;
@@ -96,10 +109,12 @@ class UI extends Component {
             <PlayersControls
               cellRadius={CELL_RADIUS}
               dices={dices}
+              rollingDices={rollingDices}
               currentPlayer={currentPlayer}
               allCellsCount={allCellsCount}
               occupiedCounters={occupiedCounters}
-              onRollDices={this.handleRollDices}
+              onStartRollDices={this.handleStartRollDices}
+              onFinishRollDices={this.handleFinishRollDices}
               onRotateRectangle={this.handleRotateRectangle}
               onSkipTurn={this.handleEndTurn}
             />

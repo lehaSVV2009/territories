@@ -10,7 +10,6 @@
     "boardgame.io": "^0.31.1",
     "cannon": "^0.6.2",
     "js-cookie": "^2.2.0",
-    "lodash.random": "^3.2.0",
     "orbit-controls-es6": "^2.0.0",
     "react": "^16.6.1",
     "react-board": "^1.1.0",

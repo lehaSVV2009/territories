@@ -5,7 +5,7 @@ import UI from "../UI";
 
 // TODO add redux enhancer with redux-persist, so game can be resumed
 const TwoPlayersPage = Client({
-  game: Game({}),
+  game: Game,
   board: UI,
   debug: false
 });
