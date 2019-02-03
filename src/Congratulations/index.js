@@ -43,6 +43,10 @@ class Congratulations extends Component {
   render() {
     const { open } = this.state;
     const { gameover } = this.props;
+
+    // prettier-ignore
+    console.log(gameover); // eslint-disable-line
+
     return (
       <Dialog open={open} fullWidth onClose={this.handleClose}>
         {gameover && (
