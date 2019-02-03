@@ -68,7 +68,6 @@ class OnlineLobby extends Component {
     });
   };
 
-  // TODO fix spectating...
   handleSpectateClick = (gameId, numPlayers) => {
     this.props.onStartGame(selectGameName(this.props), {
       gameID: gameId,

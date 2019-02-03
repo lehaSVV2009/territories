@@ -33,7 +33,7 @@ class OnlineRooms extends Component {
   };
 
   handleSpectateClick = (gameId, numPlayers) => {
-    this.props.onPlay(gameId, numPlayers);
+    this.props.onSpectate(gameId, numPlayers);
   };
 
   render() {
