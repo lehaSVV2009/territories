@@ -95,8 +95,7 @@ class UI extends Component {
     const {
       G: { board, dices, rollingDices, allCellsCount, occupiedCounters },
       ctx: { currentPlayer, gameover },
-      isMultiplayer,
-      playerID
+      isActive
     } = this.props;
     const { isLoadingNames, playersNames } = this.state;
 
@@ -104,7 +103,6 @@ class UI extends Component {
       return <LinearProgress color="primary" />;
     }
 
-    const readOnly = isMultiplayer && (!playerID || playerID !== currentPlayer);
     return (
       <PlayersNamesContext.Provider value={playersNames}>
         <Container column>
@@ -116,7 +114,7 @@ class UI extends Component {
               currentPlayer={currentPlayer}
               allCellsCount={allCellsCount}
               occupiedCounters={occupiedCounters}
-              readOnly={readOnly}
+              readOnly={!isActive}
               onStartRollDices={this.handleStartRollDices}
               onFinishRollDices={this.handleFinishRollDices}
               onRotateRectangle={this.handleRotateRectangle}
@@ -125,7 +123,7 @@ class UI extends Component {
           </DetachedItem>
           <Item center>
             <Board
-              disabled={readOnly || !dices || dices[0] === 0}
+              disabled={!isActive || !dices || dices[0] === 0}
               cellRadius={CELL_RADIUS}
               rows={board}
               rectangleHeight={dices ? dices[0] : 0}
