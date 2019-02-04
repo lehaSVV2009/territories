@@ -13,7 +13,7 @@ const calculateCellsCount = ({ board }) => {
   return board.length * (board.length > 0 ? board[0].length : 0);
 };
 
-const DEFAULT_BOARD = [...Array(5).fill([...Array(5).fill(CELL_TYPE.EMPTY)])];
+const DEFAULT_BOARD = [...Array(15).fill([...Array(40).fill(CELL_TYPE.EMPTY)])];
 const DEFAULT_DICES = [0, 0];
 
 const Territories = Game({
