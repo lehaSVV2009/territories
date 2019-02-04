@@ -1,4 +1,3 @@
-// TODO import from territories-core
 import { Game } from "boardgame.io/core";
 import {
   CELL_TYPE,
@@ -7,7 +6,7 @@ import {
   isEmptyCell,
   isOccupiedByPlayerOneCell
 } from "./gameUtils";
-import findClosedLoops from "./libs/find-closed-loops";
+import findClosedLoops from "./findClosedLoops";
 
 const selectVictoryContext = ({ allCellsCount, occupiedCounters }) => {
   const occupiedByPlayer1 = occupiedCounters[PLAYER_1];
@@ -47,6 +46,8 @@ const DEFAULT_BOARD = [...Array(15).fill([...Array(40).fill(CELL_TYPE.EMPTY)])];
 const DEFAULT_DICES = [0, 0];
 
 const Territories = Game({
+  name: "territories",
+
   setup: () => {
     return {
       // Board in format [["EMPTY", "EMPTY"], ["OCCUPIED_BY_PLAYER_1", "OCCUPIED_BY_PLAYER_2"]]
@@ -188,7 +189,6 @@ const Territories = Game({
   }
 });
 
-Territories.name = "territories";
 Territories.minPlayers = 2;
 Territories.maxPlayers = 2;
 
