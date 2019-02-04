@@ -1,8 +1,8 @@
 {
-  "name": "territories-frontend",
+  "name": "territories",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/territories-frontend",
+  "homepage": "/territories",
   "dependencies": {
     "@material-ui/core": "^3.8.1",
     "@material-ui/icons": "^3.0.1",

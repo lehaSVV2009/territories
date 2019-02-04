@@ -1,6 +1,6 @@
 {
-  "short_name": "territories-frontend",
-  "name": "territories-frontend",
+  "short_name": "territories",
+  "name": "territories",
   "icons": [
     {
       "src": "favicon.png",
