@@ -3,7 +3,7 @@ import { HashRouter as Router, Route, Switch } from "react-router-dom";
 
 import VersusBotPage from "./VersusBotPage";
 import HomePage from "./HomePage";
-import NotFoundPage from "./NotFoundPage";
+import ErrorPage from "./Error";
 import OnlineLobbyPage from "./OnlineLobbyPage";
 import TwoPlayersPage from "./TwoPlayersPage";
 
@@ -16,7 +16,7 @@ const Routes = () => (
       <Route path="/versus-bot" component={VersusBotPage} />
       <Route path="/two-players" component={TwoPlayersPage} />
       <Route path="/online" component={OnlineLobbyPage} />
-      <Route path="*" component={NotFoundPage} />
+      <Route path="*" component={ErrorPage} />
     </Switch>
   </Router>
 );

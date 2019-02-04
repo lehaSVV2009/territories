@@ -101,7 +101,7 @@ export const Mouth = styled.div`
   margin-top: 25px;
 `;
 
-export const Text = styled.h1`
+export const ErrorTitle = styled.h1`
   font-weight: 800;
   color: black;
   text-align: center;
@@ -113,4 +113,10 @@ export const Text = styled.h1`
     padding-right: 20px;
     font-size: 2em;
   }
+`;
+
+export const ErrorDescription = styled.div`
+  text-align: center;
+  color: red;
+  padding: 10px;
 `;

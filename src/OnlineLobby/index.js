@@ -1,10 +1,10 @@
 import React, { Component, Fragment } from "react";
 import intl from "react-intl-universal";
 
+import Error from "../Error";
 import OnlineLogin from "../OnlineLogin";
 import OnlineRooms from "../OnlineRooms";
 import OnlineExit from "../OnlineExit";
-import { Error } from "./elements";
 
 const selectGameName = props => props.gameComponents[0].game.name;
 const selectAllPlayersNames = props => {
@@ -89,7 +89,11 @@ class OnlineLobby extends Component {
     } = this.props;
 
     if (errorMsg) {
-      return <Error>Error: {errorMsg}</Error>;
+      return (
+        <Error>
+          {intl.get("error")}: {errorMsg}
+        </Error>
+      );
     }
 
     if (phase === "enter") {
