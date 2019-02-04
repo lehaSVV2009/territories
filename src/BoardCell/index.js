@@ -11,24 +11,6 @@ import {
   TYPE_PLAYER_2
 } from "./elements";
 
-const inRectangle = ({
-  rowIndex,
-  columnIndex,
-  selectedRowIndex,
-  selectedColumnIndex,
-  rectangleHeight,
-  rectangleWidth
-}) => {
-  return (
-    selectedRowIndex !== -1 &&
-    selectedColumnIndex !== -1 &&
-    rowIndex >= selectedRowIndex &&
-    rowIndex < selectedRowIndex + rectangleHeight &&
-    columnIndex >= selectedColumnIndex &&
-    columnIndex < selectedColumnIndex + rectangleWidth
-  );
-};
-
 class BoardCell extends Component {
   handleCellMouseEnter = () => {
     const { rowIndex, columnIndex, onMouseEnter } = this.props;
@@ -56,7 +38,7 @@ class BoardCell extends Component {
       potentiallyOccupiedCells
     } = this.props;
 
-    const isCellInRectangle = inRectangle({
+    const isCellInRectangle = GameUtils.inRectangle({
       rowIndex,
       columnIndex,
       selectedRowIndex,
@@ -68,7 +50,7 @@ class BoardCell extends Component {
     let isPotentiallyOccupied = false;
     if (!isCellInRectangle) {
       isPotentiallyOccupied = potentiallyOccupiedCells.some(cell =>
-        inRectangle({
+        GameUtils.inRectangle({
           rowIndex,
           columnIndex,
           selectedRowIndex: cell.rowIndex,
