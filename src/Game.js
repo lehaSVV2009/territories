@@ -4,45 +4,16 @@ import {
   PLAYER_1,
   PLAYER_2,
   isEmptyCell,
-  isOccupiedByPlayerOneCell
+  isOccupiedByPlayerOneCell,
+  selectGameover
 } from "./gameUtils";
 import findClosedLoops from "./findClosedLoops";
-
-const selectVictoryContext = ({ allCellsCount, occupiedCounters }) => {
-  const occupiedByPlayer1 = occupiedCounters[PLAYER_1];
-  const occupiedByPlayer2 = occupiedCounters[PLAYER_2];
-  return {
-    allCellsCount,
-    occupiedByPlayer1,
-    occupiedByPlayer2
-  };
-};
-
-const selectWinner = ({
-  allCellsCount,
-  occupiedByPlayer1,
-  occupiedByPlayer2
-}) => {
-  const halfCellsCount = allCellsCount / 2;
-  return occupiedByPlayer1 > halfCellsCount
-    ? PLAYER_1
-    : occupiedByPlayer2 > halfCellsCount
-    ? PLAYER_2
-    : null;
-};
-
-const isDraw = ({ allCellsCount, occupiedByPlayer1, occupiedByPlayer2 }) => {
-  return (
-    occupiedByPlayer1 + occupiedByPlayer2 === allCellsCount &&
-    occupiedByPlayer1 === occupiedByPlayer2
-  );
-};
 
 const calculateCellsCount = ({ board }) => {
   return board.length * (board.length > 0 ? board[0].length : 0);
 };
 
-const DEFAULT_BOARD = [...Array(15).fill([...Array(40).fill(CELL_TYPE.EMPTY)])];
+const DEFAULT_BOARD = [...Array(5).fill([...Array(5).fill(CELL_TYPE.EMPTY)])];
 const DEFAULT_DICES = [0, 0];
 
 const Territories = Game({
@@ -176,16 +147,7 @@ const Territories = Game({
   },
 
   flow: {
-    endGameIf: G => {
-      const victoryContext = selectVictoryContext(G);
-      const winner = selectWinner(victoryContext);
-      if (winner) {
-        return { winner };
-      }
-      if (isDraw(victoryContext)) {
-        return { draw: true };
-      }
-    }
+    endGameIf: selectGameover
   }
 });
 

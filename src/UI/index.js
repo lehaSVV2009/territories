@@ -7,6 +7,7 @@ import { Container, Item } from "../libs/territories-ui/Grid";
 import LinearProgress from "../libs/territories-ui/LinearProgress";
 import PlayersControls from "../PlayersControls";
 import PlayersNamesContext from "../playersNamesContext";
+import { selectGameover } from "../gameUtils";
 import { DetachedItem } from "./elements";
 
 const CELL_RADIUS = 10;
@@ -94,7 +95,7 @@ class UI extends Component {
   render() {
     const {
       G: { board, dices, rollingDices, allCellsCount, occupiedCounters },
-      ctx: { currentPlayer, gameover },
+      ctx: { currentPlayer },
       isActive
     } = this.props;
     const { isLoadingNames, playersNames } = this.state;
@@ -133,7 +134,9 @@ class UI extends Component {
             />
           </Item>
           {/* Win or Draw modal */}
-          <Congratulations gameover={gameover} />
+          <Congratulations
+            gameover={selectGameover({ allCellsCount, occupiedCounters })}
+          />
         </Container>
       </PlayersNamesContext.Provider>
     );

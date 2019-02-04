@@ -197,3 +197,47 @@ export const inRectangle = ({
     columnIndex < selectedColumnIndex + rectangleWidth
   );
 };
+
+const selectVictoryContext = ({ allCellsCount, occupiedCounters }) => {
+  const occupiedByPlayer1 = occupiedCounters[PLAYER_1];
+  const occupiedByPlayer2 = occupiedCounters[PLAYER_2];
+  return {
+    allCellsCount,
+    occupiedByPlayer1,
+    occupiedByPlayer2
+  };
+};
+
+const selectWinner = ({
+  allCellsCount,
+  occupiedByPlayer1,
+  occupiedByPlayer2
+}) => {
+  const halfCellsCount = allCellsCount / 2;
+  return occupiedByPlayer1 > halfCellsCount
+    ? PLAYER_1
+    : occupiedByPlayer2 > halfCellsCount
+    ? PLAYER_2
+    : null;
+};
+
+const isDraw = ({ allCellsCount, occupiedByPlayer1, occupiedByPlayer2 }) => {
+  return (
+    occupiedByPlayer1 + occupiedByPlayer2 === allCellsCount &&
+    occupiedByPlayer1 === occupiedByPlayer2
+  );
+};
+
+export const selectGameover = ({ allCellsCount, occupiedCounters }) => {
+  const victoryContext = selectVictoryContext({
+    allCellsCount,
+    occupiedCounters
+  });
+  const winner = selectWinner(victoryContext);
+  if (winner) {
+    return { winner };
+  }
+  if (isDraw(victoryContext)) {
+    return { draw: true };
+  }
+};

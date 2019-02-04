@@ -26,7 +26,7 @@ const HomePage = () => (
         variant="extended"
         color="secondary"
         component={Link}
-        to="/ai"
+        to="/versus-bot"
       >
         <IconBot />
         <DetachedText>{intl.get("home.game_vs_ai")}</DetachedText>
