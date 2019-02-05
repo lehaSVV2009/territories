@@ -25,6 +25,33 @@ export const isPlayer2 = player => {
   return player === PLAYER_2;
 };
 
+export const findPotentiallyOccupiedCells = ({
+  currentPlayer,
+  rectangleHeight,
+  rectangleWidth,
+  rows
+}) => {
+  const potentiallyOccupiedCells = [];
+  rows.forEach((row, rowIndex) => {
+    row.forEach((column, columnIndex) => {
+      if (
+        canDropRectangle({
+          rowIndex,
+          columnIndex,
+          value: rows[rowIndex][columnIndex],
+          rows,
+          rectangleHeight,
+          rectangleWidth,
+          currentPlayer
+        })
+      ) {
+        potentiallyOccupiedCells.push({ rowIndex, columnIndex });
+      }
+    });
+  });
+  return potentiallyOccupiedCells;
+};
+
 export const canDropRectangle = ({
   rowIndex,
   columnIndex,

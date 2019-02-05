@@ -1,7 +1,7 @@
 import React from "react";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
 
-import VersusBotPage from "./VersusBotPage";
+import AiPage from "./AiPage";
 import HomePage from "./HomePage";
 import ErrorPage from "./Error";
 import OnlineLobbyPage from "./OnlineLobbyPage";
@@ -13,7 +13,7 @@ const Routes = () => (
   <Router>
     <Switch>
       <Route exact path="/" component={HomePage} />
-      <Route path="/versus-bot" component={VersusBotPage} />
+      <Route path="/ai" component={AiPage} />
       <Route path="/two-players" component={TwoPlayersPage} />
       <Route path="/online" component={OnlineLobbyPage} />
       <Route path="*" component={ErrorPage} />

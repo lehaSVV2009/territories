@@ -19,23 +19,11 @@ class Board extends Component {
       prevProps.rectangleWidth !== rectangleWidth ||
       prevProps.currentPlayer !== currentPlayer
     ) {
-      const potentiallyOccupiedCells = [];
-      rows.forEach((row, rowIndex) => {
-        row.forEach((column, columnIndex) => {
-          if (
-            GameUtils.canDropRectangle({
-              rowIndex,
-              columnIndex,
-              value: rows[rowIndex][columnIndex],
-              rows,
-              rectangleHeight,
-              rectangleWidth,
-              currentPlayer
-            })
-          ) {
-            potentiallyOccupiedCells.push({ rowIndex, columnIndex });
-          }
-        });
+      const potentiallyOccupiedCells = GameUtils.findPotentiallyOccupiedCells({
+        currentPlayer,
+        rectangleHeight,
+        rectangleWidth,
+        rows
       });
       this.setState({ potentiallyOccupiedCells });
     }
