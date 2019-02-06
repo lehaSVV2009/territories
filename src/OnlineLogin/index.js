@@ -18,6 +18,7 @@ class OnlineLogin extends Component {
   };
 
   handleLogin = () => {
+    // TODO add user to AUTH server
     this.props.onLogin(this.state.changingPlayerName);
   };
 
@@ -31,6 +32,7 @@ class OnlineLogin extends Component {
     if (changingPlayerName.length > 15) {
       return intl.get("online.name_too_long");
     }
+    // TODO load players names from AUTH server
     if (playersNames.includes(changingPlayerName)) {
       return intl.get("online.name_taken");
     }

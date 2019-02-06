@@ -7,7 +7,7 @@ import { Container, Item } from "../libs/territories-ui/Grid";
 import LinearProgress from "../libs/territories-ui/LinearProgress";
 import PlayersControls from "../PlayersControls";
 import PlayersNamesContext from "../playersNamesContext";
-import { selectGameover } from "../gameUtils";
+import { selectGameover, PLAYER_1, PLAYER_2 } from "../gameUtils";
 import { DetachedItem } from "./elements";
 
 const CELL_RADIUS = 10;
@@ -16,13 +16,24 @@ class UI extends Component {
   state = {
     isLoadingNames: false,
     playersNames: {
-      0: "Alice",
-      1: "Bob"
+      [PLAYER_1]: "Alice",
+      [PLAYER_2]: "Bob"
     }
   };
 
   componentDidMount() {
-    const { isMultiplayer, gameID } = this.props;
+    const { ai, isMultiplayer, gameID } = this.props;
+
+    if (ai) {
+      this.setState({
+        playersNames: {
+          ...this.state.playersNames,
+          [ai.playerID]: ai.name || "Bot"
+        }
+      });
+      return;
+    }
+
     if (!isMultiplayer || !gameID) {
       return;
     }
@@ -49,6 +60,62 @@ class UI extends Component {
         });
       })
       .finally(() => this.setState({ isLoadingNames: false }));
+  }
+
+  componentDidUpdate(prevProps) {
+    const { ai } = this.props;
+    if (!ai) {
+      return;
+    }
+
+    const { currentPlayer } = this.props.ctx;
+    if (ai.playerID !== currentPlayer) {
+      return;
+    }
+
+    if (prevProps.ctx.currentPlayer !== currentPlayer) {
+      setTimeout(() => {
+        this.handleStartRollDices();
+      }, 500);
+    }
+
+    const { dices, board } = this.props.G;
+    if (
+      dices &&
+      prevProps.G.dices &&
+      prevProps.G.dices !== dices &&
+      dices[0] !== 0 &&
+      // Skip bot recalculation after rotating
+      dices[0] !== prevProps.G.dices[1] &&
+      dices[1] !== prevProps.G.dices[0]
+    ) {
+      const rectangleHeight = dices[0];
+      const rectangleWidth = dices[1];
+      const result = ai.findBestPlaceForRectangle({
+        currentPlayer,
+        rectangleHeight,
+        rectangleWidth,
+        rows: board
+      });
+      if (result.rowIndex === -1 || result.columnIndex === -1) {
+        // Skip turn if there are no available cells
+        setTimeout(() => {
+          this.handleEndTurn();
+        }, 1000);
+      } else if (result.rectangleHeight !== rectangleHeight) {
+        // Rotate if needed
+        setTimeout(() => {
+          this.handleRotateRectangle();
+          setTimeout(() => {
+            this.handleDropRectangle(result);
+          }, 1000);
+        }, 1000);
+      } else {
+        setTimeout(() => {
+          this.handleDropRectangle(result);
+        }, 1000);
+      }
+    }
   }
 
   handleStartRollDices = () => {
@@ -96,13 +163,16 @@ class UI extends Component {
     const {
       G: { board, dices, rollingDices, allCellsCount, occupiedCounters },
       ctx: { currentPlayer },
-      isActive
+      isActive,
+      ai
     } = this.props;
     const { isLoadingNames, playersNames } = this.state;
 
     if (isLoadingNames) {
       return <LinearProgress color="primary" />;
     }
+
+    const readOnly = !isActive || (ai && ai.playerID === currentPlayer);
 
     return (
       <PlayersNamesContext.Provider value={playersNames}>
@@ -115,7 +185,7 @@ class UI extends Component {
               currentPlayer={currentPlayer}
               allCellsCount={allCellsCount}
               occupiedCounters={occupiedCounters}
-              readOnly={!isActive}
+              readOnly={readOnly}
               onStartRollDices={this.handleStartRollDices}
               onFinishRollDices={this.handleFinishRollDices}
               onRotateRectangle={this.handleRotateRectangle}
@@ -124,7 +194,7 @@ class UI extends Component {
           </DetachedItem>
           <Item center>
             <Board
-              disabled={!isActive || !dices || dices[0] === 0}
+              disabled={readOnly || !dices || dices[0] === 0}
               cellRadius={CELL_RADIUS}
               rows={board}
               rectangleHeight={dices ? dices[0] : 0}
