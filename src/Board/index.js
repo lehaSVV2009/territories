@@ -19,12 +19,14 @@ class Board extends Component {
       prevProps.rectangleWidth !== rectangleWidth ||
       prevProps.currentPlayer !== currentPlayer
     ) {
-      const potentiallyOccupiedCells = GameUtils.findPotentiallyOccupiedCells({
-        currentPlayer,
-        rectangleHeight,
-        rectangleWidth,
-        rows
-      });
+      const potentiallyOccupiedCells = GameUtils.findPotentiallyOccupiedRectangles(
+        {
+          currentPlayer,
+          rectangleHeight,
+          rectangleWidth,
+          rows
+        }
+      );
       this.setState({ potentiallyOccupiedCells });
     }
   }

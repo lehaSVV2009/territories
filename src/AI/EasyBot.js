@@ -1,12 +1,12 @@
 import Bot from "./Bot";
-import { findPotentiallyOccupiedCells } from "../gameUtils";
+import { findPotentiallyOccupiedRectangles } from "../gameUtils";
 
 export default class EasyBot extends Bot {
   constructor({ playerID, name }) {
     super({ playerID, name: name || "Easy Bot" });
   }
 
-  findBestPlaceForRectangle = ({
+  guessCellToDropRectangle = ({
     currentPlayer,
     rectangleHeight,
     rectangleWidth,
@@ -24,18 +24,19 @@ export default class EasyBot extends Bot {
       result.rectangleWidth = rectangleHeight;
     }
 
-    const cells = findPotentiallyOccupiedCells({
+    const rectangles = findPotentiallyOccupiedRectangles({
       currentPlayer,
       rectangleHeight: result.rectangleHeight,
       rectangleWidth: result.rectangleWidth,
       rows
     });
 
-    if (cells.length === 0) {
+    if (rectangles.length === 0) {
       return result;
     }
 
-    const randomCell = cells[Math.floor(Math.random() * cells.length)];
+    const randomCell =
+      rectangles[Math.floor(Math.random() * rectangles.length)];
     result.rowIndex = randomCell.rowIndex;
     result.columnIndex = randomCell.columnIndex;
     return result;

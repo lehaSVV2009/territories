@@ -25,13 +25,13 @@ export const isPlayer2 = player => {
   return player === PLAYER_2;
 };
 
-export const findPotentiallyOccupiedCells = ({
+export const findPotentiallyOccupiedRectangles = ({
   currentPlayer,
   rectangleHeight,
   rectangleWidth,
   rows
 }) => {
-  const potentiallyOccupiedCells = [];
+  const potentiallyOccupiedRectangles = [];
   rows.forEach((row, rowIndex) => {
     row.forEach((column, columnIndex) => {
       if (
@@ -45,11 +45,17 @@ export const findPotentiallyOccupiedCells = ({
           currentPlayer
         })
       ) {
-        potentiallyOccupiedCells.push({ rowIndex, columnIndex });
+        potentiallyOccupiedRectangles.push({
+          rowIndex,
+          columnIndex,
+          // TODO replace with height: rectangleHeight, width: rectangleWidth and fix AI dependants
+          rectangleHeight,
+          rectangleWidth
+        });
       }
     });
   });
-  return potentiallyOccupiedCells;
+  return potentiallyOccupiedRectangles;
 };
 
 export const canDropRectangle = ({

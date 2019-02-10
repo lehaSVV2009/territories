@@ -8,6 +8,7 @@
     "@material-ui/icons": "^3.0.1",
     "axios": "^0.18.0",
     "boardgame.io": "^0.31.1",
+    "brain.js": "^1.6.1",
     "cannon": "^0.6.2",
     "js-cookie": "^2.2.0",
     "orbit-controls-es6": "^2.0.0",

@@ -6,7 +6,7 @@ import Game from "../Game";
 import { PLAYER_2 } from "../gameUtils";
 import UI from "../UI";
 
-const bot = AI({ playerID: PLAYER_2, type: BOT_TYPES.EASY });
+const bot = AI({ playerID: PLAYER_2, type: BOT_TYPES.MEDIUM });
 
 // TODO add redux enhancer with redux-persist, so game can be resumed
 const AiPage = Client({

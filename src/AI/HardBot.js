@@ -5,7 +5,7 @@ export default class HardBot extends Bot {
     super({ playerID, name: name || "Hard Bot" });
   }
 
-  findBestPlaceForRectangle = () => {
+  guessCellToDropRectangle = () => {
     throw new Error("Not implemented yet");
   };
 }

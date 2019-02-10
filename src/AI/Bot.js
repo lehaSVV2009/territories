@@ -4,7 +4,7 @@ export default class Bot {
     this.name = name;
   }
 
-  findBestPlaceForRectangle = ({
+  guessCellToDropRectangle = ({
     currentPlayer,
     rectangleHeight,
     rectangleWidth,
