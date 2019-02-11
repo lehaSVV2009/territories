@@ -1,10 +1,6 @@
-import brain from "brain.js";
-import { readAiTrainingItems } from "../AiTrainingData";
 import Bot from "./Bot";
 import { findPotentiallyOccupiedRectangles } from "../gameUtils";
-
-const net = new brain.NeuralNetwork();
-net.train(readAiTrainingItems());
+import runMediumNeuralNetwork from "./runMediumNeuralNetwork";
 
 const normalizeInput = ({
   turn,
@@ -28,7 +24,7 @@ const findRectangleRate = ({
   boardWidth,
   emptyCellsCount
 }) => {
-  return net.run(
+  return runMediumNeuralNetwork(
     normalizeInput({
       turn,
       rectangle,

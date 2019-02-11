@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-import * as AiTrainingData from "../AiTrainingData";
+// import * as AiTrainingData from "../AiTrainingData";
 import Board from "../Board";
 import Congratulations from "../Congratulations";
 import { Container, Item } from "../libs/territories-ui/Grid";
@@ -158,21 +158,21 @@ class UI extends Component {
     );
     this.handleEndTurn();
     // Collect data for AI
-    if (this.props.ctx.currentPlayer === PLAYER_2) {
-      AiTrainingData.collect({
-        columnIndex,
-        rowIndex,
-        rectangleHeight,
-        rectangleWidth,
-        turn: this.props.ctx.turn,
-        currentPlayer: this.props.ctx.currentPlayer,
-        rows: this.props.G.board,
-        emptyCellsCount:
-          this.props.G.allCellsCount -
-          this.props.G.occupiedCounters[0] -
-          this.props.G.occupiedCounters[1]
-      });
-    }
+    // if (this.props.ctx.currentPlayer === PLAYER_2) {
+    //   AiTrainingData.collect({
+    //     columnIndex,
+    //     rowIndex,
+    //     rectangleHeight,
+    //     rectangleWidth,
+    //     turn: this.props.ctx.turn,
+    //     currentPlayer: this.props.ctx.currentPlayer,
+    //     rows: this.props.G.board,
+    //     emptyCellsCount:
+    //       this.props.G.allCellsCount -
+    //       this.props.G.occupiedCounters[0] -
+    //       this.props.G.occupiedCounters[1]
+    //   });
+    // }
   };
 
   handleEndTurn = () => {
