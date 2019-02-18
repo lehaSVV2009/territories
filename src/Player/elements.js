@@ -1,9 +1,9 @@
 import styled from "styled-components";
+import { isPlayer1 } from "territories-core";
 
 import Avatar from "../libs/territories-ui/Avatar";
 import Card from "../libs/territories-ui/Card";
 import CardContent from "../libs/territories-ui/CardContent";
-import { isPlayer1 } from "../gameUtils";
 
 export const DetachedCard = styled(Card)`
   && {

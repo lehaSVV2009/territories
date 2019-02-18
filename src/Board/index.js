@@ -1,7 +1,7 @@
 import React, { Component } from "react";
+import * as GameUtils from "territories-core";
 
 import BoardCell from "../BoardCell";
-import * as GameUtils from "../gameUtils";
 import Rectangle from "../libs/territories-ui/Rectangle";
 
 class Board extends Component {

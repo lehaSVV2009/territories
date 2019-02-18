@@ -1,6 +1,6 @@
 import React, { Component } from "react";
+import * as GameUtils from "territories-core";
 
-import * as GameUtils from "../gameUtils";
 import {
   OccupiedCell,
   GreenOverlay,

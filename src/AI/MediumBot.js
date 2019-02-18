@@ -1,5 +1,5 @@
 import Bot from "./Bot";
-import { findPotentiallyOccupiedRectangles } from "../gameUtils";
+import { findPotentiallyOccupiedRectangles } from "territories-core";
 import runMediumNeuralNetwork from "./runMediumNeuralNetwork";
 
 const normalizeInput = ({

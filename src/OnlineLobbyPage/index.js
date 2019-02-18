@@ -1,10 +1,9 @@
 import React from "react";
 import intl from "react-intl-universal";
-// TODO import from territories-core
-import Game from "../Game";
+import { Game } from "territories-core";
 import LobbyLogic from "../libs/boardgame.io/react";
-import OnlineLobby from "../OnlineLobby";
 
+import OnlineLobby from "../OnlineLobby";
 import UI from "../UI";
 
 const OnlineLobbyPage = () => (

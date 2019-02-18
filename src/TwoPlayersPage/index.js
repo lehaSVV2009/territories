@@ -1,6 +1,6 @@
 import { Client } from "boardgame.io/react";
+import { Game } from "territories-core";
 
-import Game from "../Game";
 import UI from "../UI";
 
 // TODO add redux enhancer with redux-persist, so game can be resumed

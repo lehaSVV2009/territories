@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { PLAYER_1, PLAYER_2, selectGameover } from "territories-core";
 
 // import * as AiTrainingData from "../AiTrainingData";
 import Board from "../Board";
@@ -8,7 +9,6 @@ import { Container, Item } from "../libs/territories-ui/Grid";
 import LinearProgress from "../libs/territories-ui/LinearProgress";
 import PlayersControls from "../PlayersControls";
 import PlayersNamesContext from "../playersNamesContext";
-import { selectGameover, PLAYER_1, PLAYER_2 } from "../gameUtils";
 import { DetachedItem } from "./elements";
 
 const CELL_RADIUS = 10;

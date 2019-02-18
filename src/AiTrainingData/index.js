@@ -1,4 +1,4 @@
-import { findPotentiallyOccupiedRectangles } from "../gameUtils";
+import { findPotentiallyOccupiedRectangles } from "territories-core";
 const LOCAL_STORAGE_KEY = "territories-ai-data";
 
 export const readAiTrainingItems = () =>

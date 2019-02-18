@@ -1,10 +1,10 @@
 import React from "react";
 import intl from "react-intl-universal";
+import * as GameUtils from "territories-core";
 
 import Button from "../libs/territories-ui/Button";
 import { Container, Item } from "../libs/territories-ui/Grid";
 import DicesWindow from "../DicesWindow";
-import * as GameUtils from "../gameUtils";
 import IconButton from "../libs/territories-ui/IconButton";
 import Player from "../Player";
 import Rectangle from "../libs/territories-ui/Rectangle";

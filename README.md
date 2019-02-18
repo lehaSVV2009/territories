@@ -28,3 +28,7 @@ If you want to contribute - just create issues and/or pull requests and let's di
 ## License
 
 MIT
+
+## Acknowledgments
+
+Great thanks to [Katerina Draenkova](https://github.com/KaterinaDraenkova) for the inspiration and [Nicolo John Davis](https://github.com/nicolodavis) for the great library [boardgame.io](https://boardgame.io)!

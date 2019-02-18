@@ -1,9 +1,8 @@
 import React from "react";
 import { Client } from "boardgame.io/react";
+import { Game, PLAYER_2 } from "territories-core";
 
 import AI, { BOT_TYPES } from "../AI";
-import Game from "../Game";
-import { PLAYER_2 } from "../gameUtils";
 import UI from "../UI";
 
 const bot = AI({ playerID: PLAYER_2, type: BOT_TYPES.MEDIUM });

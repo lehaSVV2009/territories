@@ -1,5 +1,5 @@
 import Bot from "./Bot";
-import { findPotentiallyOccupiedRectangles } from "../gameUtils";
+import { findPotentiallyOccupiedRectangles } from "territories-core";
 
 export default class EasyBot extends Bot {
   constructor({ playerID, name }) {
