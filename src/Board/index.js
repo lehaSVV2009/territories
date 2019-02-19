@@ -105,6 +105,8 @@ class Board extends Component {
             rectangleWidth={rectangleWidth}
             cellRadius={cellRadius}
             potentiallyOccupiedCells={potentiallyOccupiedCells}
+            boardHeight={rows.length}
+            boardWidth={rows.length > 0 ? rows[0].length : 0}
             onMouseEnter={this.handleCellMouseEnter}
             onClick={this.handleDropRectangle}
           />
