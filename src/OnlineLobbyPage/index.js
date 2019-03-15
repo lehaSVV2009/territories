@@ -1,13 +1,13 @@
 import React from "react";
 import intl from "react-intl-universal";
 import { Game } from "territories-core";
-import LobbyLogic from "../libs/boardgame.io/react";
+import { Lobby } from "boardgame.io/react";
 
 import OnlineLobby from "../OnlineLobby";
 import UI from "../UI";
 
 const OnlineLobbyPage = () => (
-  <LobbyLogic
+  <Lobby
     gameServer={process.env.REACT_APP_API_URL}
     lobbyServer={process.env.REACT_APP_API_URL}
     gameComponents={[

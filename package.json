@@ -7,7 +7,7 @@
     "@material-ui/core": "^3.8.1",
     "@material-ui/icons": "^3.0.1",
     "axios": "^0.18.0",
-    "boardgame.io": "^0.31.1",
+    "boardgame.io": "^0.31.3",
     "cannon": "^0.6.2",
     "js-cookie": "^2.2.0",
     "orbit-controls-es6": "^2.0.0",
@@ -19,7 +19,7 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.1",
     "styled-components": "^4.1.1",
-    "territories-core": "lehaSVV2009/territories-core#fa97d37",
+    "territories-core": "lehaSVV2009/territories-core#abdf08d",
     "three": "^0.99.0"
   },
   "scripts": {
