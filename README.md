@@ -31,4 +31,4 @@ MIT
 
 ## Acknowledgments
 
-Great thanks to [Katerina Draenkova](https://github.com/KaterinaDraenkova) for the inspiration and [Nicolo John Davis](https://github.com/nicolodavis) for the great library [boardgame.io](https://boardgame.io)!
+Great thanks to [Katerina Soroka](https://github.com/KaterinaSoroka) for the inspiration and [Nicolo John Davis](https://github.com/nicolodavis) for the great library [boardgame.io](https://boardgame.io)!
