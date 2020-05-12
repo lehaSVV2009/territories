@@ -50,7 +50,9 @@ class OnlineRooms extends Component {
                 <Tooltip title={intl.get("online.new_room")}>
                   <IconButton
                     color="primary"
-                    disabled={gameInstances.length > 4}
+                    disabled={
+                      !Array.isArray(gameInstances) || gameInstances.length > 4
+                    }
                     onClick={this.handleCreateRoomClick}
                   >
                     <IconAdd />
@@ -65,20 +67,21 @@ class OnlineRooms extends Component {
             }
           />
           <CardContent>
-            {gameInstances.map(gameInstance => (
-              <OnlineRoom
-                key={`game-${gameInstance.gameID}`}
-                name={`Territories ${gameInstance.gameID.substring(0, 3)}`}
-                roomId={gameInstance.gameID}
-                players={gameInstance.players}
-                playerName={playerName}
-                alreadyJoined={alreadyJoined}
-                onJoin={this.handleJoinRoomClick}
-                onLeave={this.handleLeaveRoomClick}
-                onPlay={this.handlePlayClick}
-                onSpectate={this.handleSpectateClick}
-              />
-            ))}
+            {Array.isArray(gameInstances) &&
+              gameInstances.map(gameInstance => (
+                <OnlineRoom
+                  key={`game-${gameInstance.gameID}`}
+                  name={`Territories ${gameInstance.gameID.substring(0, 3)}`}
+                  roomId={gameInstance.gameID}
+                  players={gameInstance.players}
+                  playerName={playerName}
+                  alreadyJoined={alreadyJoined}
+                  onJoin={this.handleJoinRoomClick}
+                  onLeave={this.handleLeaveRoomClick}
+                  onPlay={this.handlePlayClick}
+                  onSpectate={this.handleSpectateClick}
+                />
+              ))}
           </CardContent>
         </Card>
       </Layout>

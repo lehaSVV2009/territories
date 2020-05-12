@@ -37,9 +37,11 @@ class OnlineLobby extends Component {
 
   handleLogoutClick = () => {
     const { gameInstances, playerName } = this.props;
-    const currentPlayerGames = gameInstances.filter(gameInstance =>
-      gameInstance.players.some(player => player.name === playerName)
-    );
+    const currentPlayerGames = Array.isArray(gameInstances)
+      ? gameInstances.filter(gameInstance =>
+          gameInstance.players.some(player => player.name === playerName)
+        )
+      : [];
     currentPlayerGames.forEach(game => this.handleLeaveRoomClick(game.gameID));
     this.props.onExitLobby();
   };
