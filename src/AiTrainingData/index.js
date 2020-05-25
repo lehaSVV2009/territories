@@ -61,6 +61,14 @@ export const collect = ({
   return trainingItems;
 };
 
+// distanceToCenter?
+// enemyRightestRow0Index
+// enemyRightestRow1Index
+// enemyRightestRow2Index, ...
+// enemyFrontDirection? (north, south, )
+// enemyRightestCellIndex
+// enemyRightestRowFirstIndex
+// enemyRightestRowLastIndex
 const buildTrainingItem = ({
   chosenRectangle,
   turn,

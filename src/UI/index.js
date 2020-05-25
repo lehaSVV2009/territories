@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import axios from "axios";
 import { PLAYER_1, PLAYER_2, selectGameover } from "territories-core";
 
-// import * as AiTrainingData from "../AiTrainingData";
 import Board from "../Board";
 import Congratulations from "../Congratulations";
 import { Container, Item } from "../libs/territories-ui/Grid";
@@ -10,6 +9,16 @@ import LinearProgress from "../libs/territories-ui/LinearProgress";
 import PlayersControls from "../PlayersControls";
 import PlayersNamesContext from "../playersNamesContext";
 import { DetachedItem } from "./elements";
+
+// Uncomment to collect data for AI
+// import * as AiTrainingData from "../AiTrainingData";
+
+// Uncomment for neural network function generation
+// import brain from "brain.js"; // yarn add brain.js
+// import myTrainingData from "../AiTrainingData/medium.json";
+// const net = new brain.NeuralNetwork();
+// net.train(myTrainingData);
+// console.log(net.toFunction());
 
 const CELL_RADIUS = 10;
 
@@ -157,7 +166,7 @@ class UI extends Component {
       rectangleWidth
     );
     this.handleEndTurn();
-    // Collect data for AI
+    // Uncomment to collect data for AI
     // if (this.props.ctx.currentPlayer === PLAYER_2) {
     //   AiTrainingData.collect({
     //     columnIndex,
