@@ -1,0 +1,35 @@
+{
+  "files": {
+    "static/js/0.f66d8e10.chunk.js": "/territories/static/js/0.f66d8e10.chunk.js",
+    "static/js/0.f66d8e10.chunk.js.map": "/territories/static/js/0.f66d8e10.chunk.js.map",
+    "static/js/1.30a8cb2f.chunk.js": "/territories/static/js/1.30a8cb2f.chunk.js",
+    "static/js/1.30a8cb2f.chunk.js.map": "/territories/static/js/1.30a8cb2f.chunk.js.map",
+    "main.js": "/territories/static/js/main.7649781e.chunk.js",
+    "main.js.map": "/territories/static/js/main.7649781e.chunk.js.map",
+    "runtime-main.js": "/territories/static/js/runtime-main.7836b6ec.js",
+    "runtime-main.js.map": "/territories/static/js/runtime-main.7836b6ec.js.map",
+    "static/js/4.1322591e.chunk.js": "/territories/static/js/4.1322591e.chunk.js",
+    "static/js/4.1322591e.chunk.js.map": "/territories/static/js/4.1322591e.chunk.js.map",
+    "static/js/5.a1a90a5e.chunk.js": "/territories/static/js/5.a1a90a5e.chunk.js",
+    "static/js/5.a1a90a5e.chunk.js.map": "/territories/static/js/5.a1a90a5e.chunk.js.map",
+    "static/js/6.7a7680e5.chunk.js": "/territories/static/js/6.7a7680e5.chunk.js",
+    "static/js/6.7a7680e5.chunk.js.map": "/territories/static/js/6.7a7680e5.chunk.js.map",
+    "static/js/7.d64684ad.chunk.js": "/territories/static/js/7.d64684ad.chunk.js",
+    "static/js/7.d64684ad.chunk.js.map": "/territories/static/js/7.d64684ad.chunk.js.map",
+    "static/js/8.2ef786f0.chunk.js": "/territories/static/js/8.2ef786f0.chunk.js",
+    "static/js/8.2ef786f0.chunk.js.map": "/territories/static/js/8.2ef786f0.chunk.js.map",
+    "static/js/9.0320659a.chunk.js": "/territories/static/js/9.0320659a.chunk.js",
+    "static/js/9.0320659a.chunk.js.map": "/territories/static/js/9.0320659a.chunk.js.map",
+    "index.html": "/territories/index.html",
+    "precache-manifest.37e401c433cab52f407292d01d027d84.js": "/territories/precache-manifest.37e401c433cab52f407292d01d027d84.js",
+    "service-worker.js": "/territories/service-worker.js",
+    "static/js/0.f66d8e10.chunk.js.LICENSE.txt": "/territories/static/js/0.f66d8e10.chunk.js.LICENSE.txt",
+    "static/js/4.1322591e.chunk.js.LICENSE.txt": "/territories/static/js/4.1322591e.chunk.js.LICENSE.txt",
+    "static/media/congratulations.gif": "/territories/static/media/congratulations.83861842.gif"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.7836b6ec.js",
+    "static/js/4.1322591e.chunk.js",
+    "static/js/main.7649781e.chunk.js"
+  ]
+}
