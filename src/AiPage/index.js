@@ -5,7 +5,7 @@ import { Game, PLAYER_2 } from "territories-core";
 import AI, { BOT_TYPES } from "../AI";
 import UI from "../UI";
 
-const bot = AI({ playerID: PLAYER_2, type: BOT_TYPES.MEDIUM });
+const bot = AI({ playerID: PLAYER_2, type: BOT_TYPES.HARD });
 
 // TODO add redux enhancer with redux-persist, so game can be resumed
 const AiPage = Client({
