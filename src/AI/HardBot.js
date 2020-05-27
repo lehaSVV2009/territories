@@ -8,7 +8,9 @@ import {
 export default class HardBot extends Bot {
   static RECTANGLE_EDGE = {
     TOP_LEFT: "TOP_LEFT",
+    TOP_RIGHT: "TOP_RIGHT",
     BOTTOM_LEFT: "BOTTOM_LEFT",
+    BOTTOM_RIGHT: "BOTTOM_RIGHT",
     CENTER_RIGHT: "CENTER_RIGHT",
   };
 
@@ -92,16 +94,16 @@ export default class HardBot extends Bot {
       chosenRectangle = this.findClosestRectangleToCell(
         rectangles,
         0,
-        boardCenterColumnIndex,
-        HardBot.RECTANGLE_EDGE.TOP_LEFT
+        boardCenterColumnIndex - Math.floor(Math.random() * 4),
+        HardBot.RECTANGLE_EDGE.TOP_RIGHT
       );
     } else if (isEmptyCell(rows[rows.length - 1][boardCenterColumnIndex])) {
       // bottom center is not taken
       chosenRectangle = this.findClosestRectangleToCell(
         rectangles,
         rows.length - 1,
-        boardCenterColumnIndex,
-        HardBot.RECTANGLE_EDGE.BOTTOM_LEFT
+        boardCenterColumnIndex - Math.floor(Math.random() * 4),
+        HardBot.RECTANGLE_EDGE.BOTTOM_RIGHT
       );
     }
 
@@ -185,6 +187,16 @@ export default class HardBot extends Bot {
         shift.rowShift = rectangle.rectangleHeight;
         break;
       }
+      case HardBot.RECTANGLE_EDGE.BOTTOM_RIGHT: {
+        shift.rowShift = rectangle.rectangleHeight;
+        shift.columnShift = rectangle.rectangleWidth;
+        break;
+      }
+      case HardBot.RECTANGLE_EDGE.TOP_RIGHT: {
+        shift.columnShift = rectangle.rectangleWidth;
+        break;
+      }
+      case HardBot.RECTANGLE_EDGE.TOP_LEFT:
       default: {
         break;
       }
