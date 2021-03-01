@@ -19,7 +19,7 @@
     "react-scripts": "^3.4.1",
     "styled-components": "^4.1.1",
     "territories-core": "lehaSVV2009/territories-core#abdf08d",
-    "three": "^0.99.0"
+    "three": "^0.125.0"
   },
   "scripts": {
     "start": "react-scripts start",
