@@ -1,0 +1,2 @@
+(this.webpackJsonpterritories=this.webpackJsonpterritories||[]).push([[9],{444:function(e,t,r){"use strict";r.r(t);var i=r(322),s=r(314),a=r(329),o=Object(i.Client)({game:s.Game,board:a.a,debug:!1});t.default=o}}]);
+//# sourceMappingURL=9.0320659a.chunk.js.map
