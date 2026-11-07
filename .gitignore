@@ -1,3 +1,83 @@
+# Dependencies
 node_modules/
-build/
-.vscode
+/.pnp
+.pnp.js
+
+# Testing and Coverage
+/coverage/
+.nyc_output/
+
+# Production and Build outputs
+/build/
+dist/
+out/
+
+# Rust artifacts
+target/
+**/*.rs.bk
+*.rlib
+
+# Python artifacts & Virtual Environments
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.dylib
+*.whl
+.Python
+.venv/
+venv/
+env/
+ENV/
+*.egg-info/
+.eggs/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# PyRust benchmark & diagnostic outputs
+*.dot
+*benchmark_results*.json
+
+# Environment variables and local configs
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+*.log
+
+# Editor & IDE files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*~
+*.sublime-project
+*.sublime-workspace
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Cache
+.eslintcache
+.stylelintcache
+.cache/

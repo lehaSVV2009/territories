@@ -7,6 +7,7 @@ import { DetachedFab, DetachedText } from "./elements";
 import IconBot from "../libs/territories-icons/Bot";
 import IconOnline from "../libs/territories-icons/Online";
 import IconPeople from "../libs/territories-icons/People";
+import IconAssessment from "@material-ui/icons/Assessment";
 
 const HomePage = () => (
   <Container column center alignItems="center">
@@ -36,6 +37,17 @@ const HomePage = () => (
       <DetachedFab variant="extended" component={Link} to="/two-players">
         <IconPeople />
         <DetachedText>{intl.get("home.two_players")}</DetachedText>
+      </DetachedFab>
+    </Item>
+    <Item>
+      <DetachedFab
+        variant="extended"
+        component={Link}
+        to="/ai-lab"
+        style={{ backgroundColor: "#2C3E50", color: "#FFFFFF" }}
+      >
+        <IconAssessment />
+        <DetachedText>{intl.get("home.ai_lab") || "Лаборатория"}</DetachedText>
       </DetachedFab>
     </Item>
   </Container>

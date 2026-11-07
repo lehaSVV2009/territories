@@ -18,6 +18,11 @@ const LoadableAiPage = Loadable({
   loading: Loading
 });
 
+const LoadableAiLabPage = Loadable({
+  loader: () => import("./AiLabPage"),
+  loading: Loading
+});
+
 const LoadableTwoPlayersPage = Loadable({
   loader: () => import("./TwoPlayersPage"),
   loading: Loading
@@ -35,6 +40,7 @@ const Routes = () => (
     <Switch>
       <Route exact path="/" component={LoadableHomePage} />
       <Route path="/ai" component={LoadableAiPage} />
+      <Route path="/ai-lab" component={LoadableAiLabPage} />
       <Route path="/two-players" component={LoadableTwoPlayersPage} />
       <Route path="/online" component={LoadableOnlinePage} />
       <Route path="*" component={ErrorPage} />

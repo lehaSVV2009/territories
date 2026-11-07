@@ -25,6 +25,10 @@ export default class AppWrapper extends Component {
     window.open("https://github.com/lehaSVV2009/territories");
   };
 
+  handleAiLabClick = () => {
+    window.location.hash = "#/ai-lab";
+  };
+
   handleRulesClick = () => {
     window.open(
       "https://pikabu.ru/story/prikolnaya_miniigra_stoit_poprobovat_6269129"
@@ -56,6 +60,9 @@ export default class AppWrapper extends Component {
                 </MenuItem>
               ))}
             </WhiteSelect>
+            <DetachedButton color="inherit" onClick={this.handleAiLabClick}>
+              {intl.get("app_bar.ai_lab")}
+            </DetachedButton>
             <DetachedButton color="inherit" onClick={this.handleRulesClick}>
               {intl.get("app_bar.rules")}
             </DetachedButton>

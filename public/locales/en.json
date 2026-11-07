@@ -1,5 +1,6 @@
 {
   "app_bar.rules": "Rules",
+  "app_bar.ai_lab": "AI Lab",
   "app_bar.title": "Territories",
   "congratulations.draw": "Draw",
   "congratulations.image": "Congratulations",
@@ -9,6 +10,7 @@
   "error.go_home": "Go home",
   "error.oops": "Oops! Something went wrong!",
   "home.game_vs_ai": "Game vs AI",
+  "home.ai_lab": "AI Lab",
   "home.online": "Online",
   "home.two_players": "Two players",
   "online.connecting": "Connecting...",

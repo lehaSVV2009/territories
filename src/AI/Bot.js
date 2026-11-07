@@ -8,13 +8,13 @@ export default class Bot {
     currentPlayer,
     rectangleHeight,
     rectangleWidth,
-    rows
+    rows,
   }) => ({
     rowIndex: -1,
     cellIndex: -1,
     rectangleHeight,
     rectangleWidth,
     currentPlayer,
-    rows
+    rows,
   });
 }

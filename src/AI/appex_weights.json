@@ -1,0 +1,120 @@
+{
+  "name": "Appex-Adaptive",
+  "version": "1.0.0",
+  "architecture": "Argon-4 Anchor + 4 CMA-ES Counter-Profiles",
+  "description": "Adaptive online opponent profiling with Soft Blending and 4 CMA-ES optimized counter-weight vectors.",
+  "argon4_anchor": {
+    "WEIGHT_AREA": 50.0,
+    "WEIGHT_CAPTURE": 70.0,
+    "WEIGHT_DENY_CAPTURE": 101.9948,
+    "WEIGHT_VORONOI_DELTA": 45.0,
+    "WEIGHT_SAFE_TERRITORY": 15.0,
+    "WEIGHT_COMPACTNESS": 17.2546,
+    "WEIGHT_SPATIAL_MATRIX": 0.1,
+    "WEIGHT_FRONTIER": 12.9168,
+    "WEIGHT_OPP_CHOKE": 6.988,
+    "WEIGHT_BOTTLENECK": 12.1889
+  },
+  "counter_weights": [
+    {
+      "WEIGHT_AREA": 50.0,
+      "WEIGHT_CAPTURE": 70.0,
+      "WEIGHT_DENY_CAPTURE": 102.0,
+      "WEIGHT_VORONOI_DELTA": 45.0,
+      "WEIGHT_SAFE_TERRITORY": 16.0,
+      "WEIGHT_COMPACTNESS": 17.25,
+      "WEIGHT_SPATIAL_MATRIX": 0.1,
+      "WEIGHT_FRONTIER": 22.0,
+      "WEIGHT_OPP_CHOKE": 12.0,
+      "WEIGHT_BOTTLENECK": 20.0
+    },
+    {
+      "WEIGHT_AREA": 50.0,
+      "WEIGHT_CAPTURE": 75.0,
+      "WEIGHT_DENY_CAPTURE": 125.0,
+      "WEIGHT_VORONOI_DELTA": 45.0,
+      "WEIGHT_SAFE_TERRITORY": 16.0,
+      "WEIGHT_COMPACTNESS": 17.25,
+      "WEIGHT_SPATIAL_MATRIX": 0.1,
+      "WEIGHT_FRONTIER": 13.0,
+      "WEIGHT_OPP_CHOKE": 8.0,
+      "WEIGHT_BOTTLENECK": 14.0
+    },
+    {
+      "WEIGHT_AREA": 50.0,
+      "WEIGHT_CAPTURE": 70.0,
+      "WEIGHT_DENY_CAPTURE": 102.0,
+      "WEIGHT_VORONOI_DELTA": 45.0,
+      "WEIGHT_SAFE_TERRITORY": 22.0,
+      "WEIGHT_COMPACTNESS": 18.0,
+      "WEIGHT_SPATIAL_MATRIX": 0.12,
+      "WEIGHT_FRONTIER": 16.0,
+      "WEIGHT_OPP_CHOKE": 10.0,
+      "WEIGHT_BOTTLENECK": 12.0
+    },
+    {
+      "WEIGHT_AREA": 50.0,
+      "WEIGHT_CAPTURE": 72.0,
+      "WEIGHT_DENY_CAPTURE": 102.0,
+      "WEIGHT_VORONOI_DELTA": 45.0,
+      "WEIGHT_SAFE_TERRITORY": 25.0,
+      "WEIGHT_COMPACTNESS": 20.0,
+      "WEIGHT_SPATIAL_MATRIX": 0.15,
+      "WEIGHT_FRONTIER": 12.0,
+      "WEIGHT_OPP_CHOKE": 15.0,
+      "WEIGHT_BOTTLENECK": 15.0
+    }
+  ],
+  "projection_weights": [
+    [
+      -2.6419,
+      2.2591,
+      -3.7912,
+      -13.6581,
+      -11.2493,
+      16.4809,
+      -0.2096
+    ],
+    [
+      4.4524,
+      -3.2022,
+      4.7247,
+      1.7072,
+      7.8826,
+      7.4465,
+      0.3584
+    ],
+    [
+      -4.5547,
+      -2.0751,
+      -0.2437,
+      1.851,
+      -1.0513,
+      -19.9653,
+      10.8025
+    ],
+    [
+      2.7443,
+      3.0183,
+      -0.6897,
+      10.1,
+      4.4181,
+      -3.9621,
+      -25.8262
+    ]
+  ],
+  "bias_vector": [
+    5.6783,
+    -7.3144,
+    -5.9623,
+    2.1
+  ],
+  "metadata": {
+    "num_clusters": 4,
+    "lambda": 12,
+    "mu": 6,
+    "max_workers": 3,
+    "alpha_max": 0.65,
+    "argon4_min_preservation": 0.35
+  }
+}

@@ -1,5 +1,6 @@
 {
   "app_bar.rules": "Правила",
+  "app_bar.ai_lab": "Лаборатория",
   "app_bar.title": "Территории",
   "congratulations.draw": "Ничья",
   "congratulations.image": "Поздравления",
@@ -9,6 +10,7 @@
   "error.go_home": "Домой",
   "error.oops": "Упс! Что-то пошло не так!",
   "home.game_vs_ai": "Против ИИ",
+  "home.ai_lab": "Лаборатория",
   "home.online": "Онлайн",
   "home.two_players": "Два игрока",
   "online.connecting": "Соединение...",
