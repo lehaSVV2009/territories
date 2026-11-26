@@ -1,0 +1,16 @@
+{
+  "name": "territories-wasm",
+  "type": "module",
+  "version": "1.0.0",
+  "files": [
+    "territories_wasm_bg.wasm",
+    "territories_wasm.js",
+    "territories_wasm.d.ts",
+    "snippets"
+  ],
+  "main": "territories_wasm.js",
+  "types": "territories_wasm.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}
