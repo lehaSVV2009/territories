@@ -1,0 +1,21 @@
+{
+  "name": "territories-release",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build:wasm": "wasm-pack build territories-wasm --target web --out-dir ../src/pkg && rm -f src/pkg/.gitignore",
+    "build": "vite build",
+    "preview": "vite preview --port 4173"
+  },
+  "dependencies": {
+    "onnxruntime-web": "^1.21.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^5.4.14"
+  }
+}

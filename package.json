@@ -22,10 +22,15 @@
     "three": "^0.99.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "CI=true react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "npm --prefix territories-release run dev",
+    "start": "npm --prefix territories-release run dev",
+    "build": "npm --prefix territories-release run build",
+    "preview": "npm --prefix territories-release run preview",
+    "test": "NODE_OPTIONS=--openssl-legacy-provider CI=true react-scripts test",
+    "legacy:start": "NODE_OPTIONS=--openssl-legacy-provider react-scripts start",
+    "legacy:build": "NODE_OPTIONS=--openssl-legacy-provider react-scripts build",
+    "legacy:test": "NODE_OPTIONS=--openssl-legacy-provider CI=true react-scripts test",
+    "legacy:eject": "react-scripts eject"
   },
   "hooks": {
     "pre-commit": "pretty-quick --staged"

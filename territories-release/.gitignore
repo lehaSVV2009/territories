@@ -1,0 +1,8 @@
+node_modules/
+dist/
+territories-wasm/target/
+src/admin.local/
+*.trace.json
+.DS_Store
+*.log
+.env*.local

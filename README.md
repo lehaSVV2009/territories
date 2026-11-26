@@ -1,8 +1,23 @@
 # territories
 
+> **Active codebase:** [`territories-release/`](territories-release/) (Vite + React + Rust/WASM). Root `src/` and `public/` are the archived legacy CRA app — do not edit them for new features.
+
 Simple board game [Territories](https://lehasvv2009.github.io/territories/)
 
-## Run
+## Quickstart
+
+```bash
+npm install && npm run dev
+npm run build && npm run preview
+```
+
+If you modify Rust code under `territories-release/territories-wasm/`, rebuild the committed WASM bindings before running Vite:
+
+```bash
+npm --prefix territories-release run build:wasm
+```
+
+## Legacy Run
 
 ```
 $ yarn
